@@ -296,7 +296,7 @@ void tela_cadastrar_cliente(void) {
     getchar();
 }
 
-void tela_alterar_veiculo(void) {
+void tela_alterar_cliente(void) {
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
