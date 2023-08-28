@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+//Código feito com base em: https://github.com/FlaviusGorgonio/LinguaSolta
 // Assinatura das funções
 void tela_menu_principal(void);
 void tela_sobre(void);
@@ -11,6 +11,11 @@ void tela_cadastrar_veiculo(void);
 void tela_pesquisar_veiculo(void);
 void tela_alterar_veiculo(void);
 void tela_excluir_veiculo(void);
+void tela_menu_cliente(void);
+void tela_cadastrar_cliente(void);
+void tela_pesquisar_cliente(void);
+void tela_alterar_cliente(void);
+void tela_excluir_cliente(void);
 
 
 // Programa principal
@@ -27,6 +32,7 @@ int main(void) {
 }
 
 // Funções 
+
 void tela_menu_principal(void) {
     char op;
     system("clear||cls");
@@ -101,7 +107,7 @@ void tela_equipe(void) {
     getchar();
 } 
 
-
+//VEÍCULOS
 void tela_menu_veiculo(void) {
     char op;
     system("clear||cls");
@@ -222,6 +228,110 @@ void tela_excluir_veiculo(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o Chassi do Veículo:                                 ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+//CLIENTES
+
+void tela_menu_cliente(void) {
+    char op;
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = =  Menu Cliente = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            1. Cadastrar um novo Cliente                                 ///\n");
+    printf("///            2. Pesquisar os dados de um Cliente                          ///\n");
+    printf("///            3. Atualizar o cadastro de um Cliente                        ///\n");
+    printf("///            4. Excluir um Cliente do sistema                             ///\n");
+    printf("///            0. Voltar ao menu anterior                                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Escolha a opção desejada: ");
+    scanf("%c", &op);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_cadastrar_cliente(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Cadastrar Cliente = = = = = = = =            ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Nome:                                                        ///\n");
+    printf("///            CPF:                                                         ///\n");
+    printf("///            Data de Nscimento:                                           ///\n");
+    printf("///            Cidade:                                                      ///\n");
+    printf("///            Endereço:                                                    ///\n");
+    printf("///            Telefone:                                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_alterar_veiculo(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Alterar Cliente = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe o CPF do Cliente:                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_excluir_cliente(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Excluir Cliente = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe o CPF do Cliente:                                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
