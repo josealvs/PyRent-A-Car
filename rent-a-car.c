@@ -16,6 +16,11 @@ void tela_cadastrar_cliente(void);
 void tela_pesquisar_cliente(void);
 void tela_alterar_cliente(void);
 void tela_excluir_cliente(void);
+void tela_menu_funcionario(void);
+void tela_cadastrar_funcionario(void);
+void tela_pesquisar_funcionario(void);
+void tela_alterar_funcionario(void);
+void tela_excluir_funcionario(void);
 
 
 // Programa principal
@@ -28,6 +33,17 @@ int main(void) {
     tela_pesquisar_veiculo();
     tela_alterar_veiculo();
     tela_excluir_veiculo();
+    tela_menu_cliente();
+    tela_cadastrar_cliente();
+    tela_pesquisar_cliente();
+    tela_alterar_cliente();
+    tela_excluir_cliente();
+    tela_menu_funcionario();
+    tela_cadastrar_funcionario();
+    tela_pesquisar_funcionario();
+    tela_alterar_funcionario();
+    tela_excluir_funcionario();
+    
     return 0;
 }
 
@@ -45,11 +61,12 @@ void tela_menu_principal(void) {
     printf("///                                                                         ///\n");
     printf("///                     = = = = = PyRent-A-Car = = = = =                    ///\n");
     printf("///                                                                         ///\n");
-    printf("///            1. Módulo Veículo                                            ///\n");
-    printf("///            2. Módulo Clientes                                           ///\n");
-    printf("///            3. Módulo Funcionários                                       ///\n");
-    printf("///            4. Módulo Aluguéis                                           ///\n");
-    printf("///            5. Módulo Relatórios                                         ///\n");
+    printf("///            1. Veículo                                                   ///\n");
+    printf("///            2. Clientes                                                  ///\n");
+    printf("///            3. Funcionários                                              ///\n");
+    printf("///            4. Aluguéis                                                  ///\n");
+    printf("///            5. Sobre                                                     ///\n");
+    printf("///            6. Equipe                                                    ///\n");
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opção desejada: ");
@@ -249,7 +266,7 @@ void tela_menu_cliente(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = =  Menu Cliente = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = =  Menu Cliente = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            1. Cadastrar um novo Cliente                                 ///\n");
@@ -279,15 +296,37 @@ void tela_cadastrar_cliente(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Cadastrar Cliente = = = = = = = =            ///\n");
+    printf("///            = = = = = = = = Cadastrar Cliente = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
     printf("///            CPF:                                                         ///\n");
-    printf("///            Data de Nscimento:                                           ///\n");
+    printf("///            Data de Nascimento:                                           ///\n");
     printf("///            Cidade:                                                      ///\n");
     printf("///            Endereço:                                                    ///\n");
     printf("///            Telefone:                                                    ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_pesquisar_cliente(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Pesquisar Cliente = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe o CPF do Cliente:                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -339,3 +378,111 @@ void tela_excluir_cliente(void) {
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
 }
+
+//Funcionários
+
+void tela_menu_funcionario(void) {
+    char op;
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = =  Menu Funcionário = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            1. Cadastrar um novo Funcionário                             ///\n");
+    printf("///            2. Pesquisar os dados de um Funcionário                      ///\n");
+    printf("///            3. Atualizar o cadastro de um Funcionário                    ///\n");
+    printf("///            4. Excluir um Funcionário do sistema                         ///\n");
+    printf("///            0. Voltar ao menu anterior                                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Escolha a opção desejada: ");
+    scanf("%c", &op);
+    getchar();
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_cadastrar_funcionario(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Cadastrar Funcionario = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Nome:                                                        ///\n");
+    printf("///            CPF:                                                         ///\n");
+    printf("///            Data de Nascimento:                                          ///\n");
+    printf("///            Cidade:                                                      ///\n");
+    printf("///            Endereço:                                                    ///\n");
+    printf("///            Telefone:                                                    ///\n");
+    printf("///            Cargo na Empresa:                                            ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_pesquisar_funcionario(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Pesquisar Funcionário = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe o CPF do Funcionário:                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+void tela_excluir_funcionario(void) {
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Excluir Funcioário = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe o CPF do Funcionário:                                ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+}
+
+//VENDAS
+
