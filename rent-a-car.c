@@ -4,24 +4,31 @@
 //Código feito com base em: https://github.com/FlaviusGorgonio/LinguaSolta
 // Assinatura das funções
 void tela_menu_principal(void);
+char menu_principal(void);
 void tela_sobre(void);
+char sobre(void);
 void tela_equipe(void);
+char equipe(void);
 void tela_menu_veiculo(void);
+char menu_veiculo(void);
 void tela_cadastrar_veiculo(void);
 void tela_pesquisar_veiculo(void);
 void tela_alterar_veiculo(void);
 void tela_excluir_veiculo(void);
 void tela_menu_cliente(void);
+char menu_cliente(void);
 void tela_cadastrar_cliente(void);
 void tela_pesquisar_cliente(void);
 void tela_alterar_cliente(void);
 void tela_excluir_cliente(void);
 void tela_menu_funcionario(void);
+char menu_funcionario(void);
 void tela_cadastrar_funcionario(void);
 void tela_pesquisar_funcionario(void);
 void tela_alterar_funcionario(void);
 void tela_excluir_funcionario(void);
 void tela_menu_aluguel(void);
+char menu_aluguel(void);
 void tela_cadastrar_aluguel(void);
 void tela_pesquisar_aluguel(void);
 void tela_alterar_aluguel(void);
@@ -30,36 +37,32 @@ void tela_excluir_aluguel(void);
 
 // Programa principal
 int main(void) {
-    tela_menu_principal();
-    tela_sobre();
-    tela_equipe();
-    tela_menu_veiculo();
-    tela_cadastrar_veiculo();
-    tela_pesquisar_veiculo();
-    tela_alterar_veiculo();
-    tela_excluir_veiculo();
-    tela_menu_cliente();
-    tela_cadastrar_cliente();
-    tela_pesquisar_cliente();
-    tela_alterar_cliente();
-    tela_excluir_cliente();
-    tela_menu_funcionario();
-    tela_cadastrar_funcionario();
-    tela_pesquisar_funcionario();
-    tela_alterar_funcionario();
-    tela_excluir_funcionario();
-    tela_menu_aluguel();
-    tela_cadastrar_aluguel();
-    tela_pesquisar_aluguel();
-    tela_alterar_aluguel();
-    tela_excluir_aluguel();
-    
+    char op;
+
+    do{
+        op = menu_principal();
+        switch(op) {
+            case '1': tela_menu_veiculo();
+                break;
+            case '2': tela_menu_cliente();
+                break;
+            case '3': tela_menu_funcionario();
+                break;
+            case '4': tela_menu_alugueis();
+                break;
+            case '5': tela_sobre();
+                break;
+            case '6': tela_equipe();
+                break;
+        }
+    } while (op != '0')
+
     return 0;
 }
 
 // Funções 
 
-void tela_menu_principal(void) {
+char menu_principal(void) {
     char op;
     system("clear||cls");
     printf("\n");
@@ -86,9 +89,11 @@ void tela_menu_principal(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 
 }
+
+
 
 void tela_sobre(void) {
     system("clear||cls");
@@ -108,7 +113,8 @@ void tela_sobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
+
 }
 
 
@@ -131,11 +137,28 @@ void tela_equipe(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 } 
 
 //VEÍCULOS
-void tela_menu_veiculo(void) {
+
+void tela_menu_veiculos(void){
+    char op;
+    do{
+        op = menu_veiculo();
+        switch(op){
+            case '1': 	tela_cadastrar_veiculo();
+                break;
+            case '2': 	tela_pesquisar_veiculo();
+                break;
+            case '3': 	tela_alterar_veiculo();
+                break;
+            case '4': 	tela_excluir_veiculo();
+                break;
+        }
+    }while (op != '0');
+}
+char menu_veiculo(void) {
     char op;
     system("clear||cls");
     printf("\n");
@@ -163,7 +186,7 @@ void tela_menu_veiculo(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 }
 
 
@@ -192,6 +215,7 @@ void tela_cadastrar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 
@@ -215,6 +239,7 @@ void tela_pesquisar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 
@@ -238,6 +263,7 @@ void tela_alterar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 
@@ -261,11 +287,28 @@ void tela_excluir_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 //CLIENTES
+void tela_menu_clientes(void){
+    char op;
+    do{
+        op = menu_clietes();
+        switch(opcao){
+            case '1': 	tela_cadastrar_cliente();
+                break;
+            case '2': 	tela_pesquisar_cliente();
+                break;
+            case '3': 	tela_alterar_cliente();
+                break;
+            case '4': 	tela_excluir_cliente();
+                break;
+        }
+    }while (op != '0');
+}
 
-void tela_menu_cliente(void) {
+char menu_cliente(void) {
     char op;
     system("clear||cls");
     printf("\n");
@@ -293,7 +336,7 @@ void tela_menu_cliente(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 }
 
 void tela_cadastrar_cliente(void) {
@@ -321,6 +364,7 @@ void tela_cadastrar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_pesquisar_cliente(void) {
@@ -343,6 +387,7 @@ void tela_pesquisar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_alterar_cliente(void) {
@@ -365,6 +410,7 @@ void tela_alterar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_excluir_cliente(void) {
@@ -387,11 +433,29 @@ void tela_excluir_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 //Funcionários
 
-void tela_menu_funcionario(void) {
+void tela_menu_funcionario(void){
+    char op;
+    do{
+        op = menu_funcionario();
+        switch(opcao){
+            case '1': 	tela_cadastrar_funcionario();
+                break;
+            case '2': 	tela_pesquisar_funcionario();
+                break;
+            case '3': 	tela_alterar_funcionario();
+                break;
+            case '4': 	tela_excluir_funcionario();
+                break;
+        }
+    }while (op != '0');
+}
+
+char menu_funcionario(void) {
     char op;
     system("clear||cls");
     printf("\n");
@@ -419,7 +483,7 @@ void tela_menu_funcionario(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 }
 
 void tela_cadastrar_funcionario(void) {
@@ -448,6 +512,7 @@ void tela_cadastrar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_pesquisar_funcionario(void) {
@@ -470,6 +535,7 @@ void tela_pesquisar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_alterar_funcionario(void) {
@@ -492,6 +558,7 @@ void tela_alterar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_excluir_funcionario(void) {
@@ -514,11 +581,29 @@ void tela_excluir_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 //ALUGUÉIS 
 
-void tela_menu_aluguel(void) {
+void tela_menu_aluguel(void){
+    char op;
+    do{
+        op = menu_aluguel();
+        switch(opcao){
+            case '1': 	tela_cadastrar_aluguel();
+                break;
+            case '2': 	tela_pesquisar_aluguel();
+                break;
+            case '3': 	tela_alterar_aluguel();
+                break;
+            case '4': 	tela_excluir_aluguel();
+                break;
+        }
+    }while (op != '0');
+}
+
+char menu_aluguel(void) {
     char op;
     system("clear||cls");
     printf("\n");
@@ -546,7 +631,7 @@ void tela_menu_aluguel(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    return op;
 }
 
 void tela_cadastrar_aluguel(void) {
@@ -571,6 +656,7 @@ void tela_cadastrar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_pesquisar_aluguel(void) {
@@ -593,6 +679,7 @@ void tela_pesquisar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_alterar_aluguel(void) {
@@ -615,6 +702,7 @@ void tela_alterar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
 
 void tela_excluir_aluguel(void) {
@@ -637,4 +725,5 @@ void tela_excluir_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return op;
 }
