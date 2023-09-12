@@ -55,7 +55,7 @@ int main(void) {
             case '6': tela_equipe();
                 break;
         }
-    } while (op != '0')
+    } while (op != '0');
 
     return 0;
 }
@@ -113,7 +113,6 @@ void tela_sobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    return op;
 
 }
 
@@ -137,7 +136,6 @@ void tela_equipe(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    return op;
 } 
 
 //VEÍCULOS
@@ -215,7 +213,6 @@ void tela_cadastrar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 
@@ -239,7 +236,6 @@ void tela_pesquisar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 
@@ -263,7 +259,6 @@ void tela_alterar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 
@@ -287,7 +282,6 @@ void tela_excluir_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 //CLIENTES
@@ -295,7 +289,7 @@ void tela_menu_clientes(void){
     char op;
     do{
         op = menu_clietes();
-        switch(opcao){
+        switch(op){
             case '1': 	tela_cadastrar_cliente();
                 break;
             case '2': 	tela_pesquisar_cliente();
@@ -364,7 +358,6 @@ void tela_cadastrar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 void tela_pesquisar_cliente(void) {
@@ -387,7 +380,6 @@ void tela_pesquisar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 void tela_alterar_cliente(void) {
@@ -410,7 +402,6 @@ void tela_alterar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 void tela_excluir_cliente(void) {
@@ -433,7 +424,6 @@ void tela_excluir_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
 }
 
 //Funcionários
@@ -442,7 +432,7 @@ void tela_menu_funcionario(void){
     char op;
     do{
         op = menu_funcionario();
-        switch(opcao){
+        switch(op){
             case '1': 	tela_cadastrar_funcionario();
                 break;
             case '2': 	tela_pesquisar_funcionario();
@@ -512,7 +502,7 @@ void tela_cadastrar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_pesquisar_funcionario(void) {
@@ -535,7 +525,7 @@ void tela_pesquisar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_alterar_funcionario(void) {
@@ -558,7 +548,7 @@ void tela_alterar_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_excluir_funcionario(void) {
@@ -581,7 +571,7 @@ void tela_excluir_funcionario(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 //ALUGUÉIS 
@@ -590,7 +580,7 @@ void tela_menu_aluguel(void){
     char op;
     do{
         op = menu_aluguel();
-        switch(opcao){
+        switch(op){
             case '1': 	tela_cadastrar_aluguel();
                 break;
             case '2': 	tela_pesquisar_aluguel();
@@ -656,7 +646,7 @@ void tela_cadastrar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_pesquisar_aluguel(void) {
@@ -679,7 +669,7 @@ void tela_pesquisar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_alterar_aluguel(void) {
@@ -702,7 +692,7 @@ void tela_alterar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
 
 void tela_excluir_aluguel(void) {
@@ -725,5 +715,5 @@ void tela_excluir_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return op;
+
 }
