@@ -48,7 +48,7 @@ int main(void) {
                 break;
             case '3': tela_menu_funcionario();
                 break;
-            case '4': tela_menu_alugueis();
+            case '4': tela_menu_aluguel();
                 break;
             case '5': tela_sobre();
                 break;
@@ -113,6 +113,7 @@ void tela_sobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
 
 }
 
@@ -136,11 +137,12 @@ void tela_equipe(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
 } 
 
 //VEÍCULOS
 
-void tela_menu_veiculos(void){
+void tela_menu_veiculo(void){
     char op;
     do{
         op = menu_veiculo();
@@ -285,10 +287,10 @@ void tela_excluir_veiculo(void) {
 }
 
 //CLIENTES
-void tela_menu_clientes(void){
+void tela_menu_cliente(void){
     char op;
     do{
-        op = menu_clietes();
+        op = menu_cliente();
         switch(op){
             case '1': 	tela_cadastrar_cliente();
                 break;
