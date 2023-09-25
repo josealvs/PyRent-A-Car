@@ -68,7 +68,9 @@ void tela_cadastrar_aluguel(void) {
     printf("///                                                                         ///\n");
     printf("///            CPF do Cliente:                                              ///\n");
     printf("///            CPF do Funcionario:                                          ///\n");
-    printf("///            Chassi do Veículo:                                           ///\n");
+    printf("///            Placa do Veículo:                                            ///\n");
+    printf("///            Data de Início do Aluguel:                                   ///\n");
+    printf("///            Data de Fim do Aluguel:                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

@@ -91,7 +91,7 @@ void tela_pesquisar_cliente(void) {
     printf("///            = = = = = = = = Pesquisar Cliente = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o CPF do Cliente:                                 ///\n");
+    printf("///            Informe o CPF do Cliente:                                    ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

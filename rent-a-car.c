@@ -1,17 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "veiculos.c"
-#include "funcionarios.c"
-#include "aluguel.c"
-#include "clientes.c"
 #include "veiculos.h"
 #include "funcionarios.h"
 #include "aluguel.h"
 #include "clientes.h"
+#include "relatorios.h"
 #include "sobre.h"
-#include "sobre.c"
-#include "equipe.c"
 #include "equipe.h"
 
 //Código feito com base em: https://github.com/FlaviusGorgonio/LinguaSolta
@@ -35,10 +30,11 @@ int main(void) {
                 break;
             case '4': tela_menu_aluguel();
                 break;
-            case '5': tela_sobre();
+            case '5': tela_relatorios();
                 break;
-            case '6': tela_equipe();
+            case '6': tela_sobre();
                 break;
+            case '7':tela_equipe();
         }
     } while (op != '0');
 
@@ -63,8 +59,9 @@ char menu_principal(void) {
     printf("///            2. Clientes                                                  ///\n");
     printf("///            3. Funcionários                                              ///\n");
     printf("///            4. Aluguéis                                                  ///\n");
-    printf("///            5. Sobre                                                     ///\n");
-    printf("///            6. Equipe                                                    ///\n");
+    printf("///            5. Relatórios                                                ///\n");
+    printf("///            6. Sobre                                                     ///\n");
+    printf("///            7. Equipe                                                    ///\n");
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opção desejada: ");

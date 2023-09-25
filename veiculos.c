@@ -32,7 +32,7 @@ char menu_veiculo(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = =  Menu Veículo = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = =  Menu Veículo = = = = = = = = =            ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            1. Cadastrar um novo Veículo                                 ///\n");
@@ -72,6 +72,7 @@ void tela_cadastrar_veiculo(void) {
     printf("///            Placa:                                                       ///\n");
     printf("///            Chassi:                                                      ///\n");
     printf("///            Estado de Conservação:                                       ///\n");
+    printf("///            Valor da Diária do Veículo:                                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -94,7 +95,7 @@ void tela_pesquisar_veiculo(void) {
     printf("///            = = = = = = = = Pesquisar Veículo = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o Chassi do Veículo:                                 ///\n");
+    printf("///            Informe a Placa do Veículo:                                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -117,7 +118,7 @@ void tela_alterar_veiculo(void) {
     printf("///            = = = = = = = = Alterar Veículo = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o Chassi do Veículo:                                 ///\n");
+    printf("///            Informe a Placa do Veículo:                                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -140,7 +141,7 @@ void tela_excluir_veiculo(void) {
     printf("///            = = = = = = = = Excluir Veículo = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o Chassi do Veículo:                                 ///\n");
+    printf("///            Informe a Placa do Veículo:                                  ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
