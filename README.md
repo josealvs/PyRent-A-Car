@@ -10,3 +10,5 @@ Semana 3- Módulo Vendas Adicionado
 Semana 4- Navegação entre os módulos adicionada
 
 Semana 5- Separação dos módulos em arquivos finalizada
+
+Semana 6 - Versão Final da unidade 

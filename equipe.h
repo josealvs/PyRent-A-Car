@@ -1,2 +1,2 @@
 void tela_equipe(void);
-char equipe(void);
+char equipe(void); 

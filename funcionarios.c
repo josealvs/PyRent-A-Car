@@ -76,7 +76,7 @@ void tela_cadastrar_funcionario(void) {
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n"); 
     getchar();
 
 }

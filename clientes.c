@@ -49,7 +49,7 @@ char menu_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     return op;
-}
+} 
 
 void tela_cadastrar_cliente(void) {
     system("clear||cls");

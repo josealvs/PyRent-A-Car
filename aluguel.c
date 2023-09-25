@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "aluguel.h"
-
-//ALUGUÉIS 
+ 
+//ALUGUÉIS  
 
 void tela_menu_aluguel(void){
     char op;

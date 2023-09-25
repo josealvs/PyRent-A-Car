@@ -4,7 +4,7 @@
 #include "equipe.h"
 
 
-//EQUIPE
+//EQUIPE 
 
 
 void tela_equipe(void) {

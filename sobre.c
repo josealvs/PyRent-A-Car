@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "sobre.h"
 
-//SOBRE
+//SOBRE 
 
 void tela_sobre(void) {
     system("clear||cls");
