@@ -149,3 +149,79 @@ int validadorData(int dia, int mes, int ano) {
     return 0;
   return 1;
 }
+//Inspirado no validador Nome
+int validadorModelo(char* modelo) { 
+
+    for (int i = 0; modelo[i] != '\0'; i++) {
+
+
+        if (!isalpha(modelo[i]) && modelo[i] != ' ') {
+
+
+            return 0;
+        }
+    }
+    return 1;
+}
+//Validador Fabricante, inspirado em nome e modelo
+int validadorFabricante(char* fabricante) { 
+
+    for (int i = 0; fabricante[i] != '\0'; i++) {
+
+
+        if (!isalpha(fabricante[i]) && fabricante[i] != ' ') {
+
+
+            return 0;
+        }
+    }
+    return 1;
+}
+//validador da Placa no formato da Placa Mercosul "AAA1B23"
+//feito com auxílio do chatgpt
+int validadorPlaca(char* placa) {
+    // Verificar o comprimento da placa
+    int len = strlen(placa);
+    if (len != 7) {
+        return 0;
+    }
+
+    // Verificar o formato da placa
+    for (int i = 0; i < len; i++) {
+        if (i < 3 || i == 4) {
+            if (!isupper(placa[i])) {
+                return 0;
+            }
+        } else if (i == 3) {
+            if (!isdigit(placa[i])) {
+                return 0;
+            }
+        } else {
+            if (!isdigit(placa[i])) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+//Validador de Chassi genérico, dentro doa padrões Brasileiros de Chassi
+//os padroes e regras variam entre fabricante e montadora, por isso o "genérico"
+//Criado com base no validadorPlaca
+int validadorChassi(char* chassi) {
+    // Verificar o comprimento do chassi (deve ter 17 caracteres)
+    int len = strlen(chassi);
+    if (len != 17) {
+        return 0;
+    }
+
+    // Verificar se os caracteres são alfanuméricos
+    for (int i = 0; i < len; i++) {
+        if (!isalnum(chassi[i])) {
+            return 0;
+        }
+    }
+
+    return 1;
+}

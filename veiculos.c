@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "veiculos.h"
+#include "util.h"
 
 //VEÍCULOS
  
@@ -54,6 +55,10 @@ char menu_veiculo(void) {
 
 
 void tela_cadastrar_veiculo(void) {
+    char modelo[50];
+    char fabricante[50];
+    char placa[7];
+    char chassi[17];
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -67,10 +72,45 @@ void tela_cadastrar_veiculo(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Modelo:                                                      ///\n");
+    scanf("%s", modelo);
+    if (validadorModelo(modelo)){
+        printf("\t\t\t>>>Modelo válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Modelo inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
+    printf("\n");
+
     printf("///            Fabricante:                                                  ///\n");
+    scanf("%s", fabricante);
+    if (validadorFabricante(fabricante)){
+        printf("\t\t\t>>>Nome válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Nome inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Ano:                                                         ///\n");
     printf("///            Placa:                                                       ///\n");
+    scanf("%s", placa);
+    if (validadorPlaca(placa)){
+        printf("\t\t\t>>>Placa válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Placa inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
+    printf("\n");
     printf("///            Chassi:                                                      ///\n");
+    scanf("%s", chassi);
+    if (validadorChassi(chassi)){
+        printf("\t\t\t>>>Chassi válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Chassi inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Estado de Conservação:                                       ///\n");
     printf("///            Valor da Diária do Veículo:                                  ///\n");
     printf("///                                                                         ///\n");

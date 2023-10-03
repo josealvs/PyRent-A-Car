@@ -188,7 +188,7 @@ void tela_excluir_funcionario(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Excluir Funcioário = = = = = =               ///\n");
+    printf("///            = = = = = = = = Excluir Funcionário = = = = = =               ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Funcionário:                                ///\n");
