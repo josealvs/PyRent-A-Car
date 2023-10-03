@@ -12,3 +12,5 @@ Semana 4- Navegação entre os módulos adicionada
 Semana 5- Separação dos módulos em arquivos finalizada
 
 Semana 6 - Versão Final da unidade 
+
+Semana 7 - Validadores dos Módulos Adicionados(Validador CPF ainda com problema na verificação)

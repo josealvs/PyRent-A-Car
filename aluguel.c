@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "aluguel.h"
+#include "util.h"
  
 //ALUGUÉIS  
 
@@ -54,6 +55,11 @@ char menu_aluguel(void) {
 }
 
 void tela_cadastrar_aluguel(void) {
+    char cpf_f[12];
+    char cpf_c[12];
+    char placa[7];
+    int dia_i, mes_i, ano_i;
+    int dia_f, mes_f, ano_f;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -67,10 +73,64 @@ void tela_cadastrar_aluguel(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            CPF do Cliente:                                              ///\n");
+    scanf("%s", cpf_c);
+    if (validadorCPF(cpf_c)){
+        printf("\t\t\t>>>CPF válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>CPF inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            CPF do Funcionario:                                          ///\n");
+    scanf("%s", cpf_f);
+    if (validadorCPF(cpf_f)){
+        printf("\t\t\t>>>CPF válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>CPF inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Placa do Veículo:                                            ///\n");
+    scanf("%s", placa);
+    if (validadorPlaca(placa)){
+        printf("\t\t\t>>>Placa válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Placa inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Data de Início do Aluguel:                                   ///\n");
+    printf("///            Dia:                                                         ///\n");
+    scanf("%d", &dia_i);
+    printf("///            Mês(em número):                                              ///\n");
+    scanf("%d", &mes_i);
+    printf("///            Ano:                                                         ///\n");
+    scanf("%d", &ano_i);
+
+    
+    if (validadorData(dia_i, mes_i, ano_i)){
+        printf("\t\t\t>>>Data de Início válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Data de Início inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Data de Fim do Aluguel:                                      ///\n");
+    printf("///            Dia:                                                         ///\n");
+    scanf("%d", &dia_f);
+    printf("///            Mês(em número):                                              ///\n");
+    scanf("%d", &mes_f);
+    printf("///            Ano:                                                         ///\n");
+    scanf("%d", &ano_f);
+
+    
+    if (validadorData(dia_f, mes_f, ano_f)){
+        printf("\t\t\t>>>Data Final válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Data Final inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
