@@ -59,6 +59,8 @@ void tela_cadastrar_veiculo(void) {
     char fabricante[50];
     char placa[7];
     char chassi[17];
+    char estado_c[10];
+    int diaria;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -112,7 +114,24 @@ void tela_cadastrar_veiculo(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Estado de Conservação:                                       ///\n");
+    scanf("%s", estado_c);
+    if(validadorConservacao(estado_c)){
+        printf("\t\t\t>>>Estado de conservação válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Estado de conservação inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
+    printf("\n");
     printf("///            Valor da Diária do Veículo:                                  ///\n");
+    scanf("%d", &diaria);
+    if (validadorDiaria(diaria)){
+        printf("\t\t\t>>>Valor válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Chassi inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

@@ -6,4 +6,6 @@ int validadorChassi(char*);
 int validadorTelefone(char*);
 int validadorCPF(char*);
 int validadorData(int, int, int);
+int validadorDiaria(int);
+int validadorConservacao(char*);
 int ano_bissexto(int);

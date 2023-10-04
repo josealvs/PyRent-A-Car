@@ -185,7 +185,7 @@ int validadorPlaca(char* placa) {
     if (len != 7) {
         return 0;
     }
-
+https://github.com/josealvs/PyRent-A-Car.git
     // Verificar o formato da placa
     for (int i = 0; i < len; i++) {
         if (i < 3 || i == 4) {
@@ -223,5 +223,27 @@ int validadorChassi(char* chassi) {
         }
     }
 
+    return 1;
+}
+
+//valida se o valor digitado é menor que zero
+int validadorDiaria(int diaria){
+    if (diaria < 0){
+        return 0;
+    }
+
+    return 1;
+}
+
+// valida se possui número na digitação
+int validadorConservacao(char* estado_c){
+    int i;
+    for(i=0; i < strlen(estado_c); i++){
+        if(isdigit(estado_c[i])){
+            return 0;
+        }
+
+        
+    }
     return 1;
 }
