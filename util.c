@@ -197,20 +197,6 @@ int validadorCidade(char* cidade) {
     return 1;
 }
 
-int validadorConservacao(char* conservacao) { 
-
-    for (int i = 0; conservacao[i] != '\0'; i++) {
-
-
-        if (!isalpha(conservacao[i]) && conservacao[i] != ' ') {
-
-
-            return 0;
-        }
-    }
-    return 1;
-}
-
 //validador da Placa no formato da Placa Mercosul "AAA1B23"
 //feito com auxílio do chatgpt
 int validadorPlaca(char* placa) {
