@@ -60,7 +60,7 @@ void tela_cadastrar_veiculo(void) {
     char placa[7];
     char chassi[17];
     int diaria;
-    system("clear||cls");
+    system("clear||cls"); 
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");

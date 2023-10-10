@@ -225,7 +225,7 @@ https://github.com/josealvs/PyRent-A-Car.git
         if (i < 3 || i == 4) {
             if (!isupper(placa[i])) {
                 return 0;
-            }
+            } 
         } else if (i == 3) {
             if (!isdigit(placa[i])) {
                 return 0;

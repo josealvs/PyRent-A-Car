@@ -10,4 +10,4 @@ int validadorCidade(char*);
 int validadorCargo(char*);
 int validadorDiaria(int);
 int validadorConservacao(char*);
-int ano_bissexto(int);
+int ano_bissexto(int);  
