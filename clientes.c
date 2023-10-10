@@ -113,7 +113,14 @@ void tela_cadastrar_cliente(void) {
     
     printf("\n");
     printf("///            Cidade:                                                      ///\n");
-
+    scanf("%s", cidade);
+    if (validadorCidade(cidade)){
+        printf("\t\t\t>>>Cidade válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Cidade inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Endereço:                                                    ///\n");
 
     printf("///            Telefone:                                                    ///\n");

@@ -42,67 +42,58 @@ int validadorTelefone(char* telefone) {
 
 ////Referências: Função baseada em @flgorgonio e IA Chat gpt
 int validadorCPF(char* cpf) {
+int len = strlen(cpf);
+    
+    if (len != 11) {
+        return 0; 
+    }
 
-    int i, j;
-
-    int digito1 = 0, digito2 = 0;
-
-    for (int i = 0; cpf[i] != '\0'; i++) {
+    // Verificar se todos os caracteres são dígitos numéricos
+    for (int i = 0; i < len; i++) {
         if (!isdigit(cpf[i])) {
-            return 0;
-
-
+            return 0; 
         }
     }
-    int tam = strlen(cpf); 
-    if (tam != 11) {
-        return 0;
 
+    //Converte os dígitos do CPF em números inteiros
+    int numerosCPF[11];
+    for (int i = 0; i < len; i++) {
+        numerosCPF[i] = cpf[i] - '0';
     }
 
-    //Referências: Função feita com ajuda do colega Gabriel Araújo. 
-
-
-    for (i = 0, j = 10; i < 9; i++, j--) { 
-
-        digito1 += (cpf[i] - '0') * j;
-
+    // Calcula o primeiro dígito verificador
+    int soma = 0;
+    for (int i = 0; i < 9; i++) {
+        soma += numerosCPF[i] * (10 - i);
     }
-        digito1 = 11 - (digito1 % 11);
+    int primeiroDigito = 11 - (soma % 11);
 
-        if (digito1 > 9) {
-
-
-            digito1 = 0;
+    if (primeiroDigito == 10 || primeiroDigito == 11) {
+        primeiroDigito = 0;
     }
 
-
-    for (i = 0, j = 11; i < 10; i++, j--) {
-
-        digito2 += (cpf[i] - '0') * j;
-
-
-
+    // Verifica o primeiro dígito verificador
+    if (primeiroDigito != numerosCPF[9]) {
+        return 0; 
     }
 
-    digito2 = 11 - (digito2 % 11);
+    // Calcula o segundo dígito verificador
+    soma = 0;
+    for (int i = 0; i < 10; i++) {
+        soma += numerosCPF[i] * (11 - i);
+    }
+    int segundoDigito = 11 - (soma % 11);
 
-
-
-    if (digito2 > 9) {
-
-        digito2 = 0;
+    if (segundoDigito == 10 || segundoDigito == 11) {
+        segundoDigito = 0;
     }
 
-    if (digito1 == (cpf[9] - '0') && digito2 == (cpf[10] - '0')) {
-        return 0;
-
-
-    } else {
-
-        return 1;
-
+    // Verifica o segundo dígito verificador
+    if (segundoDigito != numerosCPF[10]) {
+        return 0; 
     }
+
+    return 1; // CPF válido
 }
 
 
@@ -177,6 +168,49 @@ int validadorFabricante(char* fabricante) {
     }
     return 1;
 }
+
+int validadorCargo(char* cargo) { 
+
+    for (int i = 0; cargo[i] != '\0'; i++) {
+
+
+        if (!isalpha(cargo[i]) && cargo[i] != ' ') {
+
+
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validadorCidade(char* cidade) { 
+
+    for (int i = 0; cidade[i] != '\0'; i++) {
+
+
+        if (!isalpha(cidade[i]) && cidade[i] != ' ') {
+
+
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validadorConservacao(char* conservacao) { 
+
+    for (int i = 0; conservacao[i] != '\0'; i++) {
+
+
+        if (!isalpha(conservacao[i]) && conservacao[i] != ' ') {
+
+
+            return 0;
+        }
+    }
+    return 1;
+}
+
 //validador da Placa no formato da Placa Mercosul "AAA1B23"
 //feito com auxílio do chatgpt
 int validadorPlaca(char* placa) {

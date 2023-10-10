@@ -56,6 +56,7 @@ char menu_funcionario(void) {
 void tela_cadastrar_funcionario(void) {
     char cpf[12];
     char nome[200];
+    char cargo[50];
     int dia;
     int mes;
     int ano;
@@ -111,6 +112,14 @@ void tela_cadastrar_funcionario(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Cidade:                                                      ///\n");
+    scanf("%s", cidade);
+    if (validadorCidade(cidade)){
+        printf("\t\t\t>>>Cidade válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Cidade inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///            Endereço:                                                    ///\n");
     printf("///            Telefone:                                                    ///\n");
     scanf("%s", telefone);
@@ -123,6 +132,14 @@ void tela_cadastrar_funcionario(void) {
     }
     printf("\n");
     printf("///            Cargo na Empresa:                                            ///\n");
+    scanf("%s", cargo);
+    if (validadorCargo(cargo)){
+        printf("\t\t\t>>>Número válido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Número inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
