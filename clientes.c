@@ -9,7 +9,7 @@ void tela_menu_cliente(void){
     do{
         op = menu_cliente();
         switch(op){
-            case '1': 	tela_cadastrar_cliente();
+            case '1': 	cadastrar_cliente();
                 break;
             case '2': 	tela_pesquisar_cliente();
                 break;
@@ -52,16 +52,8 @@ char menu_cliente(void) {
     return op;
 } 
 
-void tela_cadastrar_cliente(void) {
-    char cpf[12];
-    char nome[200];
-    int dia;
-    int mes;
-    int ano;
-    char telefone[15];
-    char cidade[50];
-    char endereco[300];
-
+Clientes cadastrar_cliente(void) {
+    Clientes *clientes = malloc(sizeof(Clientes));
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -75,8 +67,8 @@ void tela_cadastrar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
-    scanf("%s", nome);
-    if (validadorNome(nome)){
+    fgets(clientes->nome, sizeof(clientes->nome), stdin);
+    if (!(validadorNome(clientes->nome))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -84,9 +76,9 @@ void tela_cadastrar_cliente(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("\n");
-    printf("///            CPF:                                                         ///\n");
-    scanf("%s", cpf);
-    if (validadorCPF(cpf)){
+    printf("///            CPF(apenas números):                                                         ///\n");
+    fgets(clientes->cpf, sizeof(clientes->cpf), stdin);
+    if (validadorCPF(clientes->cpf)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -94,27 +86,9 @@ void tela_cadastrar_cliente(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("\n");
-    printf("///            Data de Nascimento:                                          ///\n");
-    printf("///            Dia:                                                         ///\n");
-    scanf("%d", &dia);
-    printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &mes);
-    printf("///            Ano:                                                         ///\n");
-    scanf("%d", &ano);
-
-    
-    if (validadorData(dia, mes, ano)){
-        printf("\t\t\t>>>Data de Nascimento válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
-        printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }
-    
-    printf("\n");
     printf("///            Cidade:                                                      ///\n");
-    scanf("%s", cidade);
-    if (validadorCidade(cidade)){
+    fgets(clientes->cidade, sizeof(clientes->cidade), stdin);
+    if (validadorCidade(clientes->cidade)){
         printf("\t\t\t>>>Cidade válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -122,14 +96,31 @@ void tela_cadastrar_cliente(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Endereço:                                                    ///\n");
-
+    fgets(clientes->endereco, sizeof(clientes->endereco), stdin);
     printf("///            Telefone:                                                    ///\n");
-    scanf("%s", telefone);
-    if (validadorTelefone(telefone)){
+    fgets(clientes->telefone, sizeof(clientes->telefone), stdin);
+    if (validadorTelefone(clientes->telefone)){
         printf("\t\t\t>>>Número válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Número inválido<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
+    printf("\n");
+    printf("///            Data de Nascimento:                                          ///\n");
+    printf("///            Dia:                                                         ///\n");
+    scanf("%d", &clientes->dia);
+    printf("///            Mês(em número):                                              ///\n");
+    scanf("%d", &clientes->mes);
+    printf("///            Ano:                                                         ///\n");
+    scanf("%d", &clientes->ano);
+
+    
+    if (validadorData(clientes->dia, clientes->mes, clientes->ano)){
+        printf("\t\t\t>>>Data de Nascimento válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
 

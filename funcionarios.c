@@ -10,7 +10,7 @@ void tela_menu_funcionario(void){
     do{
         op = menu_funcionario();
         switch(op){
-            case '1': 	tela_cadastrar_funcionario();
+            case '1': 	cadastrar_funcionario();
                 break;
             case '2': 	tela_pesquisar_funcionario();
                 break;
@@ -53,16 +53,8 @@ char menu_funcionario(void) {
     return op;
 }
 
-void tela_cadastrar_funcionario(void) {
-    char cpf[12];
-    char nome[200];
-    char cargo[50];
-    int dia;
-    int mes;
-    int ano;
-    char telefone[15];
-    char cidade[50];
-    char endereco[300];
+Funcionarios cadastrar_funcionario(void) {
+    Funcionarios *funcionarios = malloc(sizeof(Funcionarios));
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -76,8 +68,8 @@ void tela_cadastrar_funcionario(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
-    scanf("%s", nome);
-    if (validadorNome(nome)){
+    fgets(funcionarios->nome, sizeof(funcionarios->nome), stdin);
+    if (!(validadorNome(funcionarios->nome))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -86,8 +78,8 @@ void tela_cadastrar_funcionario(void) {
     }
     printf("\n");
     printf("///            CPF:                                                         ///\n");
-    scanf("%s", cpf);
-    if (validadorCPF(cpf)){
+    fgets(funcionarios->cpf, sizeof(funcionarios->cpf), stdin);
+    if (validadorCPF(funcionarios->cpf)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -97,14 +89,14 @@ void tela_cadastrar_funcionario(void) {
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
     printf("///            Dia:                                                         ///\n");
-    scanf("%d", &dia);
+    scanf("%d", &funcionarios->dia);
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &mes);
+    scanf("%d", &funcionarios->mes);
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &ano);
+    scanf("%d", &funcionarios->ano);
 
     
-    if (validadorData(dia, mes, ano)){
+    if (validadorData(funcionarios->dia, funcionarios->mes, funcionarios->ano)){
         printf("\t\t\t>>>Data de Nascimento válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -112,8 +104,8 @@ void tela_cadastrar_funcionario(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Cidade:                                                      ///\n");
-    scanf("%s", cidade);
-    if (validadorCidade(cidade)){
+    fgets(funcionarios->cidade, sizeof(funcionarios->cidade), stdin);
+    if (validadorCidade(funcionarios->cidade)){
         printf("\t\t\t>>>Cidade válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -121,9 +113,10 @@ void tela_cadastrar_funcionario(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Endereço:                                                    ///\n");
+    fgets(funcionarios->endereco, sizeof(funcionarios->endereco), stdin);
     printf("///            Telefone:                                                    ///\n");
-    scanf("%s", telefone);
-    if (validadorTelefone(telefone)){
+    fgets(funcionarios->telefone, sizeof(funcionarios->telefone), stdin);
+    if (validadorTelefone(funcionarios->telefone)){
         printf("\t\t\t>>>Número válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -132,12 +125,12 @@ void tela_cadastrar_funcionario(void) {
     }
     printf("\n");
     printf("///            Cargo na Empresa:                                            ///\n");
-    scanf("%s", cargo);
-    if (validadorCargo(cargo)){
-        printf("\t\t\t>>>Número válido<<<\n");
+    fgets(funcionarios->cargo, sizeof(funcionarios->cargo), stdin);
+    if (!(validadorCargo(funcionarios->cargo))){
+        printf("\t\t\t>>>Cargo válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
-        printf("\t\t\t>>>Número inválido<<<\n");
+        printf("\t\t\t>>>Cargo inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///                                                                         ///\n");

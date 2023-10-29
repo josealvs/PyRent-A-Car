@@ -11,7 +11,7 @@ void tela_menu_aluguel(void){
     do{
         op = menu_aluguel();
         switch(op){
-            case '1': 	tela_cadastrar_aluguel();
+            case '1': 	cadastrar_aluguel();
                 break;
             case '2': 	tela_pesquisar_aluguel();
                 break;
