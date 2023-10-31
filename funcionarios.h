@@ -8,13 +8,13 @@ struct funcionarios{
     char telefone[15];
     char cidade[50];
     char endereco[300];
-    struct funcionarios *next;
+    char status;
 };
 typedef struct funcionarios Funcionarios;
 
 void tela_menu_funcionario(void);
 char menu_funcionario(void);
-Funcionarios cadastrar_funcionario(void);
+Funcionarios* cadastrar_funcionario(void);
 void tela_pesquisar_funcionario(void);
 void tela_alterar_funcionario(void);
 void tela_excluir_funcionario(void); 

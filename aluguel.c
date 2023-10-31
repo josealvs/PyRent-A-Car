@@ -54,8 +54,9 @@ char menu_aluguel(void) {
     return op;
 }
 
-Aluguel cadastrar_aluguel(void) {
-    Aluguel *aluguel = malloc(sizeof(Aluguel));
+Aluguel* cadastrar_aluguel(void) {
+    Aluguel* alg;
+    alg = (Aluguel*) malloc(sizeof(Aluguel));
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -69,8 +70,8 @@ Aluguel cadastrar_aluguel(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            CPF do Cliente:                                              ///\n");
-    fgets(aluguel->cpf_c, sizeof(aluguel->cpf_c), stdin);
-    if (validadorCPF(aluguel->cpf_c)){
+    fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);
+    if (validadorCPF(alg->cpf_c)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -78,8 +79,8 @@ Aluguel cadastrar_aluguel(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            CPF do Funcionario:                                          ///\n");
-    fgets(aluguel->cpf_f, sizeof(aluguel->cpf_f), stdin);
-    if (validadorCPF(aluguel->cpf_f)){
+    fgets(alg->cpf_f, sizeof(alg->cpf_f), stdin);
+    if (validadorCPF(alg->cpf_f)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -87,8 +88,8 @@ Aluguel cadastrar_aluguel(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Placa do Veículo:                                            ///\n");
-    fgets(aluguel->placa, sizeof(aluguel->placa), stdin);
-    if (validadorPlaca(aluguel->placa)){
+    fgets(alg->placa, sizeof(alg->placa), stdin);
+    if (validadorPlaca(alg->placa)){
         printf("\t\t\t>>>Placa válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -97,14 +98,14 @@ Aluguel cadastrar_aluguel(void) {
     }
     printf("///            Data de Início do Aluguel:                                   ///\n");
     printf("///            Dia:                                                         ///\n");
-    scanf("%d", &aluguel->dia_i);   
+    scanf("%d", &alg->dia_i);   
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &aluguel->mes_i);   
+    scanf("%d", &alg->mes_i);   
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &aluguel->ano_i);   
+    scanf("%d", &alg->ano_i);   
 
     
-    if (validadorData(aluguel->dia_i, aluguel->mes_i, aluguel->ano_i)){
+    if (validadorData(alg->dia_i, alg->mes_i, alg->ano_i)){
         printf("\t\t\t>>>Data de Início válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -113,20 +114,31 @@ Aluguel cadastrar_aluguel(void) {
     }
     printf("///            Data de Fim do Aluguel:                                      ///\n");
     printf("///            Dia:                                                         ///\n");
-    scanf("%d", &aluguel->dia_f);   
+    scanf("%d", &alg->dia_f);   
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &aluguel->mes_f);   
+    scanf("%d", &alg->mes_f);   
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &aluguel->ano_f);   
+    scanf("%d", &alg->ano_f);   
 
     
-    if (validadorData(aluguel->dia_f,aluguel->mes_f, aluguel->ano_f)){
+    if (validadorData(alg->dia_f,alg->mes_f, alg->ano_f)){
         printf("\t\t\t>>>Data Final válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Data Final inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
+    
+    alg->status = 'a';
+
+    FILE* file;
+    Aluguel* aluguel;
+    file = fopen("alg.dat","wb");
+    aluguel = alg;
+    fwrite(aluguel, sizeof(Aluguel), 1, file);
+    fclose(file);
+    free(aluguel);
+
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

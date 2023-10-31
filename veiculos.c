@@ -7,11 +7,12 @@
 //VEÍCULOS
  
 void tela_menu_veiculo(void){
+    Veiculos* vei;
     char op;
     do{
         op = menu_veiculo();
         switch(op){
-            case '1': 	cadastrar_veiculo();
+            case '1': 	vei = cadastrar_veiculo();
                 break;
             case '2': 	tela_pesquisar_veiculo();
                 break;
@@ -54,8 +55,9 @@ char menu_veiculo(void) {
 }
 
 
-Veiculos cadastrar_veiculo(void) {
-    Veiculos *veiculos = malloc(sizeof(Veiculos));
+Veiculos* cadastrar_veiculo(void) {
+    Veiculos* vei;
+    vei = (Veiculos*) malloc(sizeof(Veiculos));
     system("clear||cls"); 
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -69,8 +71,8 @@ Veiculos cadastrar_veiculo(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Modelo:                                                      ///\n");
-    fgets(veiculos->modelo, sizeof(veiculos->modelo), stdin);
-    if (!(validadorModelo(veiculos->modelo))){
+    fgets(vei->modelo, sizeof(vei->modelo), stdin);
+    if (!(validadorModelo(vei->modelo))){
         printf("\t\t\t>>>Modelo válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -80,8 +82,8 @@ Veiculos cadastrar_veiculo(void) {
     printf("\n");
 
     printf("///            Fabricante:                                                  ///\n");
-    fgets(veiculos->fabricante, sizeof(veiculos->fabricante), stdin);
-    if (!(validadorFabricante(veiculos->fabricante))){
+    fgets(vei->fabricante, sizeof(vei->fabricante), stdin);
+    if (!(validadorFabricante(vei->fabricante))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -89,10 +91,10 @@ Veiculos cadastrar_veiculo(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &veiculos->ano);
+    scanf("%d", &vei->ano);
     printf("///            Placa:                                                       ///\n");
-    fgets(veiculos->placa, sizeof(veiculos->placa), stdin);
-    if (!(validadorPlaca(veiculos->placa))){
+    fgets(vei->placa, sizeof(vei->placa), stdin);
+    if (!(validadorPlaca(vei->placa))){
         printf("\t\t\t>>>Placa válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -101,8 +103,8 @@ Veiculos cadastrar_veiculo(void) {
     }
     printf("\n");
     printf("///            Chassi:                                                      ///\n");
-    fgets(veiculos->chassi, sizeof(veiculos->chassi), stdin);
-    if (!(validadorChassi(veiculos->chassi))){
+    fgets(vei->chassi, sizeof(vei->chassi), stdin);
+    if (!(validadorChassi(vei->chassi))){
         printf("\t\t\t>>>Chassi válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -110,8 +112,8 @@ Veiculos cadastrar_veiculo(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Estado de Conservação:                                       ///\n");
-    fgets(veiculos->estado_c, sizeof(veiculos->estado_c), stdin);
-    if (validadorConservacao(veiculos->estado_c)){
+    fgets(vei->estado_c, sizeof(vei->estado_c), stdin);
+    if (validadorConservacao(vei->estado_c)){
         printf("\t\t\t>>>Estado de Conservacao Valido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -119,14 +121,24 @@ Veiculos cadastrar_veiculo(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Valor da Diária do Veículo:                                  ///\n");
-    scanf("%d", &veiculos->diaria);
-    if (validadorDiaria(veiculos->diaria)){
+    scanf("%d", &vei->diaria);
+    if (validadorDiaria(vei->diaria)){
         printf("\t\t\t>>>Valor válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Chassi inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
+    vei->status = 'a';
+
+    FILE* file;
+    Veiculos* veiculos;
+    file = fopen("vei.dat","wb");
+    veiculos = vei;
+    fwrite(veiculos, sizeof(Veiculos), 1, file);
+    fclose(file);
+    free(veiculos);
+
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

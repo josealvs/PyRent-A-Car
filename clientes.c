@@ -5,11 +5,12 @@
 #include "util.h"
 
 void tela_menu_cliente(void){
+    Clientes* cli;
     char op;
     do{
         op = menu_cliente();
         switch(op){
-            case '1': 	cadastrar_cliente();
+            case '1': 	cli = cadastrar_cliente();
                 break;
             case '2': 	tela_pesquisar_cliente();
                 break;
@@ -52,8 +53,9 @@ char menu_cliente(void) {
     return op;
 } 
 
-Clientes cadastrar_cliente(void) {
-    Clientes *clientes = malloc(sizeof(Clientes));
+Clientes* cadastrar_cliente(void) {
+    Clientes* cli;
+    cli = (Clientes*) malloc(sizeof(Clientes));
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -67,8 +69,8 @@ Clientes cadastrar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
-    fgets(clientes->nome, sizeof(clientes->nome), stdin);
-    if (!(validadorNome(clientes->nome))){
+    fgets(cli->nome, sizeof(cli->nome), stdin);
+    if (!(validadorNome(cli->nome))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -77,8 +79,8 @@ Clientes cadastrar_cliente(void) {
     }
     printf("\n");
     printf("///            CPF(apenas números):                                                         ///\n");
-    fgets(clientes->cpf, sizeof(clientes->cpf), stdin);
-    if (validadorCPF(clientes->cpf)){
+    fgets(cli->cpf, sizeof(cli->cpf), stdin);
+    if (validadorCPF(cli->cpf)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -87,8 +89,8 @@ Clientes cadastrar_cliente(void) {
     }
     printf("\n");
     printf("///            Cidade:                                                      ///\n");
-    fgets(clientes->cidade, sizeof(clientes->cidade), stdin);
-    if (validadorCidade(clientes->cidade)){
+    fgets(cli->cidade, sizeof(cli->cidade), stdin);
+    if (validadorCidade(cli->cidade)){
         printf("\t\t\t>>>Cidade válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -96,10 +98,10 @@ Clientes cadastrar_cliente(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
     printf("///            Endereço:                                                    ///\n");
-    fgets(clientes->endereco, sizeof(clientes->endereco), stdin);
+    fgets(cli->endereco, sizeof(cli->endereco), stdin);
     printf("///            Telefone:                                                    ///\n");
-    fgets(clientes->telefone, sizeof(clientes->telefone), stdin);
-    if (validadorTelefone(clientes->telefone)){
+    fgets(cli->telefone, sizeof(cli->telefone), stdin);
+    if (validadorTelefone(cli->telefone)){
         printf("\t\t\t>>>Número válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -109,14 +111,14 @@ Clientes cadastrar_cliente(void) {
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
     printf("///            Dia:                                                         ///\n");
-    scanf("%d", &clientes->dia);
+    scanf("%d", &cli->dia);
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &clientes->mes);
+    scanf("%d", &cli->mes);
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &clientes->ano);
-
+    scanf("%d", &cli->ano);
+    cli->status = 'a';
     
-    if (validadorData(clientes->dia, clientes->mes, clientes->ano)){
+    if (validadorData(cli->dia, cli->mes, cli->ano)){
         printf("\t\t\t>>>Data de Nascimento válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
@@ -124,12 +126,21 @@ Clientes cadastrar_cliente(void) {
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }
 
+    FILE* file;
+    Clientes* cliente;
+    cliente = cli;
+    file = fopen("cli.dat","wb");
+    fwrite(cliente, sizeof(Clientes), 1, file);
+    fclose(file);
+    free(cliente);
+    
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    
 }
 
 void tela_pesquisar_cliente(void) {

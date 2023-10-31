@@ -15,4 +15,8 @@ Semana 6 - Versão Final da unidade
 
 Semana 7 - Validadores dos Módulos Adicionados(Validador CPF ainda com problema na verificação)
 
-Semana 8 - Validadores Finalizados, os que não constam, julguei como sem necessidade no projeto final. 
+Semana 8 - Validadores Finalizados, os que não constam, julguei como sem necessidade no projeto final.
+
+Semana 9 - AlocaÇÃO DE MEMÓRIA FINALIZADA
+
+Semana 10 - Salvando dados em arquivos binários finalizados.
