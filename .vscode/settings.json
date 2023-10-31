@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "sobre.h": "c"
+        "sobre.h": "c",
+        "clientes.h": "c"
     }
 }

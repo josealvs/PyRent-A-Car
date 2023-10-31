@@ -19,4 +19,4 @@ Semana 8 - Validadores Finalizados, os que não constam, julguei como sem necess
 
 Semana 9 - AlocaÇÃO DE MEMÓRIA FINALIZADA
 
-Semana 10 - Salvando dados em arquivos binários finalizados.
+Semana 10 - Salvando dados em arquivos binários e listagem de relatórios finalizados.
