@@ -71,6 +71,7 @@ Aluguel* cadastrar_aluguel(void) {
     printf("///                                                                         ///\n");
     printf("///            CPF do Cliente:                                              ///\n");
     fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);
+    limpaBuffer();
     if (validadorCPF(alg->cpf_c)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -80,6 +81,7 @@ Aluguel* cadastrar_aluguel(void) {
     }
     printf("///            CPF do Funcionario:                                          ///\n");
     fgets(alg->cpf_f, sizeof(alg->cpf_f), stdin);
+    limpaBuffer();
     if (validadorCPF(alg->cpf_f)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -89,6 +91,7 @@ Aluguel* cadastrar_aluguel(void) {
     }
     printf("///            Placa do Veículo:                                            ///\n");
     fgets(alg->placa, sizeof(alg->placa), stdin);
+    limpaBuffer();
     if (validadorPlaca(alg->placa)){
         printf("\t\t\t>>>Placa válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -99,10 +102,13 @@ Aluguel* cadastrar_aluguel(void) {
     printf("///            Data de Início do Aluguel:                                   ///\n");
     printf("///            Dia:                                                         ///\n");
     scanf("%d", &alg->dia_i);   
+    limpaBuffer();
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &alg->mes_i);   
+    scanf("%d", &alg->mes_i); 
+    limpaBuffer();
     printf("///            Ano:                                                         ///\n");
     scanf("%d", &alg->ano_i);   
+    limpaBuffer();
 
     
     if (validadorData(alg->dia_i, alg->mes_i, alg->ano_i)){
@@ -114,11 +120,14 @@ Aluguel* cadastrar_aluguel(void) {
     }
     printf("///            Data de Fim do Aluguel:                                      ///\n");
     printf("///            Dia:                                                         ///\n");
-    scanf("%d", &alg->dia_f);   
+    scanf("%d", &alg->dia_f);
+    limpaBuffer();
     printf("///            Mês(em número):                                              ///\n");
-    scanf("%d", &alg->mes_f);   
+    scanf("%d", &alg->mes_f); 
+    limpaBuffer();
     printf("///            Ano:                                                         ///\n");
-    scanf("%d", &alg->ano_f);   
+    scanf("%d", &alg->ano_f); 
+    limpaBuffer();
 
     
     if (validadorData(alg->dia_f,alg->mes_f, alg->ano_f)){
@@ -145,6 +154,7 @@ Aluguel* cadastrar_aluguel(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return 0;
 
 }
 

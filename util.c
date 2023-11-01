@@ -205,7 +205,6 @@ int validadorPlaca(char* placa) {
     if (len != 7) {
         return 0;
     }
-https://github.com/josealvs/PyRent-A-Car.git
     // Verificar o formato da placa
     for (int i = 0; i < len; i++) {
         if (i < 3 || i == 4) {
@@ -266,4 +265,21 @@ int validadorConservacao(char* estado_c){
         
     }
     return 1;
+}
+
+//Valida o ano do carro
+int validadorAno(int ano){
+    if (ano < 0 || !isdigit(ano)){
+        return 0;
+    }
+
+
+    return 1;
+}
+
+void limpaBuffer(void){
+    int entrada;
+    do{
+        entrada = fgetc(stdin);
+    } while(entrada != EOF && entrada != '\n');
 }

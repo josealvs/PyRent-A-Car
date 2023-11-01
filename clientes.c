@@ -5,12 +5,12 @@
 #include "util.h"
 
 void tela_menu_cliente(void){
-    Clientes* cli;
+    
     char op;
     do{
         op = menu_cliente();
         switch(op){
-            case '1': 	cli = cadastrar_cliente();
+            case '1': 	cadastrar_cliente();
                 break;
             case '2': 	tela_pesquisar_cliente();
                 break;
@@ -70,6 +70,7 @@ Clientes* cadastrar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
     fgets(cli->nome, sizeof(cli->nome), stdin);
+    limpaBuffer();
     if (!(validadorNome(cli->nome))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -80,6 +81,7 @@ Clientes* cadastrar_cliente(void) {
     printf("\n");
     printf("///            CPF(apenas números):                                                         ///\n");
     fgets(cli->cpf, sizeof(cli->cpf), stdin);
+    limpaBuffer();
     if (validadorCPF(cli->cpf)){
         printf("\t\t\t>>>CPF válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -90,6 +92,7 @@ Clientes* cadastrar_cliente(void) {
     printf("\n");
     printf("///            Cidade:                                                      ///\n");
     fgets(cli->cidade, sizeof(cli->cidade), stdin);
+    limpaBuffer();
     if (validadorCidade(cli->cidade)){
         printf("\t\t\t>>>Cidade válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -99,8 +102,10 @@ Clientes* cadastrar_cliente(void) {
     }
     printf("///            Endereço:                                                    ///\n");
     fgets(cli->endereco, sizeof(cli->endereco), stdin);
+    limpaBuffer();
     printf("///            Telefone:                                                    ///\n");
     fgets(cli->telefone, sizeof(cli->telefone), stdin);
+    limpaBuffer();
     if (validadorTelefone(cli->telefone)){
         printf("\t\t\t>>>Número válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -112,10 +117,13 @@ Clientes* cadastrar_cliente(void) {
     printf("///            Data de Nascimento:                                          ///\n");
     printf("///            Dia:                                                         ///\n");
     scanf("%d", &cli->dia);
+    limpaBuffer();
     printf("///            Mês(em número):                                              ///\n");
     scanf("%d", &cli->mes);
+    limpaBuffer();
     printf("///            Ano:                                                         ///\n");
     scanf("%d", &cli->ano);
+    limpaBuffer();
     cli->status = 'a';
     
     if (validadorData(cli->dia, cli->mes, cli->ano)){
@@ -140,6 +148,7 @@ Clientes* cadastrar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return 0;
     
 }
 

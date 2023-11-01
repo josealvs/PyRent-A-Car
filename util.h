@@ -11,3 +11,5 @@ int validadorCargo(char*);
 int validadorDiaria(int);
 int validadorConservacao(char*);
 int ano_bissexto(int);  
+int validadorAno(int);
+void limpaBuffer(void);

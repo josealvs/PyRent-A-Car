@@ -7,12 +7,12 @@
 //VEÍCULOS
  
 void tela_menu_veiculo(void){
-    Veiculos* vei;
+    
     char op;
     do{
         op = menu_veiculo();
         switch(op){
-            case '1': 	vei = cadastrar_veiculo();
+            case '1': 	cadastrar_veiculo();
                 break;
             case '2': 	tela_pesquisar_veiculo();
                 break;
@@ -72,6 +72,7 @@ Veiculos* cadastrar_veiculo(void) {
     printf("///                                                                         ///\n");
     printf("///            Modelo:                                                      ///\n");
     fgets(vei->modelo, sizeof(vei->modelo), stdin);
+    limpaBuffer();
     if (!(validadorModelo(vei->modelo))){
         printf("\t\t\t>>>Modelo válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -83,6 +84,7 @@ Veiculos* cadastrar_veiculo(void) {
 
     printf("///            Fabricante:                                                  ///\n");
     fgets(vei->fabricante, sizeof(vei->fabricante), stdin);
+    limpaBuffer();
     if (!(validadorFabricante(vei->fabricante))){
         printf("\t\t\t>>>Nome válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -92,8 +94,18 @@ Veiculos* cadastrar_veiculo(void) {
     }
     printf("///            Ano:                                                         ///\n");
     scanf("%d", &vei->ano);
+    limpaBuffer();
+    if (!(validadorAno(vei->ano))){
+        printf("\t\t\t>>>Ano válida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }else{
+        printf("\t\t\t>>>Ano inválida<<<\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    }
+    printf("\n");
     printf("///            Placa:                                                       ///\n");
     fgets(vei->placa, sizeof(vei->placa), stdin);
+    limpaBuffer();
     if (!(validadorPlaca(vei->placa))){
         printf("\t\t\t>>>Placa válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -104,6 +116,7 @@ Veiculos* cadastrar_veiculo(void) {
     printf("\n");
     printf("///            Chassi:                                                      ///\n");
     fgets(vei->chassi, sizeof(vei->chassi), stdin);
+    limpaBuffer();
     if (!(validadorChassi(vei->chassi))){
         printf("\t\t\t>>>Chassi válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -113,6 +126,7 @@ Veiculos* cadastrar_veiculo(void) {
     }
     printf("///            Estado de Conservação:                                       ///\n");
     fgets(vei->estado_c, sizeof(vei->estado_c), stdin);
+    limpaBuffer();
     if (validadorConservacao(vei->estado_c)){
         printf("\t\t\t>>>Estado de Conservacao Valido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -122,6 +136,7 @@ Veiculos* cadastrar_veiculo(void) {
     }
     printf("///            Valor da Diária do Veículo:                                  ///\n");
     scanf("%d", &vei->diaria);
+    limpaBuffer();
     if (validadorDiaria(vei->diaria)){
         printf("\t\t\t>>>Valor válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -145,6 +160,8 @@ Veiculos* cadastrar_veiculo(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+    return 0;
+    
 }
 
 

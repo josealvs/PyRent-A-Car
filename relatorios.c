@@ -44,6 +44,7 @@ void tela_relatorios(void){
         printf("Cidade: %s\n", cli->cidade);
         printf("Telefone: %s\n", cli->telefone);
         printf("Endereco: %s\n", cli->endereco);
+        printf("Data de Nascimento: %d/%d/%d\n", cli->dia, cli-> mes, cli->ano);
         
         }
     }
@@ -74,6 +75,7 @@ void tela_relatorios(void){
         printf("Telefone: %s\n", fun->telefone);
         printf("Endereco: %s\n", fun->endereco);
         printf("Cargo: %s\n", fun->cargo);
+        printf("Data de Nascimento: %d/%d/%d\n", fun->dia, fun-> mes, fun->ano);
         }
     }
     fclose(ap);
@@ -102,6 +104,8 @@ void tela_relatorios(void){
         printf("Placa: %s\n", vei->placa);
         printf("Chassi: %s\n", vei->chassi);
         printf("Estado: %s\n", vei->estado_c);
+        printf("Data: %d\n", vei->ano);
+        printf("Valor da Diária: %d\n", vei->diaria);
         }
     }
     fclose(bp);
@@ -129,6 +133,8 @@ void tela_relatorios(void){
         printf("CPF do Funcionário: %s\n", alg->cpf_f);
         printf("CPF do Cliente: %s\n", alg->cpf_c);
         printf("Placa: %s\n", alg->placa);
+        printf("Data de Início do Aluguel: %d/%d/%d\n", alg->dia_i, alg-> mes_i, alg->ano_i);
+        printf("Data de Fim do Aluguel: %d/%d/%d\n", alg->dia_f, alg-> mes_f, alg->ano_f);
         }
     }
     fclose(cp);
