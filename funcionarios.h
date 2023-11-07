@@ -15,6 +15,7 @@ typedef struct funcionarios Funcionarios;
 void tela_menu_funcionario(void);
 char menu_funcionario(void);
 Funcionarios* cadastrar_funcionario(void);
-void tela_pesquisar_funcionario(void);
+Funcionarios* pesquisar_funcionario(void);
 void tela_alterar_funcionario(void);
 void tela_excluir_funcionario(void); 
+void exibe_funcionario(Funcionarios* funcionarios);

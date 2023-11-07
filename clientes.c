@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+#include <time.h>
 #include "clientes.h"
 #include "util.h"
 
 void tela_menu_cliente(void){
-    
     char op;
     do{
         op = menu_cliente();
         switch(op){
             case '1': 	cadastrar_cliente();
                 break;
-            case '2': 	tela_pesquisar_cliente();
+            case '2': 	pesquisar_cliente();
                 break;
             case '3': 	tela_alterar_cliente();
                 break;
@@ -148,11 +149,13 @@ Clientes* cadastrar_cliente(void) {
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    return 0;
     
 }
 
-void tela_pesquisar_cliente(void) {
+Clientes* pesquisar_cliente(void) {
+    FILE* fp;
+    Clientes* clientes;
+    char cpf_dig[12];
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -166,15 +169,43 @@ void tela_pesquisar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
+    scanf("%s", cpf_dig);
+    limpaBuffer();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    clientes = (Clientes*) malloc(sizeof(Clientes));
+    fp = fopen("cli.dat", "rb");
+    if (fp == NULL) {
+        printf("Ops! Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar...\n");
+        exit(1);
+    }else{
+        while(!feof(fp)) {
+            fread(clientes, sizeof(Clientes), 1, fp);
+            if (strcmp(clientes->cpf, cpf_dig)==0){
+                exibe_cliente(clientes);
+                printf("\t\t\t*** Tecle <ENTER> para continuar...\n");
+                getchar();
+                fclose(fp);
+                return clientes;
+            }else{
+
+            }
+        }
+    }
+    fclose(fp);
+    return NULL;
+
 }
 
 void tela_alterar_cliente(void) {
+    FILE* fp;
+    Clientes* clientes = (Clientes*) malloc(sizeof(Clientes));
+    char cpf_dig[12];
+    int find = 0;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -188,15 +219,125 @@ void tela_alterar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
+    scanf("%s", cpf_dig);
+    limpaBuffer();
+    getchar();
+    fp = fopen("cli.dat", "r+b");
+    if (fp == NULL) {
+      printf("\t\t\t*** Processando as informações...\n");
+      sleep(1);
+      printf("\t\t\t*** Ops! Erro na abertura do arquivo!\n");
+      printf("\t\t\t*** Não é possível continuar...\n");
+      printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
+      getchar();
+    } else {
+      while (fread(clientes, sizeof(Clientes), 1, fp) == 1) {
+        if(strcmp(clientes->cpf, cpf_dig) == 0) {
+            printf("\n");
+            printf("\t\t\t*** Cliente Encontrado ***\n");
+            printf("\t\t\t*** Refaça o Cadastro ***\n");
+            printf("\n");
+
+            printf("///            Nome:                                                        ///\n");
+            fgets(clientes->nome, sizeof(clientes->nome), stdin);
+            limpaBuffer();
+            if (!(validadorNome(clientes->nome))){
+                printf("\t\t\t>>>Nome válido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            }else{
+                printf("\t\t\t>>>Nome inválido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                break;
+            }
+            printf("\n");
+            printf("///            CPF(apenas números):                                                         ///\n");
+            fgets(clientes->cpf, sizeof(clientes->cpf), stdin);
+            limpaBuffer();
+            if (validadorCPF(clientes->cpf)){
+                printf("\t\t\t>>>CPF válido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            }else{
+                printf("\t\t\t>>>CPF inválido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                break;
+            }
+            printf("\n");
+            printf("///            Cidade:                                                      ///\n");
+            fgets(clientes->cidade, sizeof(clientes->cidade), stdin);
+            limpaBuffer();
+            if (!validadorCidade(clientes->cidade)){
+                printf("\t\t\t>>>Cidade válida<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            }else{
+                printf("\t\t\t>>>Cidade inválida<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                break;
+            }
+            printf("///            Endereço:                                                    ///\n");
+            fgets(clientes->endereco, sizeof(clientes->endereco), stdin);
+            limpaBuffer();
+            printf("///            Telefone:                                                    ///\n");
+            fgets(clientes->telefone, sizeof(clientes->telefone), stdin);
+            limpaBuffer();
+            if (validadorTelefone(clientes->telefone)){
+                printf("\t\t\t>>>Número válido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            }else{
+                printf("\t\t\t>>>Número inválido<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                break;
+            }
+            printf("\n");
+            printf("///            Data de Nascimento:                                          ///\n");
+            printf("///            Dia:                                                         ///\n");
+            scanf("%d", &clientes->dia);
+            limpaBuffer();
+            printf("///            Mês(em número):                                              ///\n");
+            scanf("%d", &clientes->mes);
+            limpaBuffer();
+            printf("///            Ano:                                                         ///\n");
+            scanf("%d", &clientes->ano);
+            limpaBuffer();
+            clientes->status = 'a';
+            
+            if (validadorData(clientes->dia, clientes->mes, clientes->ano)){
+                printf("\t\t\t>>>Data de Nascimento válida<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            }else{
+                printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
+                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                break;
+            }
+
+            fseek(fp, -sizeof(Clientes), SEEK_CUR);
+            fwrite(clientes, sizeof(Clientes), 1, fp);
+            find = 1;
+            break;
+        }
+      }
+    }
+
+    if (!find) {
+        printf("\n");
+        printf("\t\t\t CPF não encontrado!\n");
+    } else {
+        printf("\n");
+        printf("\t\t\t Cliente atualizado com sucesso!\n");
+    }
+
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+
 }
 
 void tela_excluir_cliente(void) {
+    char cpf_dig[12];
+    Clientes* clientes = (Clientes*) malloc(sizeof(Clientes));
+    FILE* fp;
+    int find = 0;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -210,10 +351,97 @@ void tela_excluir_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
+    scanf("%s", cpf_dig);
+    getchar();
+    fp = fopen("cli.dat", "r+b");
+    if (fp == NULL) {
+      printf("\t\t\t*** Processando as informações...\n");
+      sleep(1);
+      printf("\t\t\t*** Ops! Erro na abertura do arquivo!\n");
+      printf("\t\t\t*** Não é possível continuar...\n");
+      printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
+      getchar();
+    } else {
+      while (fread(clientes, sizeof(Clientes), 1, fp) == 1) {
+        if(strcmp(clientes->cpf, cpf_dig) == 0) {
+          printf("\n");
+          printf("\t\t\t*** Cliente Encontrado ***\n");
+          printf("\n");
+          clientes->status = 'x';
+          fseek(fp, -sizeof(Clientes), SEEK_CUR);
+          fwrite(clientes, sizeof(Clientes), 1, fp);
+          find = 1;
+          break;
+        }
+      }
+    }
+    if (!find) {
+        printf("\n");
+        printf("\t\t\tCPF não encontrado!\n");
+    } else {
+        printf("\n");
+        printf("\t\t\tCliente excluído com sucesso!\n");
+    }
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    fclose(fp);
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+}
+
+
+void exibe_cliente (Clientes* clientes) {
+
+    char situacao[20];
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = =  Rent A Car = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+  if ((clientes == NULL) || (clientes->status == 'x')) {
+      printf("\n Cliente não encontrado!\n");
+      printf("\n");
+      printf("\t\t\t*** Tecle <ENTER> para continuar...\n");
+      getchar();
+  } else {
+      printf("\n*** Cliente Cadastrado***\n");
+      printf("\n");
+      printf("*** Nome do Cliente: ");
+      printf("%s" ,clientes->nome);
+      printf("\n");
+      printf("*** CPF: ");
+      printf("%s" ,clientes->cpf);
+      printf("\n");
+      printf("*** Endereco: ");
+      printf("%s" ,clientes->endereco);
+      printf("\n");
+      printf("*** Cidade: ");
+      printf("%s" ,clientes->cidade);
+      printf("\n");
+      printf("*** Telefone: ");
+      printf("\n");
+      printf("%s" ,clientes->telefone);
+      printf("\n");
+      printf("*** Data de Nascimento: ");
+      printf("\n");
+      printf("%d/%d/%d", clientes->dia, clientes->mes, clientes->ano);
+    if (clientes->status == 'a') {
+      strcpy(situacao, "Cadastrado Ativo");
+    } else {
+      strcpy(situacao, "Cadastro Inativo");
+    }
+    printf("Status do cliente: %s\n", situacao);
+    printf("\n");
+  }   
 }
