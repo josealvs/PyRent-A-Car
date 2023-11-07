@@ -202,9 +202,9 @@ Clientes* pesquisar_cliente(void) {
 }
 
 void tela_alterar_cliente(void) {
-    FILE* fp;
-    Clientes* clientes = (Clientes*) malloc(sizeof(Clientes));
     char cpf_dig[12];
+    Clientes* clientes = (Clientes*) malloc(sizeof(Clientes));
+    FILE* fp;
     int find = 0;
     system("clear||cls");
     printf("\n");

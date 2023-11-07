@@ -20,3 +20,7 @@ Semana 8 - Validadores Finalizados, os que não constam, julguei como sem necess
 Semana 9 - AlocaÇÃO DE MEMÓRIA FINALIZADA
 
 Semana 10 - Salvando dados em arquivos binários e listagem de relatórios finalizados.
+
+Semana 11 - SEPE
+
+Semana 12 - CRUD feito 

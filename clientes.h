@@ -1,5 +1,5 @@
 struct clientes{
-    char cpf[12];
+    char cpf[11];
     char nome[200];
     int dia;
     int mes;

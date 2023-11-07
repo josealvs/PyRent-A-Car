@@ -112,7 +112,7 @@ void tela_relatorios(void){
     free(vei);
 
     FILE* cp;
-    Aluguel* alg;
+    Aluguel* alg; 
 
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");

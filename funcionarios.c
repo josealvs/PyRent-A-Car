@@ -214,7 +214,7 @@ Funcionarios* pesquisar_funcionario(void) {
 
     
 
-}
+} 
 
 void tela_alterar_funcionario(void) {
     FILE* fp;

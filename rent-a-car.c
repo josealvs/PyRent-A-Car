@@ -18,7 +18,7 @@ char menu_principal(void);
 // Programa principal
 int main(void) {
     char op;
-
+ 
     do{
         op = menu_principal();
         switch(op) {

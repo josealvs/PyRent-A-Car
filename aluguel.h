@@ -1,13 +1,14 @@
 struct aluguel{
     char cpf_f[12];
     char cpf_c[12];
-    char placa[7];
+    char placa[8];
     int dia_i;
     int mes_i;
     int ano_i;
     int dia_f;
     int mes_f;
     int ano_f;
+    char codigo[11];
     char status;
 };
 typedef struct aluguel Aluguel;
