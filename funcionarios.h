@@ -18,4 +18,4 @@ Funcionarios* cadastrar_funcionario(void);
 Funcionarios* pesquisar_funcionario(void);
 void tela_alterar_funcionario(void);
 void tela_excluir_funcionario(void); 
-void exibe_funcionario(Funcionarios* funcionarios); 
+void exibe_funcionario(Funcionarios* funcionarios);

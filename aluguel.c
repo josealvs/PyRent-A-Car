@@ -77,6 +77,8 @@ Aluguel* cadastrar_aluguel(void) {
     }else{
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            CPF do Funcionario:                                          ///\n");
     fgets(alg->cpf_f, sizeof(alg->cpf_f), stdin);
@@ -87,6 +89,8 @@ Aluguel* cadastrar_aluguel(void) {
     }else{
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Placa do Veículo:                                            ///\n");
     fgets(alg->placa, sizeof(alg->placa), stdin);
@@ -97,6 +101,8 @@ Aluguel* cadastrar_aluguel(void) {
     }else{
         printf("\t\t\t>>>Placa inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Data de Início do Aluguel:                                   ///\n");
     printf("///            Dia:                                                         ///\n");
@@ -116,6 +122,8 @@ Aluguel* cadastrar_aluguel(void) {
     }else{
         printf("\t\t\t>>>Data de Início inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Data de Fim do Aluguel:                                      ///\n");
     printf("///            Dia:                                                         ///\n");
@@ -135,13 +143,15 @@ Aluguel* cadastrar_aluguel(void) {
     }else{
         printf("\t\t\t>>>Data Final inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     
     alg->status = 'a';
 
     FILE* file;
     Aluguel* aluguel;
-    file = fopen("alg.dat","wb");
+    file = fopen("alg.dat","a+b");
     aluguel = alg;
     fwrite(aluguel, sizeof(Aluguel), 1, file);
     fclose(file);
@@ -160,7 +170,7 @@ Aluguel* cadastrar_aluguel(void) {
 Aluguel* pesquisar_aluguel(void) {
     FILE* fp;
     Aluguel* aluguel;
-    char codigo_dig[12];
+    char codigo_dig[11];
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -246,12 +256,14 @@ void exibe_aluguel (Aluguel* aluguel) {
       printf("*** Data de Fim: ");
       printf("\n");
       printf("%d/%d/%d", aluguel->dia_f, aluguel->mes_f, aluguel->ano_f);
+      printf("\n");
+
     if (aluguel->status == 'a') {
       strcpy(situacao, "Cadastrado Ativo");
     } else {
       strcpy(situacao, "Cadastro Inativo");
     }
-    printf("Status do cliente: %s\n", situacao);
+    printf("Status do Aluguel: %s\n", situacao);
     printf("\n");
   }   
 }

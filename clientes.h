@@ -1,5 +1,7 @@
+typedef struct clientes Clientes;
+
 struct clientes{
-    char cpf[11];
+    char cpf[12];
     char nome[200];
     int dia;
     int mes;
@@ -10,7 +12,6 @@ struct clientes{
     char status;
     
 };
-typedef struct clientes Clientes;
 
 
 void tela_menu_cliente(void);

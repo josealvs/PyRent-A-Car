@@ -79,6 +79,8 @@ Funcionarios* cadastrar_funcionario(void) {
     }else{
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
     printf("///            CPF:                                                         ///\n");
@@ -90,6 +92,8 @@ Funcionarios* cadastrar_funcionario(void) {
     }else{
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
@@ -110,16 +114,20 @@ Funcionarios* cadastrar_funcionario(void) {
     }else{
         printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Cidade:                                                      ///\n");
     fgets(fun->cidade, sizeof(fun->cidade), stdin);
     limpaBuffer();
-    if (validadorCidade(fun->cidade)){
+    if (!(validadorCidade(fun->cidade))){
         printf("\t\t\t>>>Cidade válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Cidade inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Endereço:                                                    ///\n");
     fgets(fun->endereco, sizeof(fun->endereco), stdin);
@@ -127,12 +135,14 @@ Funcionarios* cadastrar_funcionario(void) {
     printf("///            Telefone:                                                    ///\n");
     fgets(fun->telefone, sizeof(fun->telefone), stdin);
     limpaBuffer();
-    if (validadorTelefone(fun->telefone)){
+    if (!(validadorTelefone(fun->telefone))){
         printf("\t\t\t>>>Número válido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Número inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
     printf("///            Cargo na Empresa:                                            ///\n");
@@ -144,12 +154,14 @@ Funcionarios* cadastrar_funcionario(void) {
     }else{
         printf("\t\t\t>>>Cargo inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     fun->status = 'a';
 
     FILE* file;
     Funcionarios* funcionarios;
-    file = fopen("fun.dat","wb");
+    file = fopen("fun.dat","a+b");
     funcionarios = fun;
     fwrite(funcionarios, sizeof(Funcionarios), 1, file);
     fclose(file);
@@ -210,6 +222,7 @@ Funcionarios* pesquisar_funcionario(void) {
         }
     }
     fclose(fp);
+    free(funcionarios);
     return NULL;
 
     
@@ -246,7 +259,8 @@ void tela_alterar_funcionario(void) {
       printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
       getchar();
     } else {
-      while (fread(funcionarios, sizeof(Funcionarios), 1, fp) == 1) {
+      while (!feof(fp)) {
+        fread(funcionarios, sizeof(Funcionarios), 1, fp) == 1;
         if(strcmp(funcionarios->cpf, cpf_dig) == 0) {
             printf("\n");
             printf("\t\t\t*** Cliente Encontrado ***\n");
@@ -262,6 +276,8 @@ void tela_alterar_funcionario(void) {
             }else{
                 printf("\t\t\t>>>Nome inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
             printf("///            CPF:                                                         ///\n");
@@ -273,6 +289,8 @@ void tela_alterar_funcionario(void) {
             }else{
                 printf("\t\t\t>>>CPF inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
             printf("///            Data de Nascimento:                                          ///\n");
@@ -293,16 +311,20 @@ void tela_alterar_funcionario(void) {
             }else{
                 printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("///            Cidade:                                                      ///\n");
             fgets(funcionarios->cidade, sizeof(funcionarios->cidade), stdin);
             limpaBuffer();
-            if (validadorCidade(funcionarios->cidade)){
+            if (!(validadorCidade(funcionarios->cidade))){
                 printf("\t\t\t>>>Cidade válida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             }else{
                 printf("\t\t\t>>>Cidade inválida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("///            Endereço:                                                    ///\n");
             fgets(funcionarios->endereco, sizeof(funcionarios->endereco), stdin);
@@ -310,12 +332,14 @@ void tela_alterar_funcionario(void) {
             printf("///            Telefone:                                                    ///\n");
             fgets(funcionarios->telefone, sizeof(funcionarios->telefone), stdin);
             limpaBuffer();
-            if (validadorTelefone(funcionarios->telefone)){
+            if (!(validadorTelefone(funcionarios->telefone))){
                 printf("\t\t\t>>>Número válido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             }else{
                 printf("\t\t\t>>>Número inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
             printf("///            Cargo na Empresa:                                            ///\n");
@@ -327,6 +351,8 @@ void tela_alterar_funcionario(void) {
             }else{
                 printf("\t\t\t>>>Cargo inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             funcionarios->status = 'a';
 
@@ -345,6 +371,11 @@ void tela_alterar_funcionario(void) {
         printf("\n");
         printf("\t\t\t Funcionario atualizado com sucesso!\n");
     }
+    printf("\n");
+    sleep(1);
+    getchar();
+    fclose(fp);
+    free(funcionarios);
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -390,7 +421,7 @@ void tela_excluir_funcionario(void) {
           printf("\n");
           funcionarios->status = 'x';
           fseek(fp, -sizeof(Funcionarios), SEEK_CUR);
-          fwrite(funcionarios, sizeof(funcionarios), 1, fp);
+          fwrite(funcionarios, sizeof(Funcionarios), 1, fp);
           find = 1;
           break;
         }
@@ -460,6 +491,8 @@ void exibe_funcionario (Funcionarios* funcionarios) {
       printf("*** Data de Nascimento: ");
       printf("\n");
       printf("%d/%d/%d", funcionarios->dia, funcionarios->mes, funcionarios->ano);
+      printf("\n");
+
     if (funcionarios->status == 'a') {
       strcpy(situacao, "Cadastrado Ativo");
     } else {

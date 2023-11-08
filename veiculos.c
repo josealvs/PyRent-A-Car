@@ -81,6 +81,8 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Modelo inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
 
@@ -93,6 +95,8 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Ano:                                                         ///\n");
     scanf("%d", &vei->ano);
@@ -103,17 +107,21 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Ano inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
     printf("///            Placa:                                                       ///\n");
     fgets(vei->placa, sizeof(vei->placa), stdin);
     limpaBuffer();
-    if (!(validadorPlaca(vei->placa))){
+    if (validadorPlaca(vei->placa)){
         printf("\t\t\t>>>Placa válida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     }else{
         printf("\t\t\t>>>Placa inválida<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("\n");
     printf("///            Chassi:                                                      ///\n");
@@ -125,6 +133,8 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Chassi inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Estado de Conservação:                                       ///\n");
     fgets(vei->estado_c, sizeof(vei->estado_c), stdin);
@@ -135,6 +145,8 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Estado de Conservacao Invalido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     printf("///            Valor da Diária do Veículo:                                  ///\n");
     scanf("%d", &vei->diaria);
@@ -145,12 +157,14 @@ Veiculos* cadastrar_veiculo(void) {
     }else{
         printf("\t\t\t>>>Chassi inválido<<<\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        sleep(1);
+        exit(1);
     }
     vei->status = 'a';
 
     FILE* file;
     Veiculos* veiculos;
-    file = fopen("vei.dat","wb");
+    file = fopen("vei.dat","a+b");
     veiculos = vei;
     fwrite(veiculos, sizeof(Veiculos), 1, file);
     fclose(file);
@@ -212,6 +226,7 @@ Veiculos* pesquisar_veiculo(void) {
         }
     }
     fclose(fp);
+    free(veiculos);
     return NULL;
 
     
@@ -248,7 +263,8 @@ void tela_alterar_veiculo(void) {
       printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
       getchar();
     } else {
-      while (fread(veiculos, sizeof(Veiculos), 1, fp) == 1) {
+      while (!feof(fp)) {
+        fread(veiculos, sizeof(Veiculos), 1, fp) == 1;
         if(strcmp(veiculos->placa, placa_dig) == 0) {
             printf("\n");
             printf("\t\t\t*** Veiculo Encontrado ***\n");
@@ -264,6 +280,8 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Modelo inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
 
@@ -276,6 +294,8 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Nome inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("///            Ano:                                                         ///\n");
             scanf("%d", &veiculos->ano);
@@ -286,17 +306,21 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Ano inválida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
             printf("///            Placa:                                                       ///\n");
             fgets(veiculos->placa, sizeof(veiculos->placa), stdin);
             limpaBuffer();
-            if (!(validadorPlaca(veiculos->placa))){
+            if (validadorPlaca(veiculos->placa)){
                 printf("\t\t\t>>>Placa válida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             }else{
                 printf("\t\t\t>>>Placa inválida<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("\n");
             printf("///            Chassi:                                                      ///\n");
@@ -308,6 +332,8 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Chassi inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("///            Estado de Conservação:                                       ///\n");
             fgets(veiculos->estado_c, sizeof(veiculos->estado_c), stdin);
@@ -318,6 +344,8 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Estado de Conservacao Invalido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             printf("///            Valor da Diária do Veículo:                                  ///\n");
             scanf("%d", &veiculos->diaria);
@@ -328,6 +356,8 @@ void tela_alterar_veiculo(void) {
             }else{
                 printf("\t\t\t>>>Chassi inválido<<<\n");
                 printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                sleep(1);
+                break;
             }
             veiculos->status = 'a';
 
@@ -347,6 +377,11 @@ void tela_alterar_veiculo(void) {
         printf("\n");
         printf("\t\t\t Veiculo atualizado com sucesso!\n");
     }
+    printf("\n");
+    sleep(1);
+    getchar();
+    fclose(fp);
+    free(veiculos);
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -393,7 +428,7 @@ void tela_excluir_veiculo(void) {
           printf("\n");
           veiculos->status = 'x';
           fseek(fp, -sizeof(Veiculos), SEEK_CUR);
-          fwrite(veiculos, sizeof(veiculos), 1, fp);
+          fwrite(veiculos, sizeof(Veiculos), 1, fp);
           find = 1;
           break;
         }
@@ -464,6 +499,8 @@ void exibe_veiculos(Veiculos* veiculos) {
       printf("*** Ano: ");
       printf("\n");
       printf("%d",veiculos->ano);
+      printf("\n");
+
     if (veiculos->status == 'a') {
       strcpy(situacao, "Cadastrado Ativo");
     } else {
