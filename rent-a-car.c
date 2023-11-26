@@ -30,7 +30,7 @@ int main(void) {
                 break;
             case '4': tela_menu_aluguel();
                 break;
-            case '5': tela_relatorios();
+            case '5': menuRelatorio();
                 break;
             case '6': tela_sobre();
                 break;

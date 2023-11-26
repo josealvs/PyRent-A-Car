@@ -1,8 +1,8 @@
 char tela_relatorios(void);
 void menuRelatorio(void);
 char relatorioCliente(void);
-
 char relatorioFuncionario(void);
+char relatorioVeiculo(void);
 void listaCliente(void);
 void tela_op_cliente(void);
 void tela_op_funcionario(void);
@@ -13,3 +13,6 @@ void listaClienteStatus(char);
 void listaFuncionario(void);
 void listaFuncionarioBairro(void);
 void listaFuncionarioStatus(char);
+void listaVeiculo(void);
+void listaVeiculoDiaria(void);
+void listaVeiculoStatus(char);

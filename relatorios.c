@@ -12,30 +12,28 @@
 
 
 void menuRelatorio(void){
-    char op;
+    char opcao;
 
     do {
-        op = tela_relatorios();
-        switch(op) {
-            case '1':   relatorioFuncionario();
+        opcao = tela_relatorios();
+        switch(opcao) {
+            case '1':   tela_op_funcionario();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
-            case '2':   relatorioCliente();
+            case '2':   tela_op_cliente();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
-            case '3':   ;
+            case '3':   tela_op_veiculo();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
-                        break;
-            case '4':   ;
                         break;
           } 		
-    } while (op != '0');
+    } while (opcao != '0');
 }
 char tela_relatorios(void){
     char op;
@@ -54,7 +52,7 @@ char tela_relatorios(void){
     printf("///              1- Relatório Funcionários                                  ///\n");
     printf("///              2- Relatório Clientes                                      ///\n");
     printf("///              3- Relatório Veículos                                      ///\n");
-    printf("///              4- Relatório Vendas                                        ///\n");
+    printf("///              4- Relatório Aluguéis                                      ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -62,8 +60,8 @@ char tela_relatorios(void){
     printf("///                                                                         ///\n");
     printf("///             Digite a opção escolhida:                                   ///\n");
     scanf("%c", &op);
-    getchar();
     printf("\n");
+    getchar();
     return op;
 }
 
@@ -82,7 +80,7 @@ char relatorioCliente(void){
     printf("///            = = = = = = = Relatórios de Clientes = = = = =               ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///              1- Relatório por Nome, CPF e Telefone                      ///\n");
+    printf("///              1- Relatório por Completo                                  ///\n");
     printf("///              2- Relatório por Endereço e Cidade                         ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
@@ -98,10 +96,10 @@ char relatorioCliente(void){
 }
 
 void tela_op_cliente(void){
-    char op;
+    char opcao;
     do {
-        op = relatorioCliente();
-        switch(op) {
+        opcao = relatorioCliente();
+        switch(opcao) {
             case '1':   listaCliente();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -118,7 +116,7 @@ void tela_op_cliente(void){
                         getchar();
                         break;
           } 		
-    } while (op != '0');
+    } while (opcao != '0');
 }
 
 void listaCliente(void){
@@ -150,17 +148,32 @@ void listaCliente(void){
     printf("%-51s", "Nome");
     printf("|");
     printf("%-12s", "Telefone");
+    printf("|");
+    printf("%-12s", "Endereco");
+    printf("|");
+    printf("%-12s", "Cidade");
+    printf("|");
+    printf("%-11s", "Data de Nascimento");
     printf("\n");
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(clientes, sizeof(clientes), 1, fp)) { 
+    while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status != 'i') {
             printf("%-12s", clientes->cpf);
             printf("|");
-            printf("%-50s", clientes->nome);
+            printf("%-51s", clientes->nome);
             printf("|");
             printf("%-12s", clientes->telefone);
+            printf("|");
+            printf("%-12s", clientes->endereco);
+            printf("|");
+            printf("%-12s", clientes->cidade);
+            printf("|");
+            printf("%d/%d/%d", clientes->dia, clientes->mes, clientes->ano);
+            printf("\n");
+            printf("%13s", "|");
+            printf("%51s", "|");
             printf("\n");
         }
     }
@@ -199,7 +212,7 @@ void listaClienteBairro(void){
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(clientes, sizeof(clientes), 1, fp)) { 
+    while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status != 'i') {
             printf("%-12s", clientes->cidade);
             printf("|");
@@ -246,7 +259,7 @@ void listaClienteStatus(char status){
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(clientes, sizeof(clientes), 1, fp)) { 
+    while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status == 'i') {
             printf("%-12s", clientes->cpf);
             printf("|");
@@ -263,11 +276,11 @@ void listaClienteStatus(char status){
 }
 
 void tela_op_funcionario(void){
-    char op;
+    char opcao;
 
     do {
-        op = relatorioFuncionario();
-        switch(op) {
+        opcao = relatorioFuncionario();
+        switch(opcao) {
             case '1':   listaFuncionario();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -284,7 +297,7 @@ void tela_op_funcionario(void){
                         getchar();
                         break;
           } 		
-    } while (op != '0');
+    } while (opcao != '0');
 }
 
 char relatorioFuncionario(void){
@@ -302,7 +315,7 @@ char relatorioFuncionario(void){
     printf("///            = = = = = = = Relatórios de Funcionarios = = = =             ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///              1- Relatório por Nome, CPF e Telefone                      ///\n");
+    printf("///              1- Relatório Completo                                      ///\n");
     printf("///              2- Relatório por Endereço e Cidade                         ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
@@ -346,17 +359,29 @@ void listaFuncionario(void){
     printf("%-51s", "Nome");
     printf("|");
     printf("%-12s", "Telefone");
+    printf("|");
+    printf("%-12s", "Endereco");
+    printf("|");
+    printf("%-12s", "Cidade");
+    printf("|");
+    printf("%-11s", "Data de Nascimento");
     printf("\n");
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(funcionarios, sizeof(funcionarios), 1, fp)) { 
+    while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
         if (funcionarios->status != 'i') {
             printf("%-12s", funcionarios->cpf);
             printf("|");
             printf("%-50s", funcionarios->nome);
             printf("|");
             printf("%-12s", funcionarios->telefone);
+            printf("|");
+            printf("%-12s", funcionarios->endereco);
+            printf("|");
+            printf("%-12s", funcionarios->cidade);
+            printf("|");
+            printf("%d/%d/%d", funcionarios->dia, funcionarios->mes, funcionarios->ano);
             printf("\n");
         }
     }
@@ -396,7 +421,7 @@ void listaFuncionarioBairro(void){
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(funcionarios, sizeof(funcionarios), 1, fp)) { 
+    while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
         if (funcionarios->status != 'i') {
             printf("%-12s", funcionarios->cidade);
             printf("|");
@@ -443,7 +468,7 @@ void listaFuncionarioStatus(char status){
     printf("%13s", "|");
     printf("%51s", "|");
     printf("\n");
-    while (fread(funcionarios, sizeof(funcionarios), 1, fp)) { 
+    while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
         if (funcionarios->status == 'i') {
             printf("%-12s", funcionarios->cpf);
             printf("|");
@@ -458,3 +483,340 @@ void listaFuncionarioStatus(char status){
     getchar();
 
 }
+
+char relatorioVeiculo(void){
+    char op;
+
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = = = =             ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///              1- Relatório Completo                                      ///\n");
+    printf("///              2- Relatório por Valor da diária e Placa                   ///\n");
+    printf("///              3- Relatório por Status de Inativo                         ///\n");
+    printf("///              0- Retornar ao Menu Principal                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Digite a opção escolhida:                                   ///\n");
+    scanf("%c", &op);
+    getchar();
+    printf("\n");
+    return op;
+}
+
+void tela_op_veiculo(void){
+    char opcao;
+
+    do {
+        opcao = relatorioVeiculo();
+        switch(opcao) {
+            case '1':   listaVeiculo();
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        
+            case '2':   listaVeiculoDiaria();
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        
+            case '3':   listaVeiculoStatus('i');
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        break;
+          } 		
+    } while (opcao != '0');
+}
+
+
+void listaVeiculoStatus(char status){
+    FILE* fp;
+    Veiculos* veiculos;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = =  =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    getchar();
+    veiculos = (Veiculos*) malloc(sizeof(Veiculos));
+    fp = fopen("vei.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-50s", "Modelo");
+    printf("|");
+    printf("%-8s", "Placa");
+    printf("|");
+    printf("%-5s", "Ano");
+    printf("\n");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
+        if (veiculos->status == 'i') {
+            printf("%-50s", veiculos->modelo);
+            printf("|");
+            printf("%-8s", veiculos->placa);
+            printf("|");
+            printf("%-12s", veiculos->ano);
+            printf("\n");
+        }
+    }
+    fclose(fp);
+    free(veiculos);
+    getchar();
+
+}
+
+void listaVeiculoDiaria(void){
+
+    FILE* fp;
+    Veiculos* veiculos;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = = = =             ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    veiculos = (Veiculos*) malloc(sizeof(Veiculos));
+    fp = fopen("vei.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-8s", "Valor da diaria");
+    printf("|");
+    printf("%-9s", "Placa");
+    printf("|");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
+        if (veiculos->status != 'i') {
+            printf("%-8s", veiculos->diaria);
+            printf("|");
+            printf("%-9s", veiculos->placa);
+            printf("\n");
+            
+        }
+    }
+    fclose(fp);
+    free(veiculos);
+    getchar();
+}
+
+void listaVeiculo(void){
+    
+    FILE* fp;
+    Veiculos* veiculos;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = = =               ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    veiculos = (Veiculos*) malloc(sizeof(Veiculos));
+    fp = fopen("vei.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-50s", "Modelo");
+    printf("|");
+    printf("%-51s", "Marca");
+    printf("|");
+    printf("%-12s", "Placa");
+    printf("|");
+    printf("%-12s", "Chassi");
+    printf("|");
+    printf("%-12s", "Estado de Conservação");
+    printf("|");
+    printf("%-12s", "Diária");
+    printf("|");
+    printf("%-5s", "Ano");
+    printf("\n");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
+        if (veiculos->status != 'i') {
+            printf("%-50s", veiculos->modelo);
+            printf("|");
+            printf("%-50s", veiculos->fabricante);
+            printf("|");
+            printf("%-8s", veiculos->placa);
+            printf("|");
+            printf("%-17s", veiculos->chassi);
+            printf("|");
+            printf("%-20s", veiculos->estado_c);
+            printf("|");
+            printf("%-8s", veiculos->diaria);
+            printf("|");
+            printf("%-5s", veiculos->ano);
+            printf("\n");
+        }
+    }
+    fclose(fp);
+    free(veiculos);
+    getchar();
+}
+/*
+void tela_op_aluguel(void)
+{
+    char opcao;
+
+    do
+    {
+        opcao = relatorioAluguel();
+        switch (opcao)
+        {
+        case '1':
+            listaAluguel();
+            printf("\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+
+        case '2':
+            listaAluguelData();
+            printf("\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+        }
+    } while (opcao != '0');
+}
+
+char relatorioAluguel(void)
+{
+    char op;
+
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Aluguéis = = = = = =             ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///              1- Relatório Completo                                      ///\n");
+    printf("///              2- Relatório por Data de Início, fim e Placa               ///\n");
+    printf("///              0- Retornar ao Menu Principal                              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Digite a opção escolhida:                                   ///\n");
+    scanf("%c", &op);
+    getchar();
+    printf("\n");
+    return op;
+}
+
+void listaAluguel(void)
+{
+
+    FILE *fp;
+    Aluguel *aluguel;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Aluguéis = = = = =               ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    aluguel = (Aluguel *)malloc(sizeof(Aluguel));
+    fp = fopen("alg.dat", "rb");
+    if (fp == NULL)
+    {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-50s", "CPF do Cliente");
+    printf("|");
+    printf("%-51s", "CPF do Funcionario");
+    printf("|");
+    printf("%-12s", "Placa");
+    printf("|");
+    printf("%-12s", "Chassi");
+    printf("|");
+    printf("%-12s", "Estado de Conservação");
+    printf("|");
+    printf("%-12s", "Diária");
+    printf("|");
+    printf("%-5s", "Ano");
+    printf("\n");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(aluguel, sizeof(Aluguel), 1, fp))
+    {
+        if (aluguel->status != 'i')
+        {
+            printf("%-50s", aluguel->cpf_c);
+            printf("|");
+            printf("%-50s", aluguel->cpf_f);
+            printf("|");
+            printf("%-8s", aluguel->placa);
+            printf("|");
+            printf("%-17s", aluguel->chassi);
+            printf("|");
+            printf("%-20s", aluguel->estado_c);
+            printf("|");
+            printf("%-8s", aluguel->diaria);
+            printf("|");
+            printf("%-5s", aluguel->ano);
+            printf("\n");
+        }
+    }
+    fclose(fp);
+    free(aluguel);
+    getchar();
+}
+*/

@@ -24,3 +24,6 @@ Semana 10 - Salvando dados em arquivos binários e listagem de relatórios final
 Semana 11 - SEPE
 
 Semana 12 - CRUD feito 
+
+
+OBS: PARA EXECUTAR, RODE O ARQUIVO MAKE.
