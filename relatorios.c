@@ -32,6 +32,11 @@ void menuRelatorio(void){
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
+            case '4':   tela_op_aluguel();
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        break;
           } 		
     } while (opcao != '0');
 }
@@ -660,11 +665,11 @@ void listaVeiculo(void){
     }
     printf("%-50s", "Modelo");
     printf("|");
-    printf("%-51s", "Marca");
+    printf("%-50s", "Marca");
     printf("|");
-    printf("%-12s", "Placa");
+    printf("%-8s", "Placa");
     printf("|");
-    printf("%-12s", "Chassi");
+    printf("%-17s", "Chassi");
     printf("|");
     printf("%-12s", "Estado de Conservação");
     printf("|");
@@ -685,9 +690,9 @@ void listaVeiculo(void){
             printf("|");
             printf("%-17s", veiculos->chassi);
             printf("|");
-            printf("%-20s", veiculos->estado_c);
+            printf("%-12s", veiculos->estado_c);
             printf("|");
-            printf("%-8s", veiculos->diaria);
+            printf("%-12s", veiculos->diaria);
             printf("|");
             printf("%-5s", veiculos->ano);
             printf("\n");
@@ -697,7 +702,7 @@ void listaVeiculo(void){
     free(veiculos);
     getchar();
 }
-/*
+
 void tela_op_aluguel(void)
 {
     char opcao;
@@ -739,7 +744,7 @@ char relatorioAluguel(void)
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///              1- Relatório Completo                                      ///\n");
-    printf("///              2- Relatório por Data de Início, fim e Placa               ///\n");
+    printf("///              2- Relatório por Data de Início, Fim e Placa               ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -784,13 +789,9 @@ void listaAluguel(void)
     printf("|");
     printf("%-12s", "Placa");
     printf("|");
-    printf("%-12s", "Chassi");
+    printf("%-8s", "Data de Início: ");
     printf("|");
-    printf("%-12s", "Estado de Conservação");
-    printf("|");
-    printf("%-12s", "Diária");
-    printf("|");
-    printf("%-5s", "Ano");
+    printf("%-8s", "Data de Fim: ");
     printf("\n");
     printf("%13s", "|");
     printf("%51s", "|");
@@ -805,13 +806,9 @@ void listaAluguel(void)
             printf("|");
             printf("%-8s", aluguel->placa);
             printf("|");
-            printf("%-17s", aluguel->chassi);
+            printf("%d/%d/%d", aluguel->dia_i, aluguel->mes_i, aluguel->ano_i);
             printf("|");
-            printf("%-20s", aluguel->estado_c);
-            printf("|");
-            printf("%-8s", aluguel->diaria);
-            printf("|");
-            printf("%-5s", aluguel->ano);
+            printf("%d/%d/%d", aluguel->dia_f, aluguel->mes_f, aluguel->ano_f);
             printf("\n");
         }
     }
@@ -819,4 +816,97 @@ void listaAluguel(void)
     free(aluguel);
     getchar();
 }
-*/
+
+void listaAluguelData(void){
+
+    FILE* fp;
+    Aluguel* aluguel;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Aluguéis = = = = = =             ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    aluguel = (Aluguel*) malloc(sizeof(Aluguel));
+    fp = fopen("alg.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-8s", "Data de Início");
+    printf("|");
+    printf("%-9s", "Data de Fim");
+    printf("|");
+    printf("%-9s", "Placa");
+    printf("|");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
+        if (aluguel->status != 'i') {
+            printf("%d/%d/%d", aluguel->dia_i, aluguel->mes_i, aluguel->ano_i);
+            printf("|");
+            printf("%d/%d/%d", aluguel->dia_f, aluguel->mes_f, aluguel->ano_f);
+            printf("|");
+            printf("%-8s", aluguel->placa);
+            printf("\n");
+            
+        }
+    }
+    fclose(fp);
+    free(aluguel);
+    getchar();
+}
+
+void listaAluguelStatus(char status){
+    FILE* fp;
+    Aluguel* aluguel;
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Aluguéis = = = =  =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    getchar();
+    aluguel = (Aluguel*) malloc(sizeof(Aluguel));
+    fp = fopen("alg.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("%-50s", "CPF do Cliente");
+    printf("|");
+    printf("%-8s", "Placa");
+    printf("\n");
+    printf("%13s", "|");
+    printf("%51s", "|");
+    printf("\n");
+    while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
+        if (aluguel->status == 'i') {
+            printf("%-50s", aluguel->cpf_c);
+            printf("|");
+            printf("%-8s", aluguel->placa);
+            printf("\n");
+        }
+    }
+    fclose(fp);
+    free(aluguel);
+    getchar();
+
+}
