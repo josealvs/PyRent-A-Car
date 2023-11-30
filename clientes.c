@@ -72,55 +72,43 @@ Clientes* cadastrar_cliente(void) {
     printf("///            Nome:                                                        ///\n");
     fgets(cli->nome, sizeof(cli->nome), stdin);
     limpaBuffer();
-    if (!(validadorNome(cli->nome))){
-        printf("\t\t\t>>>Nome válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(validadorNome(cli->nome)){
         printf("\t\t\t>>>Nome inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>>Digite o Nome novamente: \n");
+        fgets(cli->nome, sizeof(cli->nome), stdin);
     }
+    
     printf("\n");
     printf("///            CPF(apenas números):                                                         ///\n");
     fgets(cli->cpf, sizeof(cli->cpf), stdin);
     limpaBuffer();
-    if (validadorCPF(cli->cpf)){
-        printf("\t\t\t>>>CPF válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorCPF(cli->cpf))){
         printf("\t\t\t>>>CPF inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o CPF novamente: \n");
+        fgets(cli->cpf, sizeof(cli->cpf), stdin);
     }
+
     printf("\n");
     printf("///            Cidade:                                                      ///\n");
     fgets(cli->cidade, sizeof(cli->cidade), stdin);
     limpaBuffer();
-    if (!(validadorCidade(cli->cidade))){
-        printf("\t\t\t>>>Cidade válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(validadorCidade(cli->cidade)){
         printf("\t\t\t>>>Cidade inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>>Digite a Cidade novamente: \n");
+        fgets(cli->cidade, sizeof(cli->cidade), stdin);
+
     }
+
     printf("///            Endereço:                                                    ///\n");
     fgets(cli->endereco, sizeof(cli->endereco), stdin);
     limpaBuffer();
     printf("///            Telefone:                                                    ///\n");
     fgets(cli->telefone, sizeof(cli->telefone), stdin);
     limpaBuffer();
-    if (!(validadorTelefone(cli->telefone))){
-        printf("\t\t\t>>>Número válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(validadorTelefone(cli->telefone)){
         printf("\t\t\t>>>Número inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o telefone novamente: \n");
+        fgets(cli->telefone, sizeof(cli->telefone), stdin);
     }
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
@@ -135,14 +123,18 @@ Clientes* cadastrar_cliente(void) {
     limpaBuffer();
     cli->status = 'a';
     
-    if (validadorData(cli->dia, cli->mes, cli->ano)){
-        printf("\t\t\t>>>Data de Nascimento válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorData(cli->dia, cli->mes, cli->ano))){
         printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a data de nascimento novamente:\n");
+        printf("///            Dia:                                                         ///\n");
+        scanf("%d", &cli->dia);
+        limpaBuffer();
+        printf("///            Mês(em número):                                              ///\n");
+        scanf("%d", &cli->mes);
+        limpaBuffer();
+        printf("///            Ano:                                                         ///\n");
+        scanf("%d", &cli->ano);
+        limpaBuffer();
     }
 
     FILE* file;
@@ -158,8 +150,6 @@ Clientes* cadastrar_cliente(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-    free(clientes);
     return NULL;
     
 }
@@ -181,7 +171,8 @@ Clientes* pesquisar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
-    scanf("%s", cpf_dig);
+    scanf("%s", cpf_dig);getchar();
+    free(clientes);
     limpaBuffer();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");

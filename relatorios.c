@@ -270,7 +270,7 @@ void listaClienteStatus(char status){
             printf("|");
             printf("%-50s", clientes->nome);
             printf("|");
-            printf("%-12s", clientes->status);
+            printf("%-12i", clientes->status);
             printf("\n");
         }
     }
@@ -479,7 +479,7 @@ void listaFuncionarioStatus(char status){
             printf("|");
             printf("%-50s", funcionarios->nome);
             printf("|");
-            printf("%-12s", funcionarios->status);
+            printf("%-12i", funcionarios->status);
             printf("\n");
         }
     }
@@ -584,7 +584,7 @@ void listaVeiculoStatus(char status){
             printf("|");
             printf("%-8s", veiculos->placa);
             printf("|");
-            printf("%-12s", veiculos->ano);
+            printf("%-12i", veiculos->ano);
             printf("\n");
         }
     }
@@ -627,7 +627,7 @@ void listaVeiculoDiaria(void){
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
         if (veiculos->status != 'i') {
-            printf("%-8s", veiculos->diaria);
+            printf("%-8i", veiculos->diaria);
             printf("|");
             printf("%-9s", veiculos->placa);
             printf("\n");
@@ -692,9 +692,9 @@ void listaVeiculo(void){
             printf("|");
             printf("%-12s", veiculos->estado_c);
             printf("|");
-            printf("%-12s", veiculos->diaria);
+            printf("%-12i", veiculos->diaria);
             printf("|");
-            printf("%-5s", veiculos->ano);
+            printf("%-5i", veiculos->ano);
             printf("\n");
         }
     }

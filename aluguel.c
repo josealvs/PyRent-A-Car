@@ -65,21 +65,20 @@ Aluguel* cadastrar_aluguel(void) {
     printf("///            = = = = = = = = Cadastrar Aluguel = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Codigo do Aluguel:                                          ///\n");
-    fgets(alg->codigo, sizeof(alg->codigo), stdin);
+    printf("///            Codigo do Aluguel:                                           ///\n");
+    alg->codigo = generateID();
+    printf("///            %i                                                           ///\n", alg->codigo);
+
     limpaBuffer();
     printf("///            CPF do Cliente:                                              ///\n");
     fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);
     limpaBuffer();
-    if (validadorCPF(alg->cpf_c)){
-        printf("\t\t\t>>>CPF válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorCPF(alg->cpf_c))){
         printf("\t\t\t>>>CPF inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+        fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);   
     }
+
     printf("///            CPF do Funcionario:                                          ///\n");
     fgets(alg->cpf_f, sizeof(alg->cpf_f), stdin);
     limpaBuffer();
@@ -170,7 +169,7 @@ Aluguel* cadastrar_aluguel(void) {
 Aluguel* pesquisar_aluguel(void) {
     FILE* fp;
     Aluguel* aluguel;
-    char codigo_dig[11];
+    int codigo_dig;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -184,7 +183,7 @@ Aluguel* pesquisar_aluguel(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o Código do Aluguel:                                 ///\n");
-    scanf("%11[^\n]", codigo_dig);
+    scanf("%d", &codigo_dig);
     getchar();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -200,7 +199,7 @@ Aluguel* pesquisar_aluguel(void) {
     }else{
         while(!feof(fp)) {
             fread(aluguel, sizeof(Aluguel), 1, fp);
-            if (strcmp(aluguel->codigo, codigo_dig)==0){
+            if (aluguel->codigo == codigo_dig){
                 exibe_aluguel(aluguel);
                 printf("\t\t\t*** Tecle <ENTER> para continuar...\n");
                 getchar();
@@ -239,7 +238,7 @@ void exibe_aluguel (Aluguel* aluguel) {
       printf("\n*** Cliente Cadastrado***\n");
       printf("\n");
       printf("*** Codigo: ");
-      printf("%s" ,aluguel->codigo);
+      printf("%i" ,aluguel->codigo);
       printf("\n");
       printf("*** CPF do CLiente: ");
       printf("%s" ,aluguel->cpf_c);
@@ -266,4 +265,27 @@ void exibe_aluguel (Aluguel* aluguel) {
     printf("Status do Aluguel: %s\n", situacao);
     printf("\n");
   }   
+}
+
+//Percorre o algoritmo para gerar um id de uma venda adequadamente
+int generateID(void) {
+    FILE *fp;
+    fp = fopen("alg.dat", "rb");
+    if (fp == NULL) {
+        return 1;
+    }
+    fseek(fp, 0, SEEK_END);
+    if ((long)ftell(fp) == 0){
+        fclose(fp);
+        return 1;
+    }
+    else {
+        fseek(fp, -((long)sizeof(Aluguel)), SEEK_END);
+        Aluguel* alg;
+        alg = (Aluguel*)malloc(sizeof(Aluguel));
+        fread(alg, sizeof(Aluguel), 1, fp);
+        int codigo = alg->codigo+1;
+        fclose(fp);
+        return codigo;
+    }
 }

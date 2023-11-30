@@ -101,7 +101,7 @@ int len = strlen(cpf);
 
 int ano_bissexto(int ano) {
   if ((ano % 4 == 0) && (ano % 100 != 0)) {
-    return 1;
+    return 1; 
   } else if (ano % 400 == 0) {
     return 1;
   } else {

@@ -8,7 +8,7 @@ struct aluguel{
     int dia_f;
     int mes_f;
     int ano_f;
-    char codigo[11];
+    int codigo;
     char status;
 };
 typedef struct aluguel Aluguel;
@@ -18,3 +18,4 @@ char menu_aluguel(void);
 Aluguel* cadastrar_aluguel(void);
 Aluguel* pesquisar_aluguel(void);
 void exibe_aluguel(Aluguel* aluguel);
+int generateID(void);
