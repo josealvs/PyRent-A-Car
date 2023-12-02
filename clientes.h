@@ -1,18 +1,18 @@
-typedef struct clientes Clientes;
 
 struct clientes{
     char cpf[12];
-    char nome[200];
+    char nome[101];
     int dia;
     int mes;
     int ano;
     char telefone[15];
     char cidade[50];
-    char endereco[300];
+    char endereco[200];
     char status;
+    struct clientes *next;
     
 };
-
+typedef struct clientes Clientes;
 
 void tela_menu_cliente(void);
 char menu_cliente(void);

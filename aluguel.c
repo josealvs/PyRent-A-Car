@@ -71,38 +71,35 @@ Aluguel* cadastrar_aluguel(void) {
 
     limpaBuffer();
     printf("///            CPF do Cliente:                                              ///\n");
-    fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);
+    scanf("%12[^\n]", alg->cpf_c);
     limpaBuffer();
     while(!(validadorCPF(alg->cpf_c))){
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
-        fgets(alg->cpf_c, sizeof(alg->cpf_c), stdin);   
+        scanf("%12[^\n]", alg->cpf_c);
+        getchar();
     }
 
     printf("///            CPF do Funcionario:                                          ///\n");
-    fgets(alg->cpf_f, sizeof(alg->cpf_f), stdin);
+    scanf("%12[^\n]", alg->cpf_f);
     limpaBuffer();
-    if (validadorCPF(alg->cpf_f)){
-        printf("\t\t\t>>>CPF válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while (!(validadorCPF(alg->cpf_f))){
         printf("\t\t\t>>>CPF inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o CPF do Funcionário novamente: \n");
+        scanf("%12[^\n]", alg->cpf_f);
+        getchar();
     }
+    
     printf("///            Placa do Veículo:                                            ///\n");
-    fgets(alg->placa, sizeof(alg->placa), stdin);
+    scanf("%8[^\n]", alg->placa);
     limpaBuffer();
-    if (validadorPlaca(alg->placa)){
-        printf("\t\t\t>>>Placa válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorPlaca(alg->placa))){
         printf("\t\t\t>>>Placa inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a Placa novamente:\n");
+        scanf("%8[^\n]", alg->placa);
+        getchar();
     }
+
     printf("///            Data de Início do Aluguel:                                   ///\n");
     printf("///            Dia:                                                         ///\n");
     scanf("%d", &alg->dia_i);   
@@ -115,15 +112,20 @@ Aluguel* cadastrar_aluguel(void) {
     limpaBuffer();
 
     
-    if (validadorData(alg->dia_i, alg->mes_i, alg->ano_i)){
-        printf("\t\t\t>>>Data de Início válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorData(alg->dia_i, alg->mes_i, alg->ano_i))){
         printf("\t\t\t>>>Data de Início inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a Data novamente: \n");
+        printf("///            Dia:                                                         ///\n");
+        scanf("%d", &alg->dia_i);   
+        limpaBuffer();
+        printf("///            Mês(em número):                                              ///\n");
+        scanf("%d", &alg->mes_i); 
+        limpaBuffer();
+        printf("///            Ano:                                                         ///\n");
+        scanf("%d", &alg->ano_i);   
+        limpaBuffer();
     }
+
     printf("///            Data de Fim do Aluguel:                                      ///\n");
     printf("///            Dia:                                                         ///\n");
     scanf("%d", &alg->dia_f);
@@ -136,21 +138,25 @@ Aluguel* cadastrar_aluguel(void) {
     limpaBuffer();
 
     
-    if (validadorData(alg->dia_f,alg->mes_f, alg->ano_f)){
-        printf("\t\t\t>>>Data Final válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while (!(validadorData(alg->dia_f,alg->mes_f, alg->ano_f))){
         printf("\t\t\t>>>Data Final inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a Data novamente: \n");
+        printf("///            Dia:                                                         ///\n");
+        scanf("%d", &alg->dia_f);
+        limpaBuffer();
+        printf("///            Mês(em número):                                              ///\n");
+        scanf("%d", &alg->mes_f); 
+        limpaBuffer();
+        printf("///            Ano:                                                         ///\n");
+        scanf("%d", &alg->ano_f); 
+        limpaBuffer();
     }
     
     alg->status = 'a';
 
     FILE* file;
     Aluguel* aluguel;
-    file = fopen("alg.dat","a+b");
+    file = fopen("alg.dat","ab");
     aluguel = alg;
     fwrite(aluguel, sizeof(Aluguel), 1, file);
     fclose(file);

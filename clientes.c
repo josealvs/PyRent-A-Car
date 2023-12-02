@@ -70,45 +70,48 @@ Clientes* cadastrar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
-    fgets(cli->nome, sizeof(cli->nome), stdin);
+    scanf("%100[^\n]", cli->nome);
     limpaBuffer();
     while(validadorNome(cli->nome)){
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>>Digite o Nome novamente: \n");
-        fgets(cli->nome, sizeof(cli->nome), stdin);
+        scanf("%100[^\n]", cli->nome);
+        getchar();
     }
     
     printf("\n");
     printf("///            CPF(apenas números):                                                         ///\n");
-    fgets(cli->cpf, sizeof(cli->cpf), stdin);
+    scanf("%12[^\n]", cli->cpf);
     limpaBuffer();
     while(!(validadorCPF(cli->cpf))){
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Digite o CPF novamente: \n");
-        fgets(cli->cpf, sizeof(cli->cpf), stdin);
+        scanf("%12[^\n]", cli->cpf);
+        getchar();
     }
 
     printf("\n");
     printf("///            Cidade:                                                      ///\n");
-    fgets(cli->cidade, sizeof(cli->cidade), stdin);
+    scanf("%50[^\n]", cli->cidade);
     limpaBuffer();
     while(validadorCidade(cli->cidade)){
         printf("\t\t\t>>>Cidade inválida<<<\n");
         printf("\t\t\t>>>Digite a Cidade novamente: \n");
-        fgets(cli->cidade, sizeof(cli->cidade), stdin);
-
+        scanf("%50[^\n]", cli->cidade);
+        getchar();
     }
 
     printf("///            Endereço:                                                    ///\n");
-    fgets(cli->endereco, sizeof(cli->endereco), stdin);
+    scanf("%200[^\n]", cli->endereco);
     limpaBuffer();
     printf("///            Telefone:                                                    ///\n");
-    fgets(cli->telefone, sizeof(cli->telefone), stdin);
+    scanf("%15[^\n]", cli->telefone);
     limpaBuffer();
-    while(validadorTelefone(cli->telefone)){
+    while(!(validadorTelefone(cli->telefone))){
         printf("\t\t\t>>>Número inválido<<<\n");
         printf("\t\t\t>>> Digite o telefone novamente: \n");
-        fgets(cli->telefone, sizeof(cli->telefone), stdin);
+        scanf("%15[^\n]", cli->telefone);
+        getchar();
     }
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
@@ -140,7 +143,7 @@ Clientes* cadastrar_cliente(void) {
     FILE* file;
     Clientes* clientes;
     clientes = cli;
-    file = fopen("cli.dat","a+b");
+    file = fopen("cli.dat","ab");
     fwrite(clientes, sizeof(Clientes), 1, file);
     fclose(file);
     free(clientes);
@@ -172,7 +175,6 @@ Clientes* pesquisar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
     scanf("%s", cpf_dig);getchar();
-    free(clientes);
     limpaBuffer();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -207,8 +209,8 @@ Clientes* pesquisar_cliente(void) {
 
 void tela_alterar_cliente(void) {
     char cpf_dig[12];
-    Clientes* clientes;
-    clientes = (Clientes*) malloc(sizeof(Clientes));
+    Clientes* cli;
+    cli = (Clientes*) malloc(sizeof(Clientes));
     FILE* fp;
     int find = 0;
     system("clear||cls");
@@ -236,93 +238,86 @@ void tela_alterar_cliente(void) {
       printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
       getchar();
     } else {
-      while (!feof(fp)) {
-        fread(clientes, sizeof(Clientes), 1, fp);
-        if(strcmp(clientes->cpf, cpf_dig) == 0) {
+      while (fread(cli, sizeof(Clientes), 1, fp)) {
+        if(strcmp(cli->cpf, cpf_dig) == 0) {
             printf("\n");
             printf("\t\t\t*** Cliente Encontrado ***\n");
             printf("\t\t\t*** Refaça o Cadastro ***\n");
             printf("\n");
 
             printf("///            Nome:                                                        ///\n");
-            fgets(clientes->nome, sizeof(clientes->nome), stdin);
+            scanf("%100[^\n]", cli->nome);
             limpaBuffer();
-            if (!(validadorNome(clientes->nome))){
-                printf("\t\t\t>>>Nome válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(validadorNome(cli->nome)){
                 printf("\t\t\t>>>Nome inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>>Digite o Nome novamente: \n");
+                scanf("%100[^\n]", cli->nome);
+                getchar();
             }
+            
             printf("\n");
             printf("///            CPF(apenas números):                                                         ///\n");
-            fgets(clientes->cpf, sizeof(clientes->cpf), stdin);
+            scanf("%12[^\n]", cli->cpf);
             limpaBuffer();
-            if (validadorCPF(clientes->cpf)){
-                printf("\t\t\t>>>CPF válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorCPF(cli->cpf))){
                 printf("\t\t\t>>>CPF inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
-                
+                printf("\t\t\t>>> Digite o CPF novamente: \n");
+                scanf("%12[^\n]", cli->cpf);
+                getchar();
             }
+
             printf("\n");
             printf("///            Cidade:                                                      ///\n");
-            fgets(clientes->cidade, sizeof(clientes->cidade), stdin);
+            scanf("%50[^\n]", cli->cidade);
             limpaBuffer();
-            if (!(validadorCidade(clientes->cidade))){
-                printf("\t\t\t>>>Cidade válida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(validadorCidade(cli->cidade)){
                 printf("\t\t\t>>>Cidade inválida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>>Digite a Cidade novamente: \n");
+                scanf("%50[^\n]", cli->cidade);
+                getchar();
             }
+
             printf("///            Endereço:                                                    ///\n");
-            fgets(clientes->endereco, sizeof(clientes->endereco), stdin);
+            scanf("%200[^\n]", cli->endereco);
             limpaBuffer();
             printf("///            Telefone:                                                    ///\n");
-            fgets(clientes->telefone, sizeof(clientes->telefone), stdin);
+            scanf("%15[^\n]", cli->telefone);
             limpaBuffer();
-            if (!(validadorTelefone(clientes->telefone))){
-                printf("\t\t\t>>>Número válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorTelefone(cli->telefone))){
                 printf("\t\t\t>>>Número inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite o telefone novamente: \n");
+                scanf("%15[^\n]", cli->telefone);
+                getchar();
             }
             printf("\n");
             printf("///            Data de Nascimento:                                          ///\n");
             printf("///            Dia:                                                         ///\n");
-            scanf("%d", &clientes->dia);
+            scanf("%d", &cli->dia);
             limpaBuffer();
             printf("///            Mês(em número):                                              ///\n");
-            scanf("%d", &clientes->mes);
+            scanf("%d", &cli->mes);
             limpaBuffer();
             printf("///            Ano:                                                         ///\n");
-            scanf("%d", &clientes->ano);
+            scanf("%d", &cli->ano);
             limpaBuffer();
-            clientes->status = 'a';
+            cli->status = 'a';
             
-            if (validadorData(clientes->dia, clientes->mes, clientes->ano)){
-                printf("\t\t\t>>>Data de Nascimento válida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorData(cli->dia, cli->mes, cli->ano))){
                 printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite a data de nascimento novamente:\n");
+                printf("///            Dia:                                                         ///\n");
+                scanf("%d", &cli->dia);
+                limpaBuffer();
+                printf("///            Mês(em número):                                              ///\n");
+                scanf("%d", &cli->mes);
+                limpaBuffer();
+                printf("///            Ano:                                                         ///\n");
+                scanf("%d", &cli->ano);
+                limpaBuffer();
             }
 
             fseek(fp, -1 * sizeof(Clientes), SEEK_CUR);
-            fwrite(clientes, sizeof(Clientes), 1, fp);
+            fwrite(cli, sizeof(Clientes), 1, fp);
             find = 1;
             break;
         }
@@ -340,7 +335,7 @@ void tela_alterar_cliente(void) {
     sleep(1);
     getchar();
     fclose(fp);
-    free(clientes);
+    free(cli);
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

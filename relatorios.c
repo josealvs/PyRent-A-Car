@@ -148,38 +148,33 @@ void listaCliente(void){
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-12s", "CPF");
-    printf("|");
-    printf("%-51s", "Nome");
-    printf("|");
-    printf("%-12s", "Telefone");
-    printf("|");
-    printf("%-12s", "Endereco");
-    printf("|");
-    printf("%-12s", "Cidade");
-    printf("|");
-    printf("%-11s", "Data de Nascimento");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
-    printf("\n");
+    printf("%-12s","CPF");
+        printf("|");
+    printf("%-20s","Nome");
+        printf("|");
+    printf("%-12s","Telefone");
+        printf("|");
+    printf("%-30s","Endereco");
+        printf("|");
+    printf("%-20s","Cidade");
+        printf("|");
+    printf("%-11s","Data de Nascimento");
+        printf("\n");
     while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status != 'i') {
-            printf("%-12s", clientes->cpf);
-            printf("|");
-            printf("%-51s", clientes->nome);
-            printf("|");
-            printf("%-12s", clientes->telefone);
-            printf("|");
-            printf("%-12s", clientes->endereco);
-            printf("|");
-            printf("%-12s", clientes->cidade);
-            printf("|");
-            printf("%d/%d/%d", clientes->dia, clientes->mes, clientes->ano);
-            printf("\n");
-            printf("%13s", "|");
-            printf("%51s", "|");
-            printf("\n");
+                            printf("%-12s",clientes->cpf);
+                            printf("|");
+                            printf("%-20s",clientes->nome);
+                            printf("|");
+                            printf("%-12s",clientes->telefone);
+                            printf("|");
+                            printf("%-30s",clientes->endereco);
+                            printf("|");
+                            printf("%-20s",clientes->cidade);
+                            printf("|");
+                            printf("%d/%d/%d",clientes->dia,clientes->mes,clientes->ano);
+                            printf("\n");
+            
         }
     }
     fclose(fp);
@@ -210,18 +205,15 @@ void listaClienteBairro(void){
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-12s", "Cidade");
+    printf("%-20s", "Cidade");
     printf("|");
-    printf("%-51s", "Endereco");
-    printf("|");
-    printf("%13s", "|");
-    printf("%51s", "|");
+    printf("%-30s", "Endereco");
     printf("\n");
     while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status != 'i') {
-            printf("%-12s", clientes->cidade);
+            printf("%-20s", clientes->cidade);
             printf("|");
-            printf("%-50s", clientes->endereco);
+            printf("%-30s", clientes->endereco);
             printf("\n");
             
         }
@@ -260,9 +252,6 @@ void listaClienteStatus(char status){
     printf("%-51s", "Nome");
     printf("|");
     printf("%-12s", "Status");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
     printf("\n");
     while (fread(clientes, sizeof(Clientes), 1, fp)) { 
         if (clientes->status == 'i') {

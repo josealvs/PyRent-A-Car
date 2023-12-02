@@ -71,29 +71,23 @@ Funcionarios* cadastrar_funcionario(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Nome:                                                        ///\n");
-    fgets(fun->nome, sizeof(fun->nome), stdin);
+    scanf("%100[^\n]", fun->nome);
     limpaBuffer();
-    if (!(validadorNome(fun->nome))){
-        printf("\t\t\t>>>Nome válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorNome(fun->nome))){
         printf("\t\t\t>>>Nome inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o nome novamente:\n");
+        scanf("%100[^\n]", fun->nome);
+        getchar();
     }
     printf("\n");
     printf("///            CPF:                                                         ///\n");
-    fgets(fun->cpf, sizeof(fun->cpf), stdin);
+    scanf("%12[^\n]", fun->nome);
     limpaBuffer();
-    if (validadorCPF(fun->cpf)){
-        printf("\t\t\t>>>CPF válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorCPF(fun->cpf))){
         printf("\t\t\t>>>CPF inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o CPF novamente: \n");
+        scanf("%12[^\n]", fun->nome);
+        getchar();
     }
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
@@ -108,60 +102,58 @@ Funcionarios* cadastrar_funcionario(void) {
     limpaBuffer();
 
     
-    if (validadorData(fun->dia, fun->mes, fun->ano)){
-        printf("\t\t\t>>>Data de Nascimento válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorData(fun->dia, fun->mes, fun->ano))){
         printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a Data novamente: \n");
+        printf("///            Dia:                                                         ///\n");
+        scanf("%d", &fun->dia);
+        limpaBuffer();
+        printf("///            Mês(em número):                                              ///\n");
+        scanf("%d", &fun->mes);
+        limpaBuffer();
+        printf("///            Ano:                                                         ///\n");
+        scanf("%d", &fun->ano);
+        limpaBuffer();
     }
+
     printf("///            Cidade:                                                      ///\n");
-    fgets(fun->cidade, sizeof(fun->cidade), stdin);
+    scanf("%50[^\n]", fun->cidade);
     limpaBuffer();
-    if (!(validadorCidade(fun->cidade))){
-        printf("\t\t\t>>>Cidade válida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorCidade(fun->cidade))){
         printf("\t\t\t>>>Cidade inválida<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite a Cidade novamente: \n");
+        scanf("%50[^\n]", fun->cidade);
+        getchar();
     }
+
     printf("///            Endereço:                                                    ///\n");
-    fgets(fun->endereco, sizeof(fun->endereco), stdin);
+    scanf("%200[^\n]", fun->endereco);
     limpaBuffer();
     printf("///            Telefone:                                                    ///\n");
-    fgets(fun->telefone, sizeof(fun->telefone), stdin);
+    scanf("%15[^\n]", fun->telefone);
     limpaBuffer();
-    if (!(validadorTelefone(fun->telefone))){
-        printf("\t\t\t>>>Número válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while (!(validadorTelefone(fun->telefone))){
         printf("\t\t\t>>>Número inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o número novamente:\n");
+        scanf("%15[^\n]", fun->telefone);
+        getchar();
     }
+
     printf("\n");
     printf("///            Cargo na Empresa:                                            ///\n");
-    fgets(fun->cargo, sizeof(fun->cargo), stdin);
+    scanf("%20[^\n]", fun->cargo);
     limpaBuffer();
-    if (!(validadorCargo(fun->cargo))){
-        printf("\t\t\t>>>Cargo válido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    }else{
+    while(!(validadorCargo(fun->cargo))){
         printf("\t\t\t>>>Cargo inválido<<<\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-        sleep(1);
-        exit(1);
+        printf("\t\t\t>>> Digite o Cargo novamente: \n");
+        scanf("%20[^\n]", fun->cargo);
+        getchar();
     }
     fun->status = 'a';
 
     FILE* file;
     Funcionarios* funcionarios;
-    file = fopen("fun.dat","a+b");
+    file = fopen("fun.dat","ab");
     funcionarios = fun;
     fwrite(funcionarios, sizeof(Funcionarios), 1, file);
     fclose(file);
@@ -259,8 +251,7 @@ void tela_alterar_funcionario(void) {
       printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
       getchar();
     } else {
-      while (!feof(fp)) {
-        fread(funcionarios, sizeof(Funcionarios), 1, fp) == 1;
+      while (fread(funcionarios, sizeof(Funcionarios), 1, fp) == 1) {
         if(strcmp(funcionarios->cpf, cpf_dig) == 0) {
             printf("\n");
             printf("\t\t\t*** Cliente Encontrado ***\n");
@@ -268,29 +259,23 @@ void tela_alterar_funcionario(void) {
             printf("\n");
 
             printf("///            Nome:                                                        ///\n");
-            fgets(funcionarios->nome, sizeof(funcionarios->nome), stdin);
+            scanf("%100[^\n]", funcionarios->nome);
             limpaBuffer();
-            if (!(validadorNome(funcionarios->nome))){
-                printf("\t\t\t>>>Nome válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorNome(funcionarios->nome))){
                 printf("\t\t\t>>>Nome inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite o nome novamente:\n");
+                scanf("%100[^\n]", funcionarios->nome);
+                getchar();
             }
             printf("\n");
             printf("///            CPF:                                                         ///\n");
-            fgets(funcionarios->cpf, sizeof(funcionarios->cpf), stdin);
+            scanf("%12[^\n]", funcionarios->nome);
             limpaBuffer();
-            if (validadorCPF(funcionarios->cpf)){
-                printf("\t\t\t>>>CPF válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorCPF(funcionarios->cpf))){
                 printf("\t\t\t>>>CPF inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite o CPF novamente: \n");
+                scanf("%12[^\n]", funcionarios->nome);
+                getchar();
             }
             printf("\n");
             printf("///            Data de Nascimento:                                          ///\n");
@@ -305,54 +290,52 @@ void tela_alterar_funcionario(void) {
             limpaBuffer();
 
             
-            if (validadorData(funcionarios->dia, funcionarios->mes, funcionarios->ano)){
-                printf("\t\t\t>>>Data de Nascimento válida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorData(funcionarios->dia, funcionarios->mes, funcionarios->ano))){
                 printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite a Data novamente: \n");
+                printf("///            Dia:                                                         ///\n");
+                scanf("%d", &funcionarios->dia);
+                limpaBuffer();
+                printf("///            Mês(em número):                                              ///\n");
+                scanf("%d", &funcionarios->mes);
+                limpaBuffer();
+                printf("///            Ano:                                                         ///\n");
+                scanf("%d", &funcionarios->ano);
+                limpaBuffer();
             }
+
             printf("///            Cidade:                                                      ///\n");
-            fgets(funcionarios->cidade, sizeof(funcionarios->cidade), stdin);
+            scanf("%50[^\n]", funcionarios->cidade);
             limpaBuffer();
-            if (!(validadorCidade(funcionarios->cidade))){
-                printf("\t\t\t>>>Cidade válida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorCidade(funcionarios->cidade))){
                 printf("\t\t\t>>>Cidade inválida<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite a Cidade novamente: \n");
+                scanf("%50[^\n]", funcionarios->cidade);
+                getchar();
             }
+
             printf("///            Endereço:                                                    ///\n");
-            fgets(funcionarios->endereco, sizeof(funcionarios->endereco), stdin);
+            scanf("%200[^\n]", funcionarios->endereco);
             limpaBuffer();
             printf("///            Telefone:                                                    ///\n");
-            fgets(funcionarios->telefone, sizeof(funcionarios->telefone), stdin);
+            scanf("%15[^\n]", funcionarios->telefone);
             limpaBuffer();
-            if (!(validadorTelefone(funcionarios->telefone))){
-                printf("\t\t\t>>>Número válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while (!(validadorTelefone(funcionarios->telefone))){
                 printf("\t\t\t>>>Número inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite o número novamente:\n");
+                scanf("%15[^\n]", funcionarios->telefone);
+                getchar();
             }
+
             printf("\n");
             printf("///            Cargo na Empresa:                                            ///\n");
-            fgets(funcionarios->cargo, sizeof(funcionarios->cargo), stdin);
+            scanf("%20[^\n]", funcionarios->cargo);
             limpaBuffer();
-            if (!(validadorCargo(funcionarios->cargo))){
-                printf("\t\t\t>>>Cargo válido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-            }else{
+            while(!(validadorCargo(funcionarios->cargo))){
                 printf("\t\t\t>>>Cargo inválido<<<\n");
-                printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-                sleep(1);
-                break;
+                printf("\t\t\t>>> Digite o Cargo novamente: \n");
+                scanf("%20[^\n]", funcionarios->cargo);
+                getchar();
             }
             funcionarios->status = 'a';
 
