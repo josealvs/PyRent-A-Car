@@ -269,10 +269,10 @@ int validadorConservacao(char* estado_c){
 
 //Valida o ano do carro
 int validadorAno(int ano){
-    if (ano < 0 || !isdigit(ano)){
+    if (ano < 0){
         return 0;
     }
-
+        
 
     return 1;
 }

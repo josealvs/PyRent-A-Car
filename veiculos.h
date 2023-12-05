@@ -1,9 +1,9 @@
 struct veiculos{
-    char modelo[50];
-    char fabricante[50];
+    char modelo[51];
+    char fabricante[51];
     char placa[8];
-    char chassi[17];
-    char estado_c[20];
+    char chassi[18];
+    char estado_c[21];
     int diaria;
     int ano;
     char status;

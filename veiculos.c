@@ -79,7 +79,7 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Modelo inválido<<<\n");
         printf("\t\t\t>>> Digite o Modelo novamente: \n");
         scanf("%50[^\n]", vei->modelo);
-        getchar();
+        limpaBuffer();
     }
 
     printf("\n");
@@ -90,7 +90,7 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>> Digite o Fabricante novamente:\n");
         scanf("%50[^\n]", vei->fabricante);
-        getchar();
+        limpaBuffer();
     }
 
     printf("///            Ano:                                                         ///\n");
@@ -111,7 +111,7 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Placa inválida<<<\n");
         printf("\t\t\t>>> Digite a Placa novamente: \n");
         scanf("%8[^\n]", vei->placa);
-        getchar();
+        limpaBuffer();
     }
 
     printf("\n");
@@ -122,9 +122,9 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Chassi inválido<<<\n");
         printf("\t\t\t>>> Digite o Chassi novamente: \n");
         scanf("%17[^\n]", vei->chassi);
-        getchar();
+        limpaBuffer();
     }
-    
+    printf("\n");
     printf("///            Estado de Conservação:                                       ///\n");
     scanf("%20[^\n]", vei->estado_c);
     limpaBuffer();
@@ -132,9 +132,9 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Estado de Conservacao inválido<<<\n");
         printf("\t\t\t>>>Digite o Etsado de Conservação novamente: \n");
         scanf("%20[^\n]", vei->estado_c);
-        getchar();
+        limpaBuffer();
     }
-
+    printf("\n");
     printf("///            Valor da Diária do Veículo:                                  ///\n");
     scanf("%d", &vei->diaria);
     limpaBuffer();
@@ -142,7 +142,7 @@ Veiculos* cadastrar_veiculo(void) {
         printf("\t\t\t>>>Valor inválido<<<\n");
         printf("\t\t\t>>> Digite o Valor da Diária novamente: \n");
         scanf("%d", &vei->diaria);
-        getchar();
+        limpaBuffer();
     }
     vei->status = 'a';
 
@@ -153,7 +153,6 @@ Veiculos* cadastrar_veiculo(void) {
     fwrite(veiculos, sizeof(Veiculos), 1, file);
     fclose(file);
     free(veiculos);
-
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

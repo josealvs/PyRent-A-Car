@@ -664,10 +664,7 @@ void listaVeiculo(void){
     printf("|");
     printf("%-12s", "Diária");
     printf("|");
-    printf("%-5s", "Ano");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
+    printf("%-4s", "Ano");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
         if (veiculos->status != 'i') {
@@ -679,9 +676,9 @@ void listaVeiculo(void){
             printf("|");
             printf("%-17s", veiculos->chassi);
             printf("|");
-            printf("%-12s", veiculos->estado_c);
+            printf("%-21s", veiculos->estado_c);
             printf("|");
-            printf("%-12i", veiculos->diaria);
+            printf("%-11i", veiculos->diaria);
             printf("|");
             printf("%-5i", veiculos->ano);
             printf("\n");
