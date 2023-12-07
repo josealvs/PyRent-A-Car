@@ -1,7 +1,7 @@
 struct aluguel{
-    char cpf_f[12];
-    char cpf_c[12];
-    char placa[8];
+    char cpf_f[13];
+    char cpf_c[13];
+    char placa[9];
     int dia_i;
     int mes_i;
     int ano_i;

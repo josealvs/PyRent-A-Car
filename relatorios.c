@@ -791,16 +791,13 @@ void listaVeiculoDiaria(void){
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-8s", "Valor da diaria");
+    printf("%-15s", "Valor da diaria");
     printf("|");
     printf("%-9s", "Placa");
-    printf("|");
-    printf("%13s", "|");
-    printf("%51s", "|");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
         if (veiculos->status != 'i') {
-            printf("%-8i", veiculos->diaria);
+            printf("%-15i", veiculos->diaria);
             printf("|");
             printf("%-9s", veiculos->placa);
             printf("\n");
@@ -969,18 +966,21 @@ void tela_op_aluguel(void)
             printf("\n");
             printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             getchar();
+            break;
 
         case '2':
             listaAluguelData();
             printf("\n");
             printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             getchar();
+            break;
         
         case '3':
             listaAluguelCPF(aluguel);
             printf("\n");
             printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             getchar();
+            break;
         }
     } while (opcao != '0');
 }
@@ -1042,28 +1042,25 @@ void listaAluguel(void)
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-50s", "CPF do Cliente");
+    printf("%-14s", "CPF do Cliente");
     printf("|");
-    printf("%-51s", "CPF do Funcionario");
+    printf("%-18s", "CPF do Funcionario");
     printf("|");
     printf("%-12s", "Placa");
     printf("|");
-    printf("%-8s", "Data de Início: ");
+    printf("%-15s", "Data de Início: ");
     printf("|");
-    printf("%-8s", "Data de Fim: ");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
+    printf("%-11s", "Data de Fim: ");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp))
     {
         if (aluguel->status != 'i')
         {
-            printf("%-50s", aluguel->cpf_c);
+            printf("%-14s", aluguel->cpf_c);
             printf("|");
-            printf("%-50s", aluguel->cpf_f);
+            printf("%-18s", aluguel->cpf_f);
             printf("|");
-            printf("%-8s", aluguel->placa);
+            printf("%-12s", aluguel->placa);
             printf("|");
             printf("%d/%d/%d", aluguel->dia_i, aluguel->mes_i, aluguel->ano_i);
             printf("|");
@@ -1100,14 +1097,11 @@ void listaAluguelData(void){
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-8s", "Data de Início");
+    printf("%-15s", "Data de Início");
     printf("|");
-    printf("%-9s", "Data de Fim");
+    printf("%-11s", "Data de Fim");
     printf("|");
-    printf("%-9s", "Placa");
-    printf("|");
-    printf("%13s", "|");
-    printf("%51s", "|");
+    printf("%-8s", "Placa");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
         if (aluguel->status != 'i') {
@@ -1152,9 +1146,6 @@ void listaAluguelStatus(char status){
     printf("%-50s", "CPF do Cliente");
     printf("|");
     printf("%-8s", "Placa");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
         if (aluguel->status == 'i') {

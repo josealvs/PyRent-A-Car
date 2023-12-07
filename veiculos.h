@@ -1,7 +1,7 @@
 struct veiculos{
     char modelo[51];
     char fabricante[51];
-    char placa[8];
+    char placa[9];
     char chassi[18];
     char estado_c[21];
     int diaria;
