@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
+#include <string.h>
 #include <unistd.h>
 #include <time.h>
 #include "relatorios.h"
@@ -10,6 +11,7 @@
 #include "util.h"
 //RELATORIOS
 
+void listaAluguelCPF(Aluguel*);
 
 void menuRelatorio(void){
     char opcao;
@@ -88,6 +90,7 @@ char relatorioCliente(void){
     printf("///              1- Relatório por Completo                                  ///\n");
     printf("///              2- Relatório por Endereço e Cidade                         ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
+    printf("///              3- Relatório por Ordem Alfabética                          ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -116,6 +119,11 @@ void tela_op_cliente(void){
                         getchar();
                         break;
             case '3':   listaClienteStatus('i');
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        break;
+            case '4':   listaClientesAlfa();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
@@ -269,6 +277,88 @@ void listaClienteStatus(char status){
 
 }
 
+void listaClientesAlfa(void){
+    FILE* fp = fopen("cli.dat", "rb");
+    Clientes* cli;
+    Clientes* lista;
+    system("clear||cls");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Clientes = = = = =               ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    printf("%-12s", "CPF");
+    printf("|");
+    printf("%-51s", "Nome");
+    printf("\n");
+    lista = NULL;
+    cli = (Clientes*)malloc(sizeof(Clientes));
+    if (cli == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    while(fread(cli, sizeof(Clientes), 1, fp) == 1) {
+        cli->next = NULL;
+        if ((lista == NULL) || (strcmp(cli->nome, lista->nome) < 0)) {
+            cli->next = lista;
+            lista = cli;
+        } else {
+            Clientes* ant = lista;
+            Clientes* atual = lista->next;
+            while ((atual != NULL) && strcmp(atual->nome, cli->nome) < 0) {
+                ant = atual;
+                atual = atual->next;
+            }
+            ant->next = cli;
+            cli->next = atual;
+
+        }
+        cli = (Clientes*)malloc(sizeof(Clientes));
+        if (cli == NULL) {
+            printf("\t\t\t>>> Processando as informações...\n");
+            sleep(1);
+            printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+        }
+    }
+    fclose(fp);
+    cli = lista;
+    while(cli != NULL) {
+        printf("%-12s", cli->cpf);
+        printf("|");
+        printf("%-30s", cli->nome);
+        printf("\n");
+        cli = cli->next;
+    }
+    cli = lista;
+    while (lista != NULL) {
+        lista = lista->next;
+        free(cli);
+        cli = lista;
+    }
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+
+}
+
 void tela_op_funcionario(void){
     char opcao;
 
@@ -290,6 +380,8 @@ void tela_op_funcionario(void){
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
+            case '4':   listaFuncionarioAlfa();
+
           } 		
     } while (opcao != '0');
 }
@@ -312,13 +404,14 @@ char relatorioFuncionario(void){
     printf("///              1- Relatório Completo                                      ///\n");
     printf("///              2- Relatório por Endereço e Cidade                         ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
+    printf("///              4- Relatório por Ordem Alfabética                          ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Digite a opção escolhida:                                   ///\n");
-    scanf("%c", &op);
+    scanf("%c", &op);   
     getchar();
     printf("\n");
     return op;
@@ -336,7 +429,7 @@ void listaFuncionario(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = Relatórios de Funcionarios = = = = =               ///\n");
+    printf("///            = = = = = = = Relatórios de Funcionarios = = = = =           ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("\n");
     funcionarios = (Funcionarios*) malloc(sizeof(Funcionarios));
@@ -478,6 +571,88 @@ void listaFuncionarioStatus(char status){
 
 }
 
+void listaFuncionarioAlfa(void){
+    FILE* fp = fopen("fun.dat", "rb");
+    Funcionarios* cli;
+    Funcionarios* lista;
+    system("clear||cls");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Funcionarios = = = = =           ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    printf("%-12s", "CPF");
+    printf("|");
+    printf("%-51s", "Nome");
+    printf("\n");
+    lista = NULL;
+    cli = (Funcionarios*)malloc(sizeof(Funcionarios));
+    if (cli == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    while(fread(cli, sizeof(Funcionarios), 1, fp) == 1) {
+        cli->next = NULL;
+        if ((lista == NULL) || (strcmp(cli->nome, lista->nome) < 0)) {
+            cli->next = lista;
+            lista = cli;
+        } else {
+            Funcionarios* ant = lista;
+            Funcionarios* atual = lista->next;
+            while ((atual != NULL) && strcmp(atual->nome, cli->nome) < 0) {
+                ant = atual;
+                atual = atual->next;
+            }
+            ant->next = cli;
+            cli->next = atual;
+
+        }
+        cli = (Funcionarios*)malloc(sizeof(Funcionarios));
+        if (cli == NULL) {
+            printf("\t\t\t>>> Processando as informações...\n");
+            sleep(1);
+            printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+        }
+    }
+    fclose(fp);
+    cli = lista;
+    while(cli != NULL) {
+        printf("%-12s", cli->cpf);
+        printf("|");
+        printf("%-30s", cli->nome);
+        printf("\n");
+        cli = cli->next;
+    }
+    cli = lista;
+    while (lista != NULL) {
+        lista = lista->next;
+        free(cli);
+        cli = lista;
+    }
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+
+}
+
 char relatorioVeiculo(void){
     char op;
 
@@ -496,6 +671,7 @@ char relatorioVeiculo(void){
     printf("///              1- Relatório Completo                                      ///\n");
     printf("///              2- Relatório por Valor da diária e Placa                   ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
+    printf("///              4- Relatório por Ordem Alfabética                          ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -518,13 +694,21 @@ void tela_op_veiculo(void){
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
+                        break;
                         
             case '2':   listaVeiculoDiaria();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
+                        break;
                         
             case '3':   listaVeiculoStatus('i');
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
+                        break;
+
+            case '4':   listaVeiculoAlfa();
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
@@ -689,10 +873,92 @@ void listaVeiculo(void){
     getchar();
 }
 
+void listaVeiculoAlfa(void){
+    FILE* fp = fopen("vei.dat", "rb");
+    Veiculos* vei;
+    Veiculos* lista;
+    system("clear||cls");
+    if (fp == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao abrir o arquivo!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = = =           ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    printf("%-12s", "Placa");
+    printf("|");
+    printf("%-51s", "Nome");
+    printf("\n");
+    lista = NULL;
+    vei = (Veiculos*)malloc(sizeof(Veiculos));
+    if (vei == NULL) {
+        printf("\t\t\t>>> Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+    }
+    while(fread(vei, sizeof(Veiculos), 1, fp) == 1) {
+        vei->next = NULL;
+        if ((lista == NULL) || (strcmp(vei->modelo, lista->modelo) < 0)) {
+            vei->next = lista;
+            lista = vei;
+        } else {
+            Veiculos* ant = lista;
+            Veiculos* atual = lista->next;
+            while ((atual != NULL) && strcmp(atual->modelo, vei->modelo) < 0) {
+                ant = atual;
+                atual = atual->next;
+            }
+            ant->next = vei;
+            vei->next = atual;
+
+        }
+        vei = (Veiculos*)malloc(sizeof(Veiculos));
+        if (vei == NULL) {
+            printf("\t\t\t>>> Processando as informações...\n");
+            sleep(1);
+            printf("\t\t\t>>> Houve um erro ao alocar a memória!\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+        }
+    }
+    fclose(fp);
+    vei = lista;
+    while(vei != NULL) {
+        printf("%-12s", vei->placa);
+        printf("|");
+        printf("%-30s", vei->modelo);
+        printf("\n");
+        vei = vei->next;
+    }
+    vei = lista;
+    while (lista != NULL) {
+        lista = lista->next;
+        free(vei);
+        vei = lista;
+    }
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+
+}
+
 void tela_op_aluguel(void)
 {
     char opcao;
-
+    Aluguel *aluguel = malloc(sizeof(*aluguel));
     do
     {
         opcao = relatorioAluguel();
@@ -706,6 +972,12 @@ void tela_op_aluguel(void)
 
         case '2':
             listaAluguelData();
+            printf("\n");
+            printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();
+        
+        case '3':
+            listaAluguelCPF(aluguel);
             printf("\n");
             printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
             getchar();
@@ -731,6 +1003,7 @@ char relatorioAluguel(void)
     printf("///                                                                         ///\n");
     printf("///              1- Relatório Completo                                      ///\n");
     printf("///              2- Relatório por Data de Início, Fim e Placa               ///\n");
+    printf("///              3- Relatório por CPF                                       ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -895,4 +1168,124 @@ void listaAluguelStatus(char status){
     free(aluguel);
     getchar();
 
+}
+
+void listaAluguelCPF(Aluguel* aluguel) {
+    FILE* fp;
+    char* nome_cliente;
+    char* nome_veiculo;
+    char cpf[12];
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///             Developed by @josealvs -- since Ago, 2023                   ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = Relatórios de Aluguéis = = = =  =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("\n");
+    printf("///             Digite o CPF do cliente que deseja consultar:               ///\n");
+    fgets(cpf, 12, stdin);
+    printf("\n");
+    getchar();
+    aluguel = (Aluguel*) malloc(sizeof(Aluguel));
+    fp = fopen("alg.dat", "rb");
+    if (fp == NULL) {
+        printf("\t\t\t*** Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t*** Ops! Erro na abertura do arquivo!\n");
+        printf("\t\t\t*** Não é possível continuar...\n");
+        printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
+        getchar();
+    }
+    printf("%-30s", "Modelo");
+    printf("|");
+    printf("%-30s", "Cliente");
+    printf("|");
+    printf("%-8s", "Início");
+    printf("|");
+    printf("%-8s", "Fim");
+    printf("|");
+    printf("%-8s", "Placa");
+    printf("\n");
+    while (fread(aluguel, sizeof(Aluguel), 1, fp) == 1){
+        if (strcmp(aluguel->cpf_c, cpf) == 0){
+            nome_cliente = get_cliente(cpf);
+            nome_veiculo = get_veiculo(aluguel->placa);
+            printf("%-30s", nome_veiculo);
+            printf("|");
+            printf("%-30s", nome_cliente);
+            printf("|");
+            printf("%d/%d/%d", aluguel->dia_i,aluguel->mes_i, aluguel->ano_i);
+            printf("|");
+            printf("%d/%d/%d", aluguel->dia_f,aluguel->mes_f, aluguel->ano_f);
+            printf("|");
+            printf("%8s", aluguel->placa);
+            printf("\n");
+        }
+    }
+    fclose(fp);
+    free(aluguel);
+}
+
+
+char* get_veiculo(const char* placa){
+    Veiculos veiculos;
+    FILE* fp = fopen("vei.dat", "rb");
+
+   if (fp == NULL) {
+        printf("\t\t\t*** Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t*** Ops! Erro na abertura do arquivo!\n");
+        printf("\t\t\t*** Não é possível continuar...\n");
+        printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
+        getchar();
+    }
+    while (fread(&veiculos, sizeof(veiculos), 1, fp) == 1){
+        if(strcmp(veiculos.placa, placa) == 0){
+            char* x = (char*) malloc(strlen(veiculos.modelo) + 1);
+            if (x == NULL){
+                printf("Ocorreu um erro!\n");
+                fclose(fp);
+                return x;
+            }
+            strcpy(x, veiculos.modelo);
+            fclose(fp);
+            return x;
+    }
+  }
+  fclose(fp);
+  return NULL;
+}
+
+char* get_cliente(const char* cpf){
+    Clientes cliente;
+    FILE* fp = fopen("cli.dat", "rb");
+
+   if (fp == NULL) {
+        printf("\t\t\t*** Processando as informações...\n");
+        sleep(1);
+        printf("\t\t\t*** Ops! Erro na abertura do arquivo!\n");
+        printf("\t\t\t*** Não é possível continuar...\n");
+        printf("\t\t\t*** Tecle <ENTER> para voltar...\n");
+        getchar();
+    }
+    while (fread(&cliente, sizeof(cliente), 1, fp) == 1){
+        if(strcmp(cliente.cpf, cpf) == 0){
+            char* x = (char*) malloc(strlen(cliente.nome) + 1);
+            if (x == NULL){
+                printf("Ocorreu um erro!\n");
+                fclose(fp);
+                return x;
+            }
+            strcpy(x, cliente.nome);
+            fclose(fp);
+            return x;
+    }
+  }
+  fclose(fp);
+  return NULL;
 }

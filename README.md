@@ -25,5 +25,8 @@ Semana 11 - SEPE
 
 Semana 12 - CRUD feito 
 
+Semana 13, 14 e 15- Concluídas
+
+
 
 OBS: PARA EXECUTAR, RODE O ARQUIVO MAKE.

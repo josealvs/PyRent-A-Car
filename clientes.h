@@ -1,13 +1,13 @@
 
 struct clientes{
-    char cpf[12];
-    char nome[101];
+    char cpf[13];
+    char nome[102];
     int dia;
     int mes;
     int ano;
-    char telefone[15];
-    char cidade[50];
-    char endereco[200];
+    char telefone[16];
+    char cidade[51];
+    char endereco[201];
     char status;
     struct clientes *next;
     

@@ -73,7 +73,7 @@ Funcionarios* cadastrar_funcionario(void) {
     printf("///            Nome:                                                        ///\n");
     scanf("%100[^\n]", fun->nome);
     limpaBuffer();
-    while(!(validadorNome(fun->nome))){
+    while(validadorNome(fun->nome)){
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>> Digite o nome novamente:\n");
         scanf("%100[^\n]", fun->nome);
@@ -81,12 +81,12 @@ Funcionarios* cadastrar_funcionario(void) {
     }
     printf("\n");
     printf("///            CPF:                                                         ///\n");
-    scanf("%12[^\n]", fun->nome);
+    scanf("%12[^\n]", fun->cpf);
     limpaBuffer();
     while(!(validadorCPF(fun->cpf))){
         printf("\t\t\t>>>CPF inválido<<<\n");
         printf("\t\t\t>>> Digite o CPF novamente: \n");
-        scanf("%12[^\n]", fun->nome);
+        scanf("%12[^\n]", fun->cpf);
         getchar();
     }
     printf("\n");

@@ -1,13 +1,13 @@
 struct funcionarios{
-    char cpf[12];
-    char nome[100];
-    char cargo[20];
+    char cpf[13];
+    char nome[101];
+    char cargo[21];
     int dia;
     int mes;
     int ano;
-    char telefone[15];
-    char cidade[50];
-    char endereco[200];
+    char telefone[16];
+    char cidade[51];
+    char endereco[201];
     char status;
     struct funcionarios *next;
 };

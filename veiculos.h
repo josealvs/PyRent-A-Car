@@ -7,6 +7,7 @@ struct veiculos{
     int diaria;
     int ano;
     char status;
+    struct veiculos *next;
 };
 typedef struct veiculos Veiculos;
 

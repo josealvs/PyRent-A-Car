@@ -20,3 +20,8 @@ void listaVeiculoStatus(char);
 void listaAluguel(void);
 void listaAluguelData(void);
 void listaAluguelStatus(char);
+void listaClientesAlfa(void);
+void listaFuncionarioAlfa(void);
+void listaVeiculoAlfa(void);
+char* get_cliente(const char* cpf);
+char *get_veiculo(const char* placa);

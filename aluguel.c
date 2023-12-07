@@ -66,9 +66,7 @@ Aluguel* cadastrar_aluguel(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Codigo do Aluguel:                                           ///\n");
-    alg->codigo = generateID();
-    printf("///            %i                                                           ///\n", alg->codigo);
-
+    scanf("%d", &alg->codigo);
     limpaBuffer();
     printf("///            CPF do Cliente:                                              ///\n");
     scanf("%12[^\n]", alg->cpf_c);
