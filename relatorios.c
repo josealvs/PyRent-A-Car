@@ -245,7 +245,6 @@ void listaClienteStatus(char status){
     printf("///            = = = = = = = Relatórios de Clientes = = = = =               ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("\n");
-    getchar();
     clientes = (Clientes*) malloc(sizeof(Clientes));
     fp = fopen("cli.dat", "rb");
     if (fp == NULL) {
@@ -273,8 +272,6 @@ void listaClienteStatus(char status){
     }
     fclose(fp);
     free(clientes);
-    getchar();
-
 }
 
 void listaClientesAlfa(void){
@@ -519,7 +516,6 @@ void listaFuncionarioBairro(void){
     }
     fclose(fp);
     free(funcionarios);
-    getchar();
 }
 
 void listaFuncionarioStatus(char status){
@@ -564,7 +560,6 @@ void listaFuncionarioStatus(char status){
     }
     fclose(fp);
     free(funcionarios);
-    getchar();
 
 }
 
@@ -644,9 +639,6 @@ void listaFuncionarioAlfa(void){
         free(cli);
         cli = lista;
     }
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
 
 }
 
@@ -757,7 +749,6 @@ void listaVeiculoStatus(char status){
     }
     fclose(fp);
     free(veiculos);
-    getchar();
 
 }
 
@@ -800,7 +791,6 @@ void listaVeiculoDiaria(void){
     }
     fclose(fp);
     free(veiculos);
-    getchar();
 }
 
 void listaVeiculo(void){
@@ -861,7 +851,6 @@ void listaVeiculo(void){
     }
     fclose(fp);
     free(veiculos);
-    getchar();
 }
 
 void listaVeiculoAlfa(void){
@@ -940,9 +929,7 @@ void listaVeiculoAlfa(void){
         free(vei);
         vei = lista;
     }
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+    
 
 }
 
@@ -1064,7 +1051,6 @@ void listaAluguel(void)
     }
     fclose(fp);
     free(aluguel);
-    getchar();
 }
 
 void listaAluguelData(void){
@@ -1110,7 +1096,6 @@ void listaAluguelData(void){
     }
     fclose(fp);
     free(aluguel);
-    getchar();
 }
 
 void listaAluguelStatus(char status){
@@ -1151,7 +1136,6 @@ void listaAluguelStatus(char status){
     }
     fclose(fp);
     free(aluguel);
-    getchar();
 
 }
 

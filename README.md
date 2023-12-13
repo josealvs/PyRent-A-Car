@@ -1,32 +1,17 @@
 # PyRent-A-Car
-Repositório de Projeto da disciplina de programação do curso de BSI 2023.2
+## Repositório de Projeto da disciplina de programação do curso de BSI 2023.2
 
-Semana 1 - Módulo de Veículos feito por comleto, junto de menu principal, tela sobre e equipe
+### Programa para Gestão de Aluguéis de Carros.
 
-Semana 2 - Módulos de Clientes e Funcionários adicionados
+# LINUX: PARA EXECUTAR, RODE O ARQUIVO MAKE.
 
-Semana 3- Módulo Vendas Adicionado
-
-Semana 4- Navegação entre os módulos adicionada
-
-Semana 5- Separação dos módulos em arquivos finalizada
-
-Semana 6 - Versão Final da unidade 
-
-Semana 7 - Validadores dos Módulos Adicionados(Validador CPF ainda com problema na verificação)
-
-Semana 8 - Validadores Finalizados, os que não constam, julguei como sem necessidade no projeto final.
-
-Semana 9 - AlocaÇÃO DE MEMÓRIA FINALIZADA
-
-Semana 10 - Salvando dados em arquivos binários e listagem de relatórios finalizados.
-
-Semana 11 - SEPE
-
-Semana 12 - CRUD feito 
-
-Semana 13, 14 e 15- Concluídas
-
-
-
-OBS: PARA EXECUTAR, RODE O ARQUIVO MAKE.
+# WINDOWS: EXECUTE:   
+```
+gcc -c *.c
+```
+gcc -c *.h
+```
+gcc -o nomedoarquivo *.o
+```
+start nomedoarquivo
+```
