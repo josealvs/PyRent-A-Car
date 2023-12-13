@@ -90,7 +90,7 @@ char relatorioCliente(void){
     printf("///              1- Relatório por Completo                                  ///\n");
     printf("///              2- Relatório por Endereço e Cidade                         ///\n");
     printf("///              3- Relatório por Status de Inativo                         ///\n");
-    printf("///              3- Relatório por Ordem Alfabética                          ///\n");
+    printf("///              4- Relatório por Ordem Alfabética                          ///\n");
     printf("///              0- Retornar ao Menu Principal                              ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -118,7 +118,7 @@ void tela_op_cliente(void){
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
-            case '3':   listaClienteStatus('i');
+            case '3':   listaClienteStatus('x');
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
@@ -257,17 +257,17 @@ void listaClienteStatus(char status){
     }
     printf("%-12s", "CPF");
     printf("|");
-    printf("%-51s", "Nome");
+    printf("%-50s", "Nome");
     printf("|");
     printf("%-12s", "Status");
     printf("\n");
     while (fread(clientes, sizeof(Clientes), 1, fp)) { 
-        if (clientes->status == 'i') {
+        if (clientes->status == 'x') {
             printf("%-12s", clientes->cpf);
             printf("|");
             printf("%-50s", clientes->nome);
             printf("|");
-            printf("%-12i", clientes->status);
+            printf("%c", clientes->status);
             printf("\n");
         }
     }
@@ -375,7 +375,7 @@ void tela_op_funcionario(void){
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
                         break;
-            case '3':   listaFuncionarioStatus('i');
+            case '3':   listaFuncionarioStatus('x');
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
@@ -457,7 +457,7 @@ void listaFuncionario(void){
     printf("%51s", "|");
     printf("\n");
     while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
-        if (funcionarios->status != 'i') {
+        if (funcionarios->status != 'x') {
             printf("%-12s", funcionarios->cpf);
             printf("|");
             printf("%-50s", funcionarios->nome);
@@ -509,7 +509,7 @@ void listaFuncionarioBairro(void){
     printf("%51s", "|");
     printf("\n");
     while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
-        if (funcionarios->status != 'i') {
+        if (funcionarios->status != 'x') {
             printf("%-12s", funcionarios->cidade);
             printf("|");
             printf("%-50s", funcionarios->endereco);
@@ -548,20 +548,17 @@ void listaFuncionarioStatus(char status){
     }
     printf("%-12s", "CPF");
     printf("|");
-    printf("%-51s", "Nome");
+    printf("%-50s", "Nome");
     printf("|");
     printf("%-12s", "Status");
     printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
-    printf("\n");
     while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
-        if (funcionarios->status == 'i') {
+        if (funcionarios->status == 'x') {
             printf("%-12s", funcionarios->cpf);
             printf("|");
             printf("%-50s", funcionarios->nome);
             printf("|");
-            printf("%-12i", funcionarios->status);
+            printf("%c", funcionarios->status);
             printf("\n");
         }
     }
@@ -702,7 +699,7 @@ void tela_op_veiculo(void){
                         getchar();
                         break;
                         
-            case '3':   listaVeiculoStatus('i');
+            case '3':   listaVeiculoStatus('x');
                         printf("\n");
                         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
                         getchar();
@@ -746,18 +743,15 @@ void listaVeiculoStatus(char status){
     printf("|");
     printf("%-8s", "Placa");
     printf("|");
-    printf("%-5s", "Ano");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
+    printf("%-8s", "Ano");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
-        if (veiculos->status == 'i') {
+        if (veiculos->status == 'x') {
             printf("%-50s", veiculos->modelo);
             printf("|");
             printf("%-8s", veiculos->placa);
             printf("|");
-            printf("%-12i", veiculos->ano);
+            printf("%c", veiculos->ano);
             printf("\n");
         }
     }
@@ -796,7 +790,7 @@ void listaVeiculoDiaria(void){
     printf("%-9s", "Placa");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
-        if (veiculos->status != 'i') {
+        if (veiculos->status != 'x') {
             printf("%-15i", veiculos->diaria);
             printf("|");
             printf("%-9s", veiculos->placa);
@@ -848,7 +842,7 @@ void listaVeiculo(void){
     printf("%-4s", "Ano");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
-        if (veiculos->status != 'i') {
+        if (veiculos->status != 'x') {
             printf("%-50s", veiculos->modelo);
             printf("|");
             printf("%-50s", veiculos->fabricante);
@@ -1054,7 +1048,7 @@ void listaAluguel(void)
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp))
     {
-        if (aluguel->status != 'i')
+        if (aluguel->status != 'x')
         {
             printf("%-14s", aluguel->cpf_c);
             printf("|");
@@ -1104,7 +1098,7 @@ void listaAluguelData(void){
     printf("%-8s", "Placa");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
-        if (aluguel->status != 'i') {
+        if (aluguel->status != 'x') {
             printf("%d/%d/%d", aluguel->dia_i, aluguel->mes_i, aluguel->ano_i);
             printf("|");
             printf("%d/%d/%d", aluguel->dia_f, aluguel->mes_f, aluguel->ano_f);
@@ -1148,7 +1142,7 @@ void listaAluguelStatus(char status){
     printf("%-8s", "Placa");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp)) { 
-        if (aluguel->status == 'i') {
+        if (aluguel->status == 'x') {
             printf("%-50s", aluguel->cpf_c);
             printf("|");
             printf("%-8s", aluguel->placa);

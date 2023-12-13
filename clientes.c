@@ -55,6 +55,7 @@ char menu_cliente(void) {
 } 
 
 Clientes* cadastrar_cliente(void) {
+    char cpf_digc[13];
     Clientes* cli;
     cli = (Clientes*) malloc(sizeof(Clientes));
     system("clear||cls");
@@ -72,7 +73,7 @@ Clientes* cadastrar_cliente(void) {
     printf("///            Nome:                                                        ///\n");
     scanf("%100[^\n]", cli->nome);
     limpaBuffer();
-    while(validadorNome(cli->nome)){
+    while(!(validadorNome(cli->nome))){
         printf("\t\t\t>>>Nome inválido<<<\n");
         printf("\t\t\t>>>Digite o Nome novamente: \n");
         scanf("%100[^\n]", cli->nome);
@@ -80,18 +81,44 @@ Clientes* cadastrar_cliente(void) {
     }
     
     printf("\n");
-    printf("///            CPF(apenas números):                                                         ///\n");
-    scanf("%12[^\n]", cli->cpf);
+    printf("///            CPF(apenas números):                                        ///\n");
+     scanf("%12[^\n]",cpf_digc);
+    
     limpaBuffer();
-    while(!(validadorCPF(cli->cpf))){
+    while(!(validadorCPF(cpf_digc)) ){
         printf("\t\t\t>>>CPF inválido<<<\n");
-        printf("\t\t\t>>> Digite o CPF novamente: \n");
-        scanf("%12[^\n]", cli->cpf);
+        printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+        scanf("%12[^\n]", cpf_digc);
+
+        while(cadastrar_cli(cpf_digc)){
+        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+        printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+        scanf("%12[^\n]", cpf_digc);
+        getchar();
+        }
+
+
         getchar();
     }
+    while(cadastrar_cli(cpf_digc)){
+        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+        printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+        scanf("%12[^\n]", cpf_digc);
+        
+        while(!(validadorCPF(cpf_digc)) ){
+        printf("\t\t\t>>>CPF inválido<<<\n");
+        printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+        scanf("%12[^\n]", cpf_digc);
+        getchar();
+        }
+
+
+        getchar();
+    }
+    strcpy(cli->cpf, cpf_digc); 
 
     printf("\n");
-    printf("///            Cidade:                                                      ///\n");
+    printf("///            Cidade:                                                    ///\n");
     scanf("%50[^\n]", cli->cidade);
     limpaBuffer();
     while(validadorCidade(cli->cidade)){
@@ -101,10 +128,10 @@ Clientes* cadastrar_cliente(void) {
         getchar();
     }
 
-    printf("///            Endereço:                                                    ///\n");
+    printf("///            Endereço:                                                 ///\n");
     scanf("%200[^\n]", cli->endereco);
     limpaBuffer();
-    printf("///            Telefone:                                                    ///\n");
+    printf("///            Telefone:                                                 ///\n");
     scanf("%15[^\n]", cli->telefone);
     limpaBuffer();
     while(!(validadorTelefone(cli->telefone))){
@@ -114,14 +141,14 @@ Clientes* cadastrar_cliente(void) {
         getchar();
     }
     printf("\n");
-    printf("///            Data de Nascimento:                                          ///\n");
-    printf("///            Dia:                                                         ///\n");
+    printf("///            Data de Nascimento:                                        ///\n");
+    printf("///            Dia:                                                       ///\n");
     scanf("%d", &cli->dia);
     limpaBuffer();
-    printf("///            Mês(em número):                                              ///\n");
+    printf("///            Mês(em número):                                            ///\n");
     scanf("%d", &cli->mes);
     limpaBuffer();
-    printf("///            Ano:                                                         ///\n");
+    printf("///            Ano:                                                       ///\n");
     scanf("%d", &cli->ano);
     limpaBuffer();
     cli->status = 'a';
@@ -129,13 +156,13 @@ Clientes* cadastrar_cliente(void) {
     while(!(validadorData(cli->dia, cli->mes, cli->ano))){
         printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
         printf("\t\t\t>>> Digite a data de nascimento novamente:\n");
-        printf("///            Dia:                                                         ///\n");
+        printf("///            Dia:                                                   ///\n");
         scanf("%d", &cli->dia);
         limpaBuffer();
-        printf("///            Mês(em número):                                              ///\n");
+        printf("///            Mês(em número):                                        ///\n");
         scanf("%d", &cli->mes);
         limpaBuffer();
-        printf("///            Ano:                                                         ///\n");
+        printf("///            Ano:                                                   ///\n");
         scanf("%d", &cli->ano);
         limpaBuffer();
     }
@@ -245,7 +272,7 @@ void tela_alterar_cliente(void) {
             printf("\t\t\t*** Refaça o Cadastro ***\n");
             printf("\n");
 
-            printf("///            Nome:                                                        ///\n");
+            printf("///            Nome:                                                 ///\n");
             scanf("%100[^\n]", cli->nome);
             limpaBuffer();
             while(validadorNome(cli->nome)){
@@ -256,18 +283,44 @@ void tela_alterar_cliente(void) {
             }
             
             printf("\n");
-            printf("///            CPF(apenas números):                                                         ///\n");
-            scanf("%12[^\n]", cli->cpf);
+            printf("///            CPF(apenas números):                                  ///\n");
+            scanf("%12[^\n]",cpf_dig);
+    
             limpaBuffer();
-            while(!(validadorCPF(cli->cpf))){
+            while(!(validadorCPF(cpf_dig)) ){
                 printf("\t\t\t>>>CPF inválido<<<\n");
-                printf("\t\t\t>>> Digite o CPF novamente: \n");
-                scanf("%12[^\n]", cli->cpf);
+                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+                scanf("%12[^\n]", cpf_dig);
+
+                while(cadastrar_cli(cpf_dig)){
+                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+                scanf("%12[^\n]", cpf_dig);
+                getchar();
+                }
+
+
                 getchar();
             }
+            while(cadastrar_cli(cpf_dig)){
+                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+                scanf("%12[^\n]", cpf_dig);
+                
+                while(!(validadorCPF(cpf_dig)) ){
+                printf("\t\t\t>>>CPF inválido<<<\n");
+                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
+                scanf("%12[^\n]", cpf_dig);
+                getchar();
+                }
+
+
+                getchar();
+            }
+            strcpy(cli->cpf, cpf_dig); 
 
             printf("\n");
-            printf("///            Cidade:                                                      ///\n");
+            printf("///            Cidade:                                                ///\n");
             scanf("%50[^\n]", cli->cidade);
             limpaBuffer();
             while(validadorCidade(cli->cidade)){
@@ -277,10 +330,10 @@ void tela_alterar_cliente(void) {
                 getchar();
             }
 
-            printf("///            Endereço:                                                    ///\n");
+            printf("///            Endereço:                                              ///\n");
             scanf("%200[^\n]", cli->endereco);
             limpaBuffer();
-            printf("///            Telefone:                                                    ///\n");
+            printf("///            Telefone:                                              ///\n");
             scanf("%15[^\n]", cli->telefone);
             limpaBuffer();
             while(!(validadorTelefone(cli->telefone))){
@@ -290,14 +343,14 @@ void tela_alterar_cliente(void) {
                 getchar();
             }
             printf("\n");
-            printf("///            Data de Nascimento:                                          ///\n");
-            printf("///            Dia:                                                         ///\n");
+            printf("///            Data de Nascimento:                                    ///\n");
+            printf("///            Dia:                                                   ///\n");
             scanf("%d", &cli->dia);
             limpaBuffer();
-            printf("///            Mês(em número):                                              ///\n");
+            printf("///            Mês(em número):                                        ///\n");
             scanf("%d", &cli->mes);
             limpaBuffer();
-            printf("///            Ano:                                                         ///\n");
+            printf("///            Ano:                                                   ///\n");
             scanf("%d", &cli->ano);
             limpaBuffer();
             cli->status = 'a';
@@ -305,13 +358,13 @@ void tela_alterar_cliente(void) {
             while(!(validadorData(cli->dia, cli->mes, cli->ano))){
                 printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
                 printf("\t\t\t>>> Digite a data de nascimento novamente:\n");
-                printf("///            Dia:                                                         ///\n");
+                printf("///            Dia:                                               ///\n");
                 scanf("%d", &cli->dia);
                 limpaBuffer();
-                printf("///            Mês(em número):                                              ///\n");
+                printf("///            Mês(em número):                                    ///\n");
                 scanf("%d", &cli->mes);
                 limpaBuffer();
-                printf("///            Ano:                                                         ///\n");
+                printf("///            Ano:                                                ///\n");
                 scanf("%d", &cli->ano);
                 limpaBuffer();
             }
@@ -458,3 +511,4 @@ void exibe_cliente (Clientes* clientes) {
     printf("\n");
   }   
 }
+

@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "clientes.h"
+#include "veiculos.h"
+#include "aluguel.h"
+#include "funcionarios.h"
 
 ////Referências: Função baseada em @flgorgonio e IA Chat gpt
 int validadorNome(char* nome) { 
@@ -283,3 +287,49 @@ void limpaBuffer(void){
         entrada = fgetc(stdin);
     } while(entrada != EOF && entrada != '\n');
 }
+
+int cadastrar_cli (char* cpf) {
+    FILE* fp;
+    Clientes* cli;
+    cli = (Clientes*)malloc(sizeof(Clientes));
+    fp = fopen("cli.dat", "rb");
+    while (fread(cli, sizeof(Clientes), 1, fp)) {
+        if ((!strcmp(cli->cpf, cpf)) && (cli->status == 'a')) {
+            fclose(fp);
+            return 1;
+        }
+    }
+    fclose(fp);
+    return 0;
+}
+
+int cadastrar_plac (char* placa) {
+    FILE* fp;
+    Veiculos* vei;
+    vei = (Veiculos*)malloc(sizeof(Veiculos));
+    fp = fopen("vei.dat", "rb");
+    while (fread(vei, sizeof(Veiculos), 1, fp)) {
+        if ((!strcmp(vei->placa, placa)) && (vei->status == 'a')) {
+            fclose(fp);
+            return 1;
+        }
+    }
+    fclose(fp);
+    return 0;
+}
+
+int cadastrar_fun(char* cpf) {
+    FILE* fp;
+    Funcionarios* fun;
+    fun = (Funcionarios*)malloc(sizeof(Funcionarios));
+    fp = fopen("fun.dat", "rb");
+    while (fread(fun, sizeof(Funcionarios), 1, fp)) {
+        if ((!strcmp(fun->cpf, cpf)) && (fun->status == 'a')) {
+            fclose(fp);
+            return 1;
+        }
+    }
+    fclose(fp);
+    return 0;
+}
+

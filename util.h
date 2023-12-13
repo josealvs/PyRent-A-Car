@@ -13,3 +13,6 @@ int validadorConservacao(char*);
 int ano_bissexto(int);  
 int validadorAno(int);
 void limpaBuffer(void);
+int cadastrar_plac (char* placa);
+int cadastrar_cli (char* cpf);
+int cadastrar_fun(char* cpf) ;

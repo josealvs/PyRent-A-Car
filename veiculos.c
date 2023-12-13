@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <time.h>
 #include "veiculos.h"
+#include "clientes.h"
 #include "util.h"
 
 //VEÍCULOS
@@ -60,6 +61,7 @@ char menu_veiculo(void) {
 Veiculos* cadastrar_veiculo(void) {
     Veiculos* vei;
     vei = (Veiculos*) malloc(sizeof(Veiculos));
+    char placa_dig[8];
     system("clear||cls"); 
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -105,14 +107,35 @@ Veiculos* cadastrar_veiculo(void) {
 
     printf("\n");
     printf("///            Placa:                                                       ///\n");
-    scanf("%8[^\n]", vei->placa);
+    scanf("%7[^\n]", placa_dig);
     limpaBuffer();
-    while(!(validadorPlaca(vei->placa))){
-        printf("\t\t\t>>>Placa inválida<<<\n");
-        printf("\t\t\t>>> Digite a Placa novamente: \n");
-        scanf("%8[^\n]", vei->placa);
-        limpaBuffer();
-    }
+    while(!(validadorPlaca(placa_dig))){
+                printf("\t\t\t>>>Placa é inválida<<<\n");
+                printf("\t\t\t>>> Digite a Placa novamente: \n");
+                scanf("%7[^\n]", placa_dig);
+                while(cadastrar_cli(placa_dig)){
+                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+                    printf("\t\t\t>>> Digite a Placa novamente: \n");
+                    scanf("%7[^\n]", placa_dig);
+                    limpaBuffer();
+                }
+                limpaBuffer();
+            }
+
+            while(cadastrar_cli(placa_dig)){
+                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+                    printf("\t\t\t>>> Digite a Placa novamente: \n");
+                    scanf("%7[^\n]", placa_dig);
+                    while(!(validadorPlaca(placa_dig))){
+                        printf("\t\t\t>>>Placa é inválida<<<\n");
+                        printf("\t\t\t>>> Digite a Placa novamente: \n");
+                        scanf("%7[^\n]", placa_dig);
+                        limpaBuffer();
+                    }
+                limpaBuffer();
+            }
+
+            strcpy(vei->placa, placa_dig);
 
     printf("\n");
     printf("///            Chassi:                                                      ///\n");
@@ -253,7 +276,7 @@ void tela_alterar_veiculo(void) {
             printf("\t\t\t*** Refaça o Cadastro ***\n");
             printf("\n");
 
-            printf("///            Modelo:                                                      ///\n");
+            printf("///            Modelo:                                              ///\n");
             scanf("%50[^\n]", veiculos->modelo);
             limpaBuffer();
             while(!(validadorModelo(veiculos->modelo))){
@@ -264,7 +287,7 @@ void tela_alterar_veiculo(void) {
             }
 
             printf("\n");
-            printf("///            Fabricante:                                                  ///\n");
+            printf("///            Fabricante:                                         ///\n");
             scanf("%50[^\n]", veiculos->fabricante);
             limpaBuffer();
             while(!(validadorFabricante(veiculos->fabricante))){
@@ -274,7 +297,7 @@ void tela_alterar_veiculo(void) {
                 getchar();
             }
 
-            printf("///            Ano:                                                         ///\n");
+            printf("///            Ano:                                               ///\n");
             scanf("%d", &veiculos->ano);
             limpaBuffer();
             while(!(validadorAno(veiculos->ano))){
@@ -285,18 +308,41 @@ void tela_alterar_veiculo(void) {
             }
 
             printf("\n");
-            printf("///            Placa:                                                       ///\n");
-            scanf("%8[^\n]", veiculos->placa);
+            printf("///            Placa:                                             ///\n");
+            scanf("%7[^\n]", placa_dig);
             limpaBuffer();
-            while(!(validadorPlaca(veiculos->placa))){
-                printf("\t\t\t>>>Placa inválida<<<\n");
+            while(!(validadorPlaca(placa_dig))){
+                printf("\t\t\t>>>Placa é inválida<<<\n");
                 printf("\t\t\t>>> Digite a Placa novamente: \n");
-                scanf("%8[^\n]", veiculos->placa);
-                getchar();
+                scanf("%7[^\n]", placa_dig);
+                while(cadastrar_cli(placa_dig)){
+                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+                    printf("\t\t\t>>> Digite a Placa novamente: \n");
+                    scanf("%7[^\n]", placa_dig);
+                    limpaBuffer();
+                }
+                limpaBuffer();
             }
 
+            while(cadastrar_cli(placa_dig)){
+                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+                    printf("\t\t\t>>> Digite a Placa novamente: \n");
+                    scanf("%7[^\n]", placa_dig);
+                    while(!(validadorPlaca(placa_dig))){
+                        printf("\t\t\t>>>Placa é inválida<<<\n");
+                        printf("\t\t\t>>> Digite a Placa novamente: \n");
+                        scanf("%7[^\n]", placa_dig);
+                        limpaBuffer();
+                    }
+                limpaBuffer();
+            }
+
+            strcpy(veiculos->placa, placa_dig);
+
+
+
             printf("\n");
-            printf("///            Chassi:                                                      ///\n");
+            printf("///            Chassi:                                            ///\n");
             scanf("%17[^\n]", veiculos->chassi);
             limpaBuffer();
             while(!(validadorChassi(veiculos->chassi))){
@@ -306,7 +352,7 @@ void tela_alterar_veiculo(void) {
                 getchar();
             }
             
-            printf("///            Estado de Conservação:                                       ///\n");
+            printf("///            Estado de Conservação:                             ///\n");
             scanf("%20[^\n]", veiculos->estado_c);
             limpaBuffer();
             while(!(validadorConservacao(veiculos->estado_c))){
@@ -316,7 +362,7 @@ void tela_alterar_veiculo(void) {
                 getchar();
             }
 
-            printf("///            Valor da Diária do Veículo:                                  ///\n");
+            printf("///            Valor da Diária do Veículo:                        ///\n");
             scanf("%d", &veiculos->diaria);
             limpaBuffer();
             while(!(validadorDiaria(veiculos->diaria))){
@@ -476,3 +522,8 @@ void exibe_veiculos(Veiculos* veiculos) {
     printf("\n");
   }   
 }
+
+
+
+
+

@@ -58,6 +58,7 @@ char menu_funcionario(void) {
 Funcionarios* cadastrar_funcionario(void) {
     Funcionarios* fun;
     fun = (Funcionarios*) malloc(sizeof(Funcionarios));
+    char cpf_dig[13];
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -81,14 +82,35 @@ Funcionarios* cadastrar_funcionario(void) {
     }
     printf("\n");
     printf("///            CPF:                                                         ///\n");
-    scanf("%12[^\n]", fun->cpf);
+    scanf("%12[^\n]",cpf_dig);
     limpaBuffer();
-    while(!(validadorCPF(fun->cpf))){
-        printf("\t\t\t>>>CPF inválido<<<\n");
+    while(!(validadorCPF(cpf_dig))){
+        printf("\t\t\t>>>CPF foi digitado incorretamente<<<\n");
         printf("\t\t\t>>> Digite o CPF novamente: \n");
-        scanf("%12[^\n]", fun->cpf);
+        scanf("%12[^\n]",cpf_dig);
+        while(cadastrar_fun(cpf_dig)){
+            printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+            printf("\t\t\t>>> Digite o CPF novamente: \n");
+            scanf("%12[^\n]",cpf_dig);
+            getchar();
+        }
         getchar();
     }
+
+     while(cadastrar_fun(cpf_dig)){
+        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+        printf("\t\t\t>>> Digite o CPF novamente: \n");
+        scanf("%12[^\n]",cpf_dig);
+        getchar();
+        while(!(validadorCPF(cpf_dig))){
+            printf("\t\t\t>>>CPF foi digitado incorretamente<<<\n");
+            printf("\t\t\t>>> Digite o CPF novamente: \n");
+            scanf("%12[^\n]",cpf_dig);
+            getchar();
+        }
+    }
+    strcpy(fun->cpf, cpf_dig); 
+
     printf("\n");
     printf("///            Data de Nascimento:                                          ///\n");
     printf("///            Dia:                                                         ///\n");
@@ -105,13 +127,13 @@ Funcionarios* cadastrar_funcionario(void) {
     while(!(validadorData(fun->dia, fun->mes, fun->ano))){
         printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
         printf("\t\t\t>>> Digite a Data novamente: \n");
-        printf("///            Dia:                                                         ///\n");
+        printf("///            Dia:                                                     ///\n");
         scanf("%d", &fun->dia);
         limpaBuffer();
-        printf("///            Mês(em número):                                              ///\n");
+        printf("///            Mês(em número):                                          ///\n");
         scanf("%d", &fun->mes);
         limpaBuffer();
-        printf("///            Ano:                                                         ///\n");
+        printf("///            Ano:                                                     ///\n");
         scanf("%d", &fun->ano);
         limpaBuffer();
     }
@@ -258,7 +280,7 @@ void tela_alterar_funcionario(void) {
             printf("\t\t\t*** Refaça o Cadastro ***\n");
             printf("\n");
 
-            printf("///            Nome:                                                        ///\n");
+            printf("///            Nome:                                                ///\n");
             scanf("%100[^\n]", funcionarios->nome);
             limpaBuffer();
             while(!(validadorNome(funcionarios->nome))){
@@ -267,25 +289,50 @@ void tela_alterar_funcionario(void) {
                 scanf("%100[^\n]", funcionarios->nome);
                 getchar();
             }
+
+
             printf("\n");
-            printf("///            CPF:                                                         ///\n");
-            scanf("%12[^\n]", funcionarios->nome);
+            printf("///            CPF:                                                ///\n");
+            scanf("%12[^\n]",cpf_dig);
             limpaBuffer();
-            while(!(validadorCPF(funcionarios->cpf))){
-                printf("\t\t\t>>>CPF inválido<<<\n");
+
+            while(!(validadorCPF(cpf_dig))){
+            printf("\t\t\t>>>CPF foi digitado incorretamente<<<\n");
+            printf("\t\t\t>>> Digite o CPF novamente: \n");
+            scanf("%12[^\n]",cpf_dig);
+            while(cadastrar_fun(cpf_dig)){
+                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
                 printf("\t\t\t>>> Digite o CPF novamente: \n");
-                scanf("%12[^\n]", funcionarios->nome);
+                scanf("%12[^\n]",cpf_dig);
                 getchar();
             }
+            getchar();
+            }
+
+            while(cadastrar_fun(cpf_dig)){
+                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+                printf("\t\t\t>>> Digite o CPF novamente: \n");
+                scanf("%12[^\n]",cpf_dig);
+                getchar();
+                while(!(validadorCPF(cpf_dig))){
+                    printf("\t\t\t>>>CPF foi digitado incorretamente<<<\n");
+                    printf("\t\t\t>>> Digite o CPF novamente: \n");
+                    scanf("%12[^\n]",cpf_dig);
+                    getchar();
+                }
+            }
+            strcpy(funcionarios->cpf, cpf_dig);
+            
+             
             printf("\n");
-            printf("///            Data de Nascimento:                                          ///\n");
-            printf("///            Dia:                                                         ///\n");
+            printf("///            Data de Nascimento:                                 ///\n");
+            printf("///            Dia:                                                ///\n");
             scanf("%d", &funcionarios->dia);
             limpaBuffer();
-            printf("///            Mês(em número):                                              ///\n");
+            printf("///            Mês(em número):                                     ///\n");
             scanf("%d", &funcionarios->mes);
             limpaBuffer();
-            printf("///            Ano:                                                         ///\n");
+            printf("///            Ano:                                                ///\n");
             scanf("%d", &funcionarios->ano);
             limpaBuffer();
 
@@ -293,18 +340,18 @@ void tela_alterar_funcionario(void) {
             while(!(validadorData(funcionarios->dia, funcionarios->mes, funcionarios->ano))){
                 printf("\t\t\t>>>Data de Nascimento inválida<<<\n");
                 printf("\t\t\t>>> Digite a Data novamente: \n");
-                printf("///            Dia:                                                         ///\n");
+                printf("///            Dia:                                            ///\n");
                 scanf("%d", &funcionarios->dia);
                 limpaBuffer();
-                printf("///            Mês(em número):                                              ///\n");
+                printf("///            Mês(em número):                                 ///\n");
                 scanf("%d", &funcionarios->mes);
                 limpaBuffer();
-                printf("///            Ano:                                                         ///\n");
+                printf("///            Ano:                                            ///\n");
                 scanf("%d", &funcionarios->ano);
                 limpaBuffer();
             }
 
-            printf("///            Cidade:                                                      ///\n");
+            printf("///            Cidade:                                            ///\n");
             scanf("%50[^\n]", funcionarios->cidade);
             limpaBuffer();
             while(!(validadorCidade(funcionarios->cidade))){
@@ -314,10 +361,10 @@ void tela_alterar_funcionario(void) {
                 getchar();
             }
 
-            printf("///            Endereço:                                                    ///\n");
+            printf("///            Endereço:                                          ///\n");
             scanf("%200[^\n]", funcionarios->endereco);
             limpaBuffer();
-            printf("///            Telefone:                                                    ///\n");
+            printf("///            Telefone:                                          ///\n");
             scanf("%15[^\n]", funcionarios->telefone);
             limpaBuffer();
             while (!(validadorTelefone(funcionarios->telefone))){
@@ -328,7 +375,7 @@ void tela_alterar_funcionario(void) {
             }
 
             printf("\n");
-            printf("///            Cargo na Empresa:                                            ///\n");
+            printf("///            Cargo na Empresa:                                  ///\n");
             scanf("%20[^\n]", funcionarios->cargo);
             limpaBuffer();
             while(!(validadorCargo(funcionarios->cargo))){
@@ -382,7 +429,7 @@ void tela_excluir_funcionario(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Excluir Funcionário = = = = = =               ///\n");
+    printf("///            = = = = = = = = Excluir Funcionário = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Funcionário:                                ///\n");
