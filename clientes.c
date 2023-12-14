@@ -130,6 +130,13 @@ Clientes* cadastrar_cliente(void) {
 
     printf("///            Endereço:                                                 ///\n");
     scanf("%200[^\n]", cli->endereco);
+    while (!(validadorEndereco(cli->endereco))){
+        printf("\t\t\t>>>Endereço inválido<<<\n");
+        printf("\t\t\t>>>Digite o Endereço novamente: \n");
+        scanf("%200[^\n]", cli->endereco);
+        getchar();
+    }
+    
     limpaBuffer();
     printf("///            Telefone:                                                 ///\n");
     scanf("%15[^\n]", cli->telefone);
@@ -201,7 +208,7 @@ Clientes* pesquisar_cliente(void) {
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
-    scanf("%s", cpf_dig);getchar();
+    scanf("%s", cpf_dig);
     limpaBuffer();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
@@ -254,7 +261,6 @@ void tela_alterar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do Cliente:                                    ///\n");
     scanf("%s", cpf_dig);
-    getchar();
     limpaBuffer();
     fp = fopen("cli.dat", "r+b");
     if (fp == NULL) {
@@ -275,7 +281,7 @@ void tela_alterar_cliente(void) {
             printf("///            Nome:                                                 ///\n");
             scanf("%100[^\n]", cli->nome);
             limpaBuffer();
-            while(validadorNome(cli->nome)){
+            while(!(validadorNome(cli->nome))){
                 printf("\t\t\t>>>Nome inválido<<<\n");
                 printf("\t\t\t>>>Digite o Nome novamente: \n");
                 scanf("%100[^\n]", cli->nome);
@@ -290,31 +296,7 @@ void tela_alterar_cliente(void) {
             while(!(validadorCPF(cpf_dig)) ){
                 printf("\t\t\t>>>CPF inválido<<<\n");
                 printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
-                scanf("%12[^\n]", cpf_dig);
-
-                while(cadastrar_cli(cpf_dig)){
-                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
-                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
-                scanf("%12[^\n]", cpf_dig);
-                getchar();
-                }
-
-
-                getchar();
-            }
-            while(cadastrar_cli(cpf_dig)){
-                printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
-                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
-                scanf("%12[^\n]", cpf_dig);
-                
-                while(!(validadorCPF(cpf_dig)) ){
-                printf("\t\t\t>>>CPF inválido<<<\n");
-                printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
-                scanf("%12[^\n]", cpf_dig);
-                getchar();
-                }
-
-
+                scanf("%12[^\n]", cpf_dig); 
                 getchar();
             }
             strcpy(cli->cpf, cpf_dig); 
@@ -446,8 +428,6 @@ void tela_excluir_cliente(void) {
         printf("\n");
         printf("\t\t\tCliente excluído com sucesso!\n");
     }
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
     fclose(fp);
     printf("///                                                                         ///\n");
@@ -494,11 +474,9 @@ void exibe_cliente (Clientes* clientes) {
       printf("%s" ,clientes->cidade);
       printf("\n");
       printf("*** Telefone: ");
-      printf("\n");
       printf("%s" ,clientes->telefone);
       printf("\n");
       printf("*** Data de Nascimento: ");
-      printf("\n");
       printf("%d/%d/%d", clientes->dia, clientes->mes, clientes->ano);
       printf("\n");
 

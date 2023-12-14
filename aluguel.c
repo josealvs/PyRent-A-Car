@@ -86,8 +86,8 @@ Aluguel* cadastrar_aluguel(void) {
         printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
         scanf("%12[^\n]", cpf_digc);
 
-        while(cadastrar_cli(cpf_digc)){
-        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+        while(!(cadastrar_cli(cpf_digc))){
+        printf("\t\t\t>>>CPF Digitado não existe no banco de dados<<<\n");
         printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
         scanf("%12[^\n]", cpf_digc);
         getchar();
@@ -96,8 +96,8 @@ Aluguel* cadastrar_aluguel(void) {
 
         getchar();
     }
-    while(cadastrar_cli(cpf_digc)){
-        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+    while(!(cadastrar_cli(cpf_digc))){
+        printf("\t\t\t>>>CPF Digitado não existe no banco de dados<<<\n");
         printf("\t\t\t>>> Digite o CPF do Cliente novamente: \n");
         scanf("%12[^\n]", cpf_digc);
         
@@ -121,8 +121,8 @@ Aluguel* cadastrar_aluguel(void) {
         printf("\t\t\t>>>CPF foi digitado incorretamente<<<\n");
         printf("\t\t\t>>> Digite o CPF novamente: \n");
         scanf("%12[^\n]",cpf_digf);
-        while(cadastrar_fun(cpf_digf)){
-            printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+        while(!(cadastrar_fun(cpf_digf))){
+            printf("\t\t\t>>>CPF Digitado não existe no banco de dados<<<\n");
             printf("\t\t\t>>> Digite o CPF novamente: \n");
             scanf("%12[^\n]",cpf_digf);
             getchar();
@@ -130,8 +130,8 @@ Aluguel* cadastrar_aluguel(void) {
         getchar();
     }
 
-     while(cadastrar_fun(cpf_digf)){
-        printf("\t\t\t>>>CPF já existe no banco de dados<<<\n");
+     while(!(cadastrar_fun(cpf_digf))){
+        printf("\t\t\t>>>CPF Digitado não existe no banco de dados<<<\n");
         printf("\t\t\t>>> Digite o CPF novamente: \n");
         scanf("%12[^\n]",cpf_digf);
         getchar();
@@ -379,10 +379,9 @@ void exibe_aluguel (Aluguel* aluguel) {
       printf("%s" ,aluguel->placa);
       printf("\n");
       printf("*** Data de Inicio: ");
-      printf("\n");
       printf("%d/%d/%d", aluguel->dia_i, aluguel->mes_i, aluguel->ano_i);
-      printf("*** Data de Fim: ");
       printf("\n");
+      printf("*** Data de Fim: ");
       printf("%d/%d/%d", aluguel->dia_f, aluguel->mes_f, aluguel->ano_f);
       printf("\n");
 

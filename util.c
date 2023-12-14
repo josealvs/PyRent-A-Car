@@ -6,20 +6,28 @@
 #include "veiculos.h"
 #include "aluguel.h"
 #include "funcionarios.h"
+#define true 1
+#define false 0
 
+int ehLetra(char c) {
+  if (c >= 'A' && c <= 'Z') {
+    return true;
+    } else if (c >= 'a' && c <= 'z') {
+    return true;
+    } else if (c == ' ') {
+    return true;
+    } else {
+    return false;
+    }
+}
 ////Referências: Função baseada em @flgorgonio e IA Chat gpt
 int validadorNome(char* nome) { 
-
-    for (int i = 0; nome[i] != '\0'; i++) {
-
-
-        if (!isalpha(nome[i]) && nome[i] != ' ') {
-
-
-            return 0;
-        }
-    }
-    return 1;
+ for (int i=0; nome[i] != '\0'; i++) {
+        if (!ehLetra(nome[i]) || (strlen(nome) > 46)) {
+            return false; 
+        } 
+    } 
+    return true; 
 }
 
 ////Referências: Função baseada em @flgorgonio e IA Chat gpt
@@ -251,11 +259,20 @@ int validadorChassi(char* chassi) {
 
 //valida se o valor digitado é menor que zero
 int validadorDiaria(int diaria){
-    if (diaria < 0){
-        return 0;
+     
+    if (diaria >= 10 && diaria <= 9999999) {
+        
+        int digito;
+        while (diaria > 0) {
+            digito = diaria % 10;
+            if (digito < 0 || digito > 9) {
+                return 0; 
+            }
+            diaria /= 10;
+        }
+        return 1; 
     }
-
-    return 1;
+    return 0; 
 }
 
 // valida se possui número na digitação
@@ -273,12 +290,20 @@ int validadorConservacao(char* estado_c){
 
 //Valida o ano do carro
 int validadorAno(int ano){
-    if (ano < 0){
-        return 0;
+     // Verifica se o ano tem exatamente 4 dígitos
+    if (ano >= 1000 && ano <= 9999) {
+        // Verifica se todos os dígitos são números
+        int digito;
+        while (ano > 0) {
+            digito = ano % 10;
+            if (digito < 0 || digito > 9) {
+                return 0; // Pelo menos um dígito não é um número
+            }
+            ano /= 10;
+        }
+        return 1; // Todos os dígitos são números
     }
-        
-
-    return 1;
+    return 0; // Não possui exatamente 4 dígitos
 }
 
 void limpaBuffer(void){
@@ -332,4 +357,16 @@ int cadastrar_fun(char* cpf) {
     fclose(fp);
     return 0;
 }
+
+
+
+int validadorEndereco(char* endereco) { 
+ for (int i = 0; endereco[i] != '\0'; i++) {
+        if (!isalpha(endereco[i]) && endereco[i] != ' ') {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 

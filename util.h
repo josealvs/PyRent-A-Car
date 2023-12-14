@@ -1,4 +1,6 @@
+int ehLetra(char);
 int validadorNome(char*);
+int validadorEndereco(char*);
 int validadorModelo(char*);
 int validadorFabricante(char*);
 int validadorPlaca(char*);

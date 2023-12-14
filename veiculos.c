@@ -110,32 +110,32 @@ Veiculos* cadastrar_veiculo(void) {
     scanf("%7[^\n]", placa_dig);
     limpaBuffer();
     while(!(validadorPlaca(placa_dig))){
-                printf("\t\t\t>>>Placa é inválida<<<\n");
-                printf("\t\t\t>>> Digite a Placa novamente: \n");
-                scanf("%7[^\n]", placa_dig);
-                while(cadastrar_cli(placa_dig)){
-                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
-                    printf("\t\t\t>>> Digite a Placa novamente: \n");
-                    scanf("%7[^\n]", placa_dig);
-                    limpaBuffer();
-                }
-                limpaBuffer();
-            }
+        printf("\t\t\t>>>Placa é inválida<<<\n");
+        printf("\t\t\t>>> Digite a Placa novamente: \n");
+        scanf("%7[^\n]", placa_dig);
+        while(cadastrar_plac(placa_dig)){
+            printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+            printf("\t\t\t>>> Digite a Placa novamente: \n");
+            scanf("%7[^\n]", placa_dig);
+            limpaBuffer();
+        }
+        limpaBuffer();
+    }
 
-            while(cadastrar_cli(placa_dig)){
-                    printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
-                    printf("\t\t\t>>> Digite a Placa novamente: \n");
-                    scanf("%7[^\n]", placa_dig);
-                    while(!(validadorPlaca(placa_dig))){
-                        printf("\t\t\t>>>Placa é inválida<<<\n");
-                        printf("\t\t\t>>> Digite a Placa novamente: \n");
-                        scanf("%7[^\n]", placa_dig);
-                        limpaBuffer();
-                    }
-                limpaBuffer();
-            }
+    while(cadastrar_plac(placa_dig)){
+        printf("\t\t\t>>>Placa Já existe no banco de dados<<<\n");
+        printf("\t\t\t>>> Digite a Placa novamente: \n");
+        scanf("%7[^\n]", placa_dig);
+        while(!(validadorPlaca(placa_dig))){
+            printf("\t\t\t>>>Placa é inválida<<<\n");
+            printf("\t\t\t>>> Digite a Placa novamente: \n");
+            scanf("%7[^\n]", placa_dig);
+            limpaBuffer();
+        }
+    limpaBuffer();
+    }
 
-            strcpy(vei->placa, placa_dig);
+    strcpy(vei->placa, placa_dig);
 
     printf("\n");
     printf("///            Chassi:                                                      ///\n");
@@ -501,15 +501,13 @@ void exibe_veiculos(Veiculos* veiculos) {
       printf("*** Chassi: ");
       printf("%s" ,veiculos->chassi);
       printf("\n");
-      printf("*** Estado de COnservação: ");
+      printf("*** Estado de Conservação: ");
       printf("%s" ,veiculos->estado_c);
       printf("\n");
       printf("*** Valor da Diaria: ");
-      printf("\n");
-      printf("%d" ,veiculos->diaria);
+      printf("%i" ,veiculos->diaria);
       printf("\n");
       printf("*** Ano: ");
-      printf("\n");
       printf("%d",veiculos->ano);
       printf("\n");
 

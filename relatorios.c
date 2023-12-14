@@ -378,6 +378,9 @@ void tela_op_funcionario(void){
                         getchar();
                         break;
             case '4':   listaFuncionarioAlfa();
+                        printf("\n");
+                        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+                        getchar();
 
           } 		
     } while (opcao != '0');
@@ -444,14 +447,9 @@ void listaFuncionario(void){
     printf("|");
     printf("%-12s", "Telefone");
     printf("|");
-    printf("%-12s", "Endereco");
-    printf("|");
     printf("%-12s", "Cidade");
     printf("|");
     printf("%-11s", "Data de Nascimento");
-    printf("\n");
-    printf("%13s", "|");
-    printf("%51s", "|");
     printf("\n");
     while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
         if (funcionarios->status != 'x') {
@@ -461,8 +459,6 @@ void listaFuncionario(void){
             printf("|");
             printf("%-12s", funcionarios->telefone);
             printf("|");
-            printf("%-12s", funcionarios->endereco);
-            printf("|");
             printf("%-12s", funcionarios->cidade);
             printf("|");
             printf("%d/%d/%d", funcionarios->dia, funcionarios->mes, funcionarios->ano);
@@ -471,7 +467,7 @@ void listaFuncionario(void){
     }
     fclose(fp);
     free(funcionarios);
-    getchar();
+
 }
 
 void listaFuncionarioBairro(void){
@@ -501,9 +497,6 @@ void listaFuncionarioBairro(void){
     printf("%-12s", "Cidade");
     printf("|");
     printf("%-51s", "Endereco");
-    printf("|");
-    printf("%13s", "|");
-    printf("%51s", "|");
     printf("\n");
     while (fread(funcionarios, sizeof(Funcionarios), 1, fp)) { 
         if (funcionarios->status != 'x') {
@@ -532,7 +525,6 @@ void listaFuncionarioStatus(char status){
     printf("///            = = = = = = = Relatórios de Funcionarios = = = =             ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("\n");
-    getchar();
     funcionarios = (Funcionarios*) malloc(sizeof(Funcionarios));
     fp = fopen("fun.dat", "rb");
     if (fp == NULL) {
@@ -1029,9 +1021,9 @@ void listaAluguel(void)
     printf("|");
     printf("%-12s", "Placa");
     printf("|");
-    printf("%-15s", "Data de Início: ");
+    printf("%-7s", "Inicio: ");
     printf("|");
-    printf("%-11s", "Data de Fim: ");
+    printf("%-4s", "Fim: ");
     printf("\n");
     while (fread(aluguel, sizeof(Aluguel), 1, fp))
     {
@@ -1112,7 +1104,6 @@ void listaAluguelStatus(char status){
     printf("///            = = = = = = = Relatórios de Aluguéis = = = =  =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("\n");
-    getchar();
     aluguel = (Aluguel*) malloc(sizeof(Aluguel));
     fp = fopen("alg.dat", "rb");
     if (fp == NULL) {
