@@ -819,9 +819,9 @@ void listaVeiculo(void){
     printf("|");
     printf("%-12s", "Estado de Conservação");
     printf("|");
-    printf("%-12s", "Diária");
+    printf("%-11s", "Diária");
     printf("|");
-    printf("%-4s", "Ano");
+    printf("%-5s", "Ano");
     printf("\n");
     while (fread(veiculos, sizeof(Veiculos), 1, fp)) { 
         if (veiculos->status != 'x') {
@@ -865,7 +865,7 @@ void listaVeiculoAlfa(void){
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = Relatórios de Veiculos = = = = =           ///\n");
+    printf("///            = = = = = = = Relatórios de Veiculos = = = = =               ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("\n");
     printf("%-12s", "Placa");
@@ -1069,9 +1069,9 @@ void listaAluguelData(void){
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
         getchar();
     }
-    printf("%-15s", "Data de Início");
+    printf("%-8s", "Início");
     printf("|");
-    printf("%-11s", "Data de Fim");
+    printf("%-8s", "Fim");
     printf("|");
     printf("%-8s", "Placa");
     printf("\n");
