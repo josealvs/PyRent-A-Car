@@ -9,6 +9,7 @@
 #define true 1
 #define false 0
 
+//Verifica se a posição do char é ou não letra
 int ehLetra(char c) {
   if (c >= 'A' && c <= 'Z') {
     return true;
@@ -21,6 +22,7 @@ int ehLetra(char c) {
     }
 }
 ////Referências: Função baseada em @flgorgonio e IA Chat gpt
+//Passa um vetor para verificação de suas posições chamando a função ehLetra
 int validadorNome(char* nome) { 
  for (int i=0; nome[i] != '\0'; i++) {
         if (!ehLetra(nome[i]) || (strlen(nome) > 46)) {
@@ -181,6 +183,7 @@ int validadorFabricante(char* fabricante) {
     return 1;
 }
 
+//Valida o Cargo verificando se possui apenas caracteres alfanumericos
 int validadorCargo(char* cargo) { 
 
     for (int i = 0; cargo[i] != '\0'; i++) {
@@ -195,6 +198,7 @@ int validadorCargo(char* cargo) {
     return 1;
 }
 
+//Valida a cidade verificando se possui apenas caracteres alfanumnéricos
 int validadorCidade(char* cidade) { 
 
     for (int i = 0; cidade[i] != '\0'; i++) {
@@ -313,6 +317,8 @@ void limpaBuffer(void){
     } while(entrada != EOF && entrada != '\n');
 }
 
+//Verifica a existência de algum cpf igual ao inserido
+
 int cadastrar_cli (char* cpf) {
     FILE* fp;
     Clientes* cli;
@@ -327,6 +333,7 @@ int cadastrar_cli (char* cpf) {
     fclose(fp);
     return 0;
 }
+//Verifica a existência de alguma igual a inserida
 
 int cadastrar_plac (char* placa) {
     FILE* fp;
@@ -343,6 +350,7 @@ int cadastrar_plac (char* placa) {
     return 0;
 }
 
+//Verifica a existência de algum cpf igual ao inserido
 int cadastrar_fun(char* cpf) {
     FILE* fp;
     Funcionarios* fun;
@@ -359,7 +367,7 @@ int cadastrar_fun(char* cpf) {
 }
 
 
-
+//Valida o Endereço verificando se é alfanumérico 
 int validadorEndereco(char* endereco) { 
  for (int i = 0; endereco[i] != '\0'; i++) {
         if (!isalpha(endereco[i]) && endereco[i] != ' ') {

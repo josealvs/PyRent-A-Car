@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+//biblioteca de temporizador
 #include <time.h>
 #include "clientes.h"
 #include "util.h"
@@ -314,6 +315,12 @@ void tela_alterar_cliente(void) {
 
             printf("///            Endereço:                                              ///\n");
             scanf("%200[^\n]", cli->endereco);
+            while(!(validadorEndereco(cli->endereco))){
+                printf("\t\t\t>>>Endereço inválido<<<\n");
+                printf("\t\t\t>>> Digite o Endereço novamente: \n");
+                scanf("%15[^\n]", cli->endereco);
+                getchar();
+            }
             limpaBuffer();
             printf("///            Telefone:                                              ///\n");
             scanf("%15[^\n]", cli->telefone);

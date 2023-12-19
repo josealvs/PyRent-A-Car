@@ -350,6 +350,12 @@ void tela_alterar_funcionario(void) {
             printf("///            Endereço:                                          ///\n");
             scanf("%200[^\n]", funcionarios->endereco);
             limpaBuffer();
+            while(!(validadorEndereco(funcionarios->endereco))){
+                printf("\t\t\t>>>Endereço inválido<<<\n");
+                printf("\t\t\t>>> Digite o Endereço novamente: \n");
+                scanf("%15[^\n]", funcionarios->endereco);
+                getchar();
+            }
             printf("///            Telefone:                                          ///\n");
             scanf("%15[^\n]", funcionarios->telefone);
             limpaBuffer();
